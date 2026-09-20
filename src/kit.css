@@ -1,0 +1,56 @@
+/* ============================================================================
+ * Vuedemond global helper layer — the handful of non-scoped rules the kit
+ * components need at runtime. Import alongside `theme.css` (also optional: it
+ * only matters if you use the board drag or the `v-ripple` directive).
+ * ========================================================================= */
+
+/* Kanban drag mirror — the fixed-position card clone that follows the cursor
+ * while a column/lane card is dragged (see src/board/useDragDrop.ts). */
+.board-drag-mirror {
+  position: fixed;
+  z-index: 2000;
+  pointer-events: none;
+  opacity: 0.85;
+  rotate: 3deg;
+  box-shadow: var(--shadow-modal, 0 12px 48px rgba(0, 0, 0, 0.6));
+  background: var(--surface-1, #171c22);
+  color: var(--text, #d7dde4);
+  border-radius: var(--radius-md, 6px);
+  border: 1px solid var(--accent-strong, currentColor);
+}
+
+/* Material ripple used by the `v-ripple` directive (ripple span is appended by
+ * the directive and self-removes on animationend). */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.35;
+  transform: scale(0);
+  animation: vuedemond-ripple 0.55s var(--ease-out, ease-out);
+  pointer-events: none;
+}
+
+@keyframes vuedemond-ripple {
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Scrollbar styling used by ScrollArea / TreeTable / boards when the host
+ * theme is dark. */
+.vd-scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.vd-scroll::-webkit-scrollbar-thumb {
+  background: var(--line-strong, #38434f);
+  border-radius: var(--radius-pill, 999px);
+  border: 2px solid var(--surface-1, #171c22);
+}
+
+.vd-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
