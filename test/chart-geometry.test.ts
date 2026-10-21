@@ -37,10 +37,14 @@ describe("valueRange — the y-domain contract", () => {
 
 describe("ticksFor + scaleOf — axis maths", () => {
   it("produces nice 1/2/5×10ⁿ steps covering the span", () => {
+    // expectations verified against the implementation; each output is a
+    // multiple of one 1/2/5×10ⁿ step, starts ≥ min and ends ≤ max
     expect(ticksFor(0, 100)).toEqual([0, 50, 100]);
     expect(ticksFor(0, 10)).toEqual([0, 5, 10]);
-    expect(ticksFor(0, 1.2)).toEqual([0, 0.4, 0.8, 1.2]);
-    expect(ticksFor(800, 900, 4)[0]).toBeGreaterThanOrEqual(800);
+    expect(ticksFor(0, 1.2)).toEqual([0, 0.5, 1]);
+    expect(ticksFor(3, 9)).toEqual([4, 6, 8]);
+    expect(ticksFor(800, 900)).toEqual([800, 850, 900]);
+    expect(ticksFor(-5, 5)).toEqual([-5, 0, 5]);
   });
 
   it("scale y-maps domain to plot pixels (inverted) and x maps indexes", () => {
