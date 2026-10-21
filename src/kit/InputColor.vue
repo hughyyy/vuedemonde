@@ -25,7 +25,7 @@ function picker(): void {
 
 <template>
   <div class="input-color">
-    <button class="input-color__current" type="button" :style="{ background: modelValue }" :title="modelValue" @click="picker">
+    <button class="input-color__current" type="button" :style="{ background: modelValue }" :aria-label="`Current colour: ${modelValue}`" @click="picker">
       <AppIcon name="edit" :size="12" class="input-color__edit" />
     </button>
     <div class="input-color__swatches">
@@ -45,6 +45,8 @@ function picker(): void {
       class="input-color__native"
       type="color"
       :value="modelValue"
+      tabindex="-1"
+      aria-hidden="true"
       @input="emit('update:modelValue', (native?.value ?? modelValue))"
     />
   </div>
