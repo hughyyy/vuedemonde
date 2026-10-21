@@ -108,7 +108,7 @@ onMounted(() => {
       </div>
     </DemoCard>
 
-    <DemoCard class="demo span-2" title="Popover / ConfirmPopup / ContextMenu" desc="Anchored floating panels — opened in print mode, trigger-driven live.">
+    <DemoCard class="demo span-2 print-overlay-gap" title="Popover / ConfirmPopup / ContextMenu" desc="Anchored floating panels — opened in print mode, trigger-driven live.">
       <div class="col">
         <!-- triggers spaced across the full-width card so the anchored panels
              open side by side instead of stacking (print render) -->

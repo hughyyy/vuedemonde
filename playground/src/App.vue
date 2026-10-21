@@ -195,8 +195,20 @@ html[data-print] .drawer {
 html[data-print] .drawer__backdrop {
   display: none;
 }
+/* The open drawer is pinned to its own demo card (row 1, y81–255) instead of
+ * spanning the full viewport height — previously it covered every card in the
+ * right column (BlockUI, ToastHost, context menu). */
+html[data-print] .drawer {
+  top: 81px;
+  height: 174px;
+}
 html[data-print] .app-dialog__scrim {
   place-items: center start;
+}
+/* The open dialog sits at the viewport centre (~y470–630); the overlays
+ * section leaves that band empty so the modal never covers another card. */
+html[data-print] .print-overlay-gap {
+  margin-bottom: 190px;
 }
 /* Under prefers-reduced-motion the kit zeroes --dur-*; Vue's drawer
  * <Transition> then collapses with a 0ms duration and can stick at the
