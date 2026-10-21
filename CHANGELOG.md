@@ -20,6 +20,9 @@ so it runs on demand rather than on every change.
 - `docs/quality-audit.md` — the living issue register for the phase.
 
 ### Fixed
+- AppAccordion: headers wired to their panels (aria-controls per item).
+- Menubar / MegaMenu / TieredMenu: triggers announce popup type and open state (aria-haspopup + aria-expanded).
+- Carousel: labelled carousel region semantics (role=region, aria-roledescription).
 - AppTooltip: bubble hidden from assistive tech until shown; wired via aria-describedby.
 - BlockUI: blocked content becomes inert (no keyboard escape into it).
 - ConfirmPopup: panel announced as a labelled dialog.

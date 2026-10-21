@@ -31,6 +31,10 @@ same commit.** Anything not yet audited is implicitly `open` on first sight.
 | BlockUI | med | blocked content stays focusable/tabbable | inert content while blocked | fixed |
 | ConfirmPopup | med | open panel unnamed | role=dialog + aria-label | fixed |
 | Popover | low | dialog panel unnamed | label prop wired to aria-label | fixed |
+| AppAccordion | med | headers not associated with panels | aria-controls via per-item ids | fixed |
+| Menubar / MegaMenu / TieredMenu | med | triggers never announced popup/open state | aria-haspopup + aria-expanded | fixed |
+| Carousel | low | plain div region | region + aria-roledescription + label | fixed |
+| AppTabs | low | disabled tab visually distinct? | confirmed adequate (opacity 0.5 + :disabled) — no work | clean |
 | ContextMenu | info | role=menu with plain buttons (no menuitem roles/arrow nav) | candidate enhancement: ARIA menu pattern | open |
 | DatePicker / CascadeSelect | low | trigger showed haspopup but never announced open state | aria-expanded wiring | fixed |
 | FloatLabel / IftaLabel | med | label and input never associated | for/id wiring on mount | fixed |
