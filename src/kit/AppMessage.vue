@@ -23,7 +23,7 @@ function defaultIcon(kind: string): IconName {
 </script>
 
 <template>
-  <div class="app-message" :class="`is-${kind}`" role="status">
+  <div class="app-message" :class="`is-${kind}`" :role="kind === 'err' ? 'alert' : 'status'">
     <AppIcon :name="icon ?? defaultIcon(kind)" :size="15" class="app-message__icon" />
     <div class="app-message__body">
       <strong v-if="title" class="app-message__title">{{ title }}</strong>
@@ -70,6 +70,10 @@ function defaultIcon(kind: string): IconName {
 }
 .app-message__close:hover {
   opacity: 1;
+}
+.app-message__close:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring);
+  outline-offset: 2px;
 }
 .is-info {
   border-color: transparent;
