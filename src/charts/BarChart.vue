@@ -51,7 +51,8 @@ function barX(cat: number, sIdx: number): number {
 function spec(sIdx: number, cat: number): { y: number; height: number } {
   const v = props.series[sIdx]!.data[cat] ?? 0;
   if (!props.stacked) {
-    return { y: yPos(v), height: Math.max(0, innerH.value - (v / yMax.value) * innerH.value) };
+    // bar spans from its value top down to the baseline: height == value height
+    return { y: yPos(v), height: Math.max(0, (v / yMax.value) * innerH.value) };
   }
   const below = props.series.slice(0, sIdx).reduce((n, s) => n + (s.data[cat] ?? 0), 0);
   const top = below + v;

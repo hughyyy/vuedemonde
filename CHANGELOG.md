@@ -20,6 +20,7 @@ so it runs on demand rather than on every change.
 - `docs/quality-audit.md` — the living issue register for the phase.
 
 ### Fixed
+- BarChart: grouped bars used the complement height (innerH − value) so they grew past the baseline, clipping at the svg edge and covering the x-axis labels (caught by the per-card visual audit).
 - OverlaysSection (playground): anchored-panel card is full-width with triggers spread — popover/confirm/context panels render side by side instead of stacking.
 - App.vue (print harness): dialog left-aligned in print so the open drawer never covers it.
 - InputsSection (playground): print-mode panel opens now pin scroll to top — teleported panels (DatePicker/CascadeSelect) were anchored against a scrolled viewport, floating ~620px off their triggers (caught by the per-card visual audit).
