@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, useId } from "vue";
 import { AppIcon } from "./index";
 import type { SelectOption } from "./types";
 
-/** Listbox — single/multiple selection from a (filterable) list. */
+/** Listbox — single/multiple selection from a (filterable) list.
+ *  Keyboard: Tab focuses the list; ↑/↓ move the active option (skipping
+ *  disabled), Home/End jump, Enter/Space pick. */
 
 const props = withDefaults(
   defineProps<{
@@ -19,6 +21,9 @@ const props = withDefaults(
 const emit = defineEmits<{ "update:modelValue": [v: string | string[]] }>();
 
 const q = ref("");
+const listId = useId();
+/** index into `filtered` of the keyboard-active option (null = none yet) */
+const activeIdx = ref<number | null>(null);
 
 const filtered = computed(() => {
   const s = q.value.trim().toLowerCase();
@@ -38,6 +43,50 @@ function onPick(o: SelectOption): void {
     emit("update:modelValue", o.value);
   }
 }
+
+/** next focusable index from `from`, stepping `dir` (±1), wrapping; null when none. */
+function step(from: number | null, dir: 1 | -1): number | null {
+  const n = filtered.value.length;
+  if (!n) return null;
+  let i = (from ?? (dir === 1 ? -1 : 0)) + dir;
+  for (let k = 0; k < n; k++) {
+    const idx = ((i % n) + n) % n;
+    if (!filtered.value[idx]!.disabled) return idx;
+    i += dir;
+  }
+  return null; // every option disabled
+}
+
+function onKeydown(e: KeyboardEvent): void {
+  switch (e.key) {
+    case "ArrowDown":
+    case "ArrowUp": {
+      e.preventDefault();
+      const next = step(activeIdx.value, e.key === "ArrowDown" ? 1 : -1);
+      activeIdx.value = next;
+      if (next !== null) {
+        document.getElementById(`${listId}-opt-${next}`)?.scrollIntoView({ block: "nearest" });
+      }
+      break;
+    }
+    case "Home": {
+      e.preventDefault();
+      activeIdx.value = step(-1, 1);
+      break;
+    }
+    case "End": {
+      e.preventDefault();
+      activeIdx.value = step(filtered.value.length, -1);
+      break;
+    }
+    case "Enter":
+    case " ": {
+      e.preventDefault();
+      if (activeIdx.value !== null) onPick(filtered.value[activeIdx.value]!);
+      break;
+    }
+  }
+}
 </script>
 
 <template>
@@ -46,15 +95,23 @@ function onPick(o: SelectOption): void {
       <AppIcon name="search" :size="13" />
       <input v-model="q" type="text" :placeholder="placeholder" />
     </div>
-    <ul class="listbox__items">
+    <ul
+      :id="listId"
+      class="listbox__items"
+      tabindex="0"
+      :aria-activedescendant="activeIdx === null ? undefined : `${listId}-opt-${activeIdx}`"
+      @keydown="onKeydown"
+    >
       <li
-        v-for="o in filtered"
+        v-for="(o, i) in filtered"
         :key="o.value"
+        :id="`${listId}-opt-${i}`"
         class="listbox__item"
-        :class="{ 'is-selected': isSel(o), 'is-disabled': o.disabled }"
+        :class="{ 'is-selected': isSel(o), 'is-active': activeIdx === i, 'is-disabled': o.disabled }"
         role="option"
         :aria-selected="isSel(o)"
         @click="onPick(o)"
+        @mouseenter="activeIdx = i"
       >
         <span class="listbox__label">{{ o.label }}</span>
         <AppIcon v-if="multiple && isSel(o)" name="check" :size="13" class="listbox__check" />
@@ -112,6 +169,9 @@ function onPick(o: SelectOption): void {
 }
 .listbox__item:hover:not(.is-disabled) {
   background: var(--surface-2);
+}
+.listbox__item.is-active {
+  background: var(--surface-3);
 }
 .listbox__item.is-selected {
   background: var(--accent-soft);
