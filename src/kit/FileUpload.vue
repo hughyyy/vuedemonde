@@ -54,7 +54,12 @@ function fmtSize(n: number): string {
     <div
       class="file-upload__zone"
       :class="{ 'is-dragover': dragOver }"
+      role="button"
+      tabindex="0"
+      aria-label="Choose files"
       @click="openPicker"
+      @keydown.enter.prevent="openPicker"
+      @keydown.space.prevent="openPicker"
       @dragover.prevent="dragOver = true"
       @dragleave="dragOver = false"
       @drop.prevent="onDrop"
@@ -63,7 +68,7 @@ function fmtSize(n: number): string {
       <span class="file-upload__label">{{ label }}</span>
       <span v-if="description" class="file-upload__desc">{{ description }}</span>
     </div>
-    <input ref="inputEl" class="file-upload__input" type="file" :accept="accept" :multiple="multiple" @change="add(($event.target as HTMLInputElement).files)" />
+    <input ref="inputEl" class="file-upload__input" type="file" :accept="accept" :multiple="multiple" tabindex="-1" aria-hidden="true" @change="add(($event.target as HTMLInputElement).files)" />
 
     <ul v-if="raw.length" class="file-upload__list">
       <li v-for="(f, i) in raw" :key="i" class="file-upload__file">
