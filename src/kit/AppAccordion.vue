@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useId } from "vue";
 import AppIcon from "./AppIcon.vue";
 import type { AccordionItem } from "./types";
 
@@ -12,6 +13,7 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{ "update:modelValue": [value: string | null] }>();
+const rootId = useId();
 
 function toggle(id: string): void {
   emit("update:modelValue", props.modelValue === id ? null : id);
@@ -26,12 +28,13 @@ function toggle(id: string): void {
         class="app-accordion__head"
         type="button"
         :aria-expanded="modelValue === item.id"
+        :aria-controls="`${rootId}-${item.id}`"
         @click="toggle(item.id)"
       >
         <span class="app-accordion__title">{{ item.title }}</span>
         <AppIcon name="chevron-down" :size="14" class="app-accordion__chevron" />
       </button>
-      <div v-show="modelValue === item.id" class="app-accordion__body">
+      <div :id="`${rootId}-${item.id}`" v-show="modelValue === item.id" class="app-accordion__body">
         <slot :name="`panel-${item.id}`" />
       </div>
     </div>
