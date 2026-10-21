@@ -28,7 +28,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "render:release": "node scripts/render-release.mjs",
-    "build:demo": "vite build --config vite.demo.config.ts"
+    "build:demo": "vite build --config vite.demo.config.ts",
+    "test:audit": "vitest run --config vitest.audit.config.ts"
   },
   "peerDependencies": {
     "vue": "^3.5.0"
