@@ -9,8 +9,10 @@ const props = withDefaults(
     modelValue: string[];
     placeholder?: string;
     disabled?: boolean;
+    /** accessible name for the tag input (placeholder disappears once tags exist). */
+    ariaLabel?: string;
   }>(),
-  { placeholder: "Add tag…", disabled: false },
+  { placeholder: "Add tag…", disabled: false, ariaLabel: "Add tag" },
 );
 
 const emit = defineEmits<{ "update:modelValue": [v: string[]] }>();
@@ -51,6 +53,7 @@ function onKeydown(e: KeyboardEvent): void {
       type="text"
       :placeholder="modelValue.length ? '' : placeholder"
       :disabled="disabled"
+      :aria-label="ariaLabel"
       @keydown="onKeydown"
     />
   </div>
