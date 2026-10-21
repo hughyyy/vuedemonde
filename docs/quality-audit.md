@@ -33,6 +33,7 @@ same commit.** Anything not yet audited is implicitly `open` on first sight.
 | LaneBoard | info | one seed card sits ~10px past its lane fold when a sibling lane sets the stretch height (lanes scroll; cards ellipsize) | observed, acceptable; optional polish: shorter seed title | open |
 | ChartsSection (playground) | med | 7 points vs 6 labels — last dot rendered past the svg edge | matched label arrays | fixed |
 | BarChart | high | grouped bars overflow the plot area (complement height math) — bottoms clipped by the svg, axis labels covered | height = value height, not its complement; geometry tests | fixed |
+| OverlaysSection (playground) | low | tooltip demo showed 3 of 4 placements; BlockUI rendered unblocked in print (mask state never represented) | add left placement; blocked state in print | fixed |
 | OverlaysSection (playground) | med | ConfirmPopup overlapped the open dialog (x421–681 vs 24–584, y470 band) in print renders | placement=top in print mode | fixed |
 | OverlaysSection (playground harness) | med | three anchored panels stacked over each other in a narrow card; drawer overlapped the open dialog in print renders | full-width card with spread triggers; print left-aligns the dialog | fixed |
 | InputsSection (playground harness) | med | DatePicker/CascadeSelect print-open panels landed ~620px off the trigger (open fired after scroll anchoring shifted the viewport) | scrollTo(0,0) before panel opens | fixed |

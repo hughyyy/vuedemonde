@@ -13,7 +13,7 @@ const dialogOpen = ref(false);
 const drawerOpen = ref(false);
 const popOpen = ref(false);
 const cmdOpen = ref(false);
-const blocked = ref(false);
+const blocked = ref(props.print); // print renders show the blocked mask state
 const cp = ref<InstanceType<typeof ConfirmPopup> | null>(null);
 const ctxHost = ref<HTMLElement | null>(null);
 
@@ -163,6 +163,9 @@ onMounted(() => {
         </AppTooltip>
         <AppTooltip text="Right tooltip" placement="right">
           <AppButton size="sm" variant="ghost">Right</AppButton>
+        </AppTooltip>
+        <AppTooltip text="Left tooltip" placement="left">
+          <AppButton size="sm" variant="ghost">Left</AppButton>
         </AppTooltip>
       </div>
     </DemoCard>
