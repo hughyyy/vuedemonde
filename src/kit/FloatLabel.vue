@@ -1,10 +1,22 @@
 <script setup lang="ts">
+import { onMounted, ref, useId } from "vue";
 /** FloatLabel — label overlays the input and floats up on focus/value.
- *  Usage: <FloatLabel><input placeholder=" "><label>Name</label></FloatLabel> */
+ *  Usage: <FloatLabel><input placeholder=" "><label>Name</label></FloatLabel>
+ *  The slotted input gets the label wired to it (for/id) on mount. */
+const root = ref<HTMLElement | null>(null);
+const uid = useId();
+onMounted(() => {
+  const input = root.value?.querySelector<HTMLInputElement | HTMLTextAreaElement>("input, textarea");
+  const label = root.value?.querySelector("label");
+  if (input && label && !input.id) {
+    input.id = uid;
+    label.setAttribute("for", uid);
+  }
+});
 </script>
 
 <template>
-  <div class="float-label">
+  <div ref="root" class="float-label">
     <slot />
     <label><slot name="label" /></label>
   </div>

@@ -1,11 +1,23 @@
 <script setup lang="ts">
+import { onMounted, ref, useId } from "vue";
 /** IftaLabel — the label acts as the input's placeholder and shifts to a
  *  floating caption on focus/value.
- *  Usage: <IftaLabel><input placeholder=" "><label>Name</label></IftaLabel> */
+ *  Usage: <IftaLabel><input placeholder=" "><label>Name</label></IftaLabel>
+ *  The slotted input gets the label wired to it (for/id) on mount. */
+const root = ref<HTMLElement | null>(null);
+const uid = useId();
+onMounted(() => {
+  const input = root.value?.querySelector<HTMLInputElement | HTMLTextAreaElement>("input, textarea");
+  const label = root.value?.querySelector("label");
+  if (input && label && !input.id) {
+    input.id = uid;
+    label.setAttribute("for", uid);
+  }
+});
 </script>
 
 <template>
-  <div class="ifta-label">
+  <div ref="root" class="ifta-label">
     <slot />
     <label><slot name="label" /></label>
   </div>
