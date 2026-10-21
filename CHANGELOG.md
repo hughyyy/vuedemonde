@@ -20,6 +20,10 @@ so it runs on demand rather than on every change.
 - `docs/quality-audit.md` — the living issue register for the phase.
 
 ### Fixed
+- AppProgress: aria-valuenow clamped to 0–100 like the bar; indeterminate/spinner animation stops under reduced motion.
+- AppMessage: errors announce as role=alert (others stay status); close button gets a focus ring.
+- AppChip: removable close button gets a focus ring.
+- Skeleton: text-line mode hidden from assistive tech (aria-hidden).
 - AppButton: aria-label/aria-busy for icon-only and loading states, focus-visible ring, spinner stops under reduced motion.
 - InputsSection (playground): the Knob demo referenced the component without
   importing it, so it silently never rendered in the catalogue — caught by the

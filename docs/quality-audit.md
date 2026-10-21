@@ -20,6 +20,10 @@ same commit.** Anything not yet audited is implicitly `open` on first sight.
 
 | Component | Severity | Observed | Required work | Status |
 | --- | --- | --- | --- | --- |
+| AppProgress | low | aria-valuenow unclamped (announced value can disagree with the bar); indeterminate motion ignored reduced-motion contract | clamp like the width; stop animation under reduced motion | fixed |
+| AppMessage | med | all kinds announced as role=status; close button lacked a focus ring | role=alert for err; focus-visible ring | fixed |
+| AppChip | low | removable close button lacked a focus ring | focus-visible ring | fixed |
+| Skeleton | med | text-line mode not hidden from assistive tech | aria-hidden on text mode | fixed |
 | AppButton | med | no accessible name for icon-only buttons; no aria-busy while loading; no focus-visible ring; spinner ignores reduced motion | add ariaLabel prop + aria-busy + focus-visible + static spinner under reduced motion, with a11y tests | fixed |
 | InputsSection (catalogue) | med | `<Knob>` used without import — the component silently never rendered in the catalogue; caught by the first `test:audit` run | import Knob from `@vuedemond` in the section | fixed |
 | Calendar EventTile / EventChip | low | long titles clip at container edge without ellipsis (catalogue check) | verify component markup; add `text-overflow: ellipsis` / line-clamp with `title` attr | open |
