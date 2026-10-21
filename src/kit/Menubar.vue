@@ -20,8 +20,8 @@ function onPick(action: MenuAction): void {
   <nav class="menubar" role="menubar" aria-label="Menu">
     <template v-for="it in items" :key="it.id">
       <Popover v-if="it.children?.length" :align="'start'" placement="bottom">
-        <template #trigger="{ toggle }">
-          <button class="menubar__root" type="button" role="menuitem" @click="toggle">
+        <template #trigger="{ toggle, open }">
+          <button class="menubar__root" type="button" role="menuitem" :aria-haspopup="'menu'" :aria-expanded="open" @click="toggle">
             <AppIcon v-if="it.icon" :name="it.icon" :size="15" class="menubar__icon" />
             {{ it.label }}
             <AppIcon name="chevron-down" :size="11" class="menubar__caret" />

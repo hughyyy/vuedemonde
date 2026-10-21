@@ -34,7 +34,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="carousel">
+  <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Carousel">
     <div class="carousel__viewport">
       <div class="carousel__track" :style="{ transform: `translateX(-${index * 100}%)` }">
         <div v-for="(item, i) in items" :key="i" class="carousel__slide">

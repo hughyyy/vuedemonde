@@ -105,7 +105,7 @@ onBeforeUnmount(() => {
 
 <template>
   <span ref="wrapEl" class="tiered">
-    <span role="button" tabindex="0" @click="toggle" @keydown.enter.prevent="toggle"><slot /></span>
+    <span role="button" tabindex="0" :aria-haspopup="'menu'" :aria-expanded="open" @click="toggle" @keydown.enter.prevent="toggle"><slot /></span>
     <Teleport to="body">
       <Transition name="menu-pop">
         <div v-if="open" ref="rootEl" class="tiered__panel" role="menu" :style="pos" @keydown.esc="close">

@@ -18,8 +18,8 @@ const emit = defineEmits<{ select: [id: string] }>();
   <nav class="mega" role="menubar" aria-label="Mega menu">
     <template v-for="it in items" :key="it.id">
       <Popover v-if="it.columns?.length" :align="'start'" :width="480" placement="bottom">
-        <template #trigger="{ toggle }">
-          <button class="mega__root" type="button" @click="toggle">
+        <template #trigger="{ toggle, open }">
+          <button class="mega__root" type="button" :aria-haspopup="'menu'" :aria-expanded="open" @click="toggle">
             <AppIcon v-if="it.icon" :name="it.icon" :size="15" />
             {{ it.label }}
           </button>
