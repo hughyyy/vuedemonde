@@ -20,6 +20,9 @@ so it runs on demand rather than on every change.
 - `docs/quality-audit.md` — the living issue register for the phase.
 
 ### Fixed
+- Slider: degenerate min===max range no longer renders NaN fill.
+- Knob: same degenerate-range guard on the arc.
+- Compare: divider is keyboard-operable (focusable, arrow keys, focus ring) — parity with Splitter.
 - AppInput: hint/error text wired to the control via aria-describedby; aria-invalid omitted when clean; token focus-visible ring.
 - AppTextarea: same describedby/aria-invalid/focus-ring contract as AppInput.
 - AppSelect: same describedby/aria-invalid/focus-ring contract.
