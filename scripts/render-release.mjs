@@ -78,12 +78,17 @@ async function shot(page, sel, path) {
 }
 
 async function renderBanner(page) {
+  // the banner carries 8 theme cards per row — full width
+  await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(`${BASE}/?print=banner`);
   await shot(page, "#banner", join(ASSETS, "theme-banner.png"));
   console.log("  banner → theme-banner.png (two rows of 8 theme cards, light themes grouped)");
 }
 
 async function renderCatalogue(page) {
+  // two-column family grids: 2 × ~455px cards — no col-3 strays beside
+  // span-2 cards, so no part of a section forces extra horizontal width
+  await page.setViewportSize({ width: 1000, height: 1000 });
   for (const id of FAMILIES) {
     for (const theme of THEMES) {
       await page.goto(`${BASE}/?print=family&id=${id}&theme=${theme}`);

@@ -121,7 +121,7 @@ const iconRow: IconName[] = [
       </div>
     </DemoCard>
 
-    <DemoCard title="Divider" desc="Horizontal rule with centred label and vertical separators.">
+    <DemoCard class="demo span-2" title="Divider" desc="Horizontal rule with centred label and vertical separators.">
       <div class="col">
         <Divider label="or" :spacing="6" />
         <div class="row v-demo">

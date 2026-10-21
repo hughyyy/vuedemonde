@@ -59,7 +59,7 @@ onMounted(() => {
   <div class="wrap">
     <h2 class="sec-title">Layout</h2>
 
-    <DemoCard title="Panels, cards, fieldsets" desc="Containers with headers, elevation, and collapse — expanded and collapsed fieldsets side by side.">
+    <DemoCard class="demo span-2" title="Panels, cards, fieldsets" desc="Containers with headers, elevation, and collapse — expanded and collapsed fieldsets side by side.">
       <div class="row">
         <AppPanel title="AppPanel" subtitle="Token panel" elevation="raised" class="cell">
           <p class="p">Elevation + heading + action slot.</p>
@@ -152,7 +152,7 @@ onMounted(() => {
       </div>
     </DemoCard>
 
-    <DemoCard title="FileUpload / MediaGallery / DeferredContent" desc="File picker, image strip, lazy mounting on scroll-into-view.">
+    <DemoCard class="demo span-2" title="FileUpload / MediaGallery / DeferredContent" desc="File picker, image strip, lazy mounting on scroll-into-view.">
       <div class="col">
         <FileUpload accept="image/*" multiple label="Drop images" description="PNG / JPG, up to 5MB" />
         <MediaGallery :images="gallery" class="gal" />

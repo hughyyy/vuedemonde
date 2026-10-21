@@ -194,7 +194,7 @@ onMounted(() => {
     </DemoCard>
 
     <DemoCard class="span-3" title="AppVirtualList / Timeline / MeterGroup" desc="Dynamic-height rows, tinted activity stream, stacked meter.">
-      <div class="grid3">
+      <div class="grid2">
         <div class="vlist-box">
           <AppVirtualList :items="vlistItems">
             <template #item="{ item }">
@@ -208,9 +208,9 @@ onMounted(() => {
         <div>
           <Timeline :items="timeline" />
         </div>
-        <div>
-          <MeterGroup :meters="meters" />
-        </div>
+      </div>
+      <div class="meters">
+        <MeterGroup :meters="meters" />
       </div>
     </DemoCard>
 
@@ -250,6 +250,18 @@ onMounted(() => {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   align-items: start;
+}
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+/* the meter bar sits below the virtual list + timeline, not in a crowded
+ * right column — capped so the stacked bar stays compact */
+.meters {
+  max-width: 560px;
+  margin-top: 16px;
 }
 .dv-row {
   padding: 8px 10px;

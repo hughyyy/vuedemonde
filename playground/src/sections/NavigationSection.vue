@@ -125,7 +125,7 @@ onMounted(() => {
       </div>
     </DemoCard>
 
-    <DemoCard title="Popover menus & Dock" desc="Action menu (open in print), tiered cascade (open in print), dock.">
+    <DemoCard class="demo span-2" title="Popover menus & Dock" desc="Action menu (open in print), tiered cascade (open in print), dock.">
       <div class="row wrap-row">
         <AppMenu v-model="menuOpen" :items="menuItems" placement="bottom" @select="pick">
           <AppButton variant="secondary" size="sm" icon="more">Menu</AppButton>

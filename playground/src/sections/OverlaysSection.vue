@@ -139,7 +139,7 @@ onMounted(() => {
       </div>
     </DemoCard>
 
-    <DemoCard title="ToastHost" desc="Fixed top-right stack — fire toasts live, or they pre-render in print mode.">
+    <DemoCard class="demo span-2" title="ToastHost" desc="Fixed top-right stack — fire toasts live, or they pre-render in print mode.">
       <div class="col">
         <div class="row">
           <AppButton size="sm" @click="notify('ok', 'Workflow saved')">Notify ok</AppButton>

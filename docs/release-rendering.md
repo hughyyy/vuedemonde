@@ -44,7 +44,12 @@ Outputs (28 PNGs, committed):
      restores localStorage over a print request.
 3. Screenshots `#banner` / `#print-section` at
    `deviceScaleFactor: 2` with `prefers-reduced-motion` emulated (the kit
-   zeroes every `--dur-*` under it) and a fixed 1440×1000 viewport.
+   zeroes every `--dur-*` under it). The banner renders at 1440×1000 (8 cards
+   per row); family catalogue renders use a **1000×1000 viewport → two-column
+   grids** (2 × ~455px cards), so no component sits in a third column beside a
+   wide card and no section forces extra horizontal width. `.span-2`/`.span-3`
+   cards become full rows; `.span-1` cards pair up automatically; lone cards
+   get `span-2`.
 
 ## Catalogue quality
 

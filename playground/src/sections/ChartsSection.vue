@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import {
-  AppToggle, BarChart, ChartLegend, DonutChart, LineChart, RadarChart,
+  CHART_COLORS, AppToggle, BarChart, ChartLegend, DonutChart, LineChart, RadarChart,
 } from "@vuedemond";
 import DemoCard from "../DemoCard.vue";
 
@@ -67,8 +67,11 @@ const stacked = ref(false);
       </div>
     </DemoCard>
 
-    <DemoCard title="RadarChart" desc="Multi-series radar with configurable rings.">
-      <RadarChart :labels="radarLabels" :series="radar" :size="260" :rings="4" />
+    <DemoCard class="demo span-2" title="RadarChart" desc="Multi-series radar with configurable rings — below the donut, legend beside.">
+      <div class="row">
+        <RadarChart :labels="radarLabels" :series="radar" :size="260" :rings="4" />
+        <ChartLegend :items="radar.map((r) => ({ label: r.name, color: CHART_COLORS[radar.indexOf(r) % CHART_COLORS.length] }))" />
+      </div>
     </DemoCard>
   </div>
 </template>
