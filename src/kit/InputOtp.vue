@@ -50,7 +50,7 @@ function onPaste(e: ClipboardEvent): void {
 </script>
 
 <template>
-  <div class="input-otp">
+  <div class="input-otp" role="group" aria-label="One-time code">
     <input
       v-for="(_, i) in length"
       :key="i"
@@ -61,7 +61,7 @@ function onPaste(e: ClipboardEvent): void {
       inputmode="numeric"
       :maxlength="2"
       :disabled="disabled"
-      aria-label="OTP digit"
+      :aria-label="`Digit ${i + 1} of ${length}`"
       @input="onInput(i, $event)"
       @keydown="onKeydown(i, $event)"
       @paste="onPaste"
