@@ -25,6 +25,9 @@ same commit.** Anything not yet audited is implicitly `open` on first sight.
 | InputPassword | med | password field unnamed; reveal toggle lacked pressed state | ariaLabel + aria-pressed | fixed |
 | InputColor | low | current button named only by title; hidden native input focusable | aria-label; tabindex=-1 + aria-hidden | fixed |
 | Listbox | med | click-only listbox — no keyboard path | APG-style arrows/Home/End/Enter + aria-activedescendant | fixed |
+| FileUpload | med | drop zone mouse-only; hidden native input in tab order | keyboard zone (role/tabindex/keys); inert input | fixed |
+| AutoComplete | med | unnamed combobox, click-only suggestions | combobox role + aria-expanded/controls/activedescendant + arrow keys | fixed |
+| DatePicker / CascadeSelect | low | trigger showed haspopup but never announced open state | aria-expanded wiring | fixed |
 | FloatLabel / IftaLabel | med | label and input never associated | for/id wiring on mount | fixed |
 | Slider / Knob | low | degenerate min===max range rendered NaN% fill/arc | guard division by zero | fixed |
 | Compare | med | draggable-only divider — no keyboard path, no focusable handle | tabindex + arrow keys + aria-label + focus ring | fixed |

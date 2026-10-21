@@ -20,6 +20,9 @@ so it runs on demand rather than on every change.
 - `docs/quality-audit.md` — the living issue register for the phase.
 
 ### Fixed
+- FileUpload: drop zone keyboard-operable; native file input inert (tabindex -1).
+- AutoComplete: full combobox contract — named input, aria-expanded/controls, arrow navigation with aria-activedescendant, Escape.
+- DatePicker / CascadeSelect: trigger buttons announce their expanded state (aria-expanded).
 - InputOtp: group labelled "One-time code"; each digit named distinctly (Digit N of M).
 - InputTags: tag input keeps an accessible name (ariaLabel, default "Add tag") even when tags clear the placeholder.
 - InputPassword: field named (ariaLabel default "Password"); reveal toggle pressed-state; dead icon ternary removed.
