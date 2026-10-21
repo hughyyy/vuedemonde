@@ -20,6 +20,12 @@ same commit.** Anything not yet audited is implicitly `open` on first sight.
 
 | Component | Severity | Observed | Required work | Status |
 | --- | --- | --- | --- | --- |
+| InputOtp | med | six identical aria-labels — digits indistinguishable; no group label | per-digit labels + labelled group | fixed |
+| InputTags | med | input unnamed once tags exist (placeholder cleared) | ariaLabel prop | fixed |
+| InputPassword | med | password field unnamed; reveal toggle lacked pressed state | ariaLabel + aria-pressed | fixed |
+| InputColor | low | current button named only by title; hidden native input focusable | aria-label; tabindex=-1 + aria-hidden | fixed |
+| Listbox | med | click-only listbox — no keyboard path | APG-style arrows/Home/End/Enter + aria-activedescendant | fixed |
+| FloatLabel / IftaLabel | med | label and input never associated | for/id wiring on mount | fixed |
 | Slider / Knob | low | degenerate min===max range rendered NaN% fill/arc | guard division by zero | fixed |
 | Compare | med | draggable-only divider — no keyboard path, no focusable handle | tabindex + arrow keys + aria-label + focus ring | fixed |
 | AppInput / AppTextarea / AppSelect | med | hint/error text not associated with the control (aria-describedby missing); aria-invalid="false" rendered when clean; no token focus ring | wire useId-describedby, omit aria-invalid when valid, focus-visible ring | fixed |

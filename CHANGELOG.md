@@ -20,6 +20,12 @@ so it runs on demand rather than on every change.
 - `docs/quality-audit.md` — the living issue register for the phase.
 
 ### Fixed
+- InputOtp: group labelled "One-time code"; each digit named distinctly (Digit N of M).
+- InputTags: tag input keeps an accessible name (ariaLabel, default "Add tag") even when tags clear the placeholder.
+- InputPassword: field named (ariaLabel default "Password"); reveal toggle pressed-state; dead icon ternary removed.
+- InputColor: current-colour button labelled; hidden native picker out of tab order and AT.
+- Listbox: full keyboard navigation (arrows skip disabled, Home/End, Enter/Space pick, aria-activedescendant).
+- FloatLabel / IftaLabel: slotted label wired to the slotted input (for/id) on mount.
 - Slider: degenerate min===max range no longer renders NaN fill.
 - Knob: same degenerate-range guard on the arc.
 - Compare: divider is keyboard-operable (focusable, arrow keys, focus ring) — parity with Splitter.
