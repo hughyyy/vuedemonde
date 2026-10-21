@@ -20,6 +20,7 @@ so it runs on demand rather than on every change.
 - `docs/quality-audit.md` — the living issue register for the phase.
 
 ### Fixed
+- AppRadio: per-instance radio group name (useId) — multiple groups no longer cancel each other's selection.
 - PaneSection: toggle wired with aria-controls (useId) and a focus ring.
 - AppProgress: aria-valuenow clamped to 0–100 like the bar; indeterminate/spinner animation stops under reduced motion.
 - AppMessage: errors announce as role=alert (others stay status); close button gets a focus ring.

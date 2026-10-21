@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useId } from "vue";
 import type { RadioOption } from "./types";
 
 withDefaults(
@@ -12,6 +13,8 @@ withDefaults(
 );
 
 const emit = defineEmits<{ "update:modelValue": [value: string] }>();
+/** unique group name per instance — two radio groups must never share it */
+const groupName = useId();
 
 function onInput(e: Event): void {
   emit("update:modelValue", (e.target as HTMLInputElement).value);
@@ -29,7 +32,7 @@ function onInput(e: Event): void {
           :value="o.value"
           :checked="modelValue === o.value"
           :disabled="o.disabled"
-          name="kit-radio"
+          :name="groupName"
           @input="onInput"
         />
         <span>{{ o.label }}</span>
