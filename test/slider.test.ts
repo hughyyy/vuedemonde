@@ -19,8 +19,10 @@ describe("Slider — range contract", () => {
 
   it("clamps keyboard steps to the min/max bounds", async () => {
     const wrapper = mount(Slider, { props: { modelValue: 98 } });
-    await wrapper.find("[role='slider']").trigger("keydown", { key: "ArrowRight" });
-    await wrapper.find("[role='slider']").trigger("keydown", { key: "ArrowRight" });
+    const el = wrapper.find("[role='slider']");
+    await el.trigger("keydown", { key: "ArrowRight" });
+    await wrapper.setProps({ modelValue: 99 });
+    await el.trigger("keydown", { key: "ArrowRight" });
     expect(wrapper.emitted("update:modelValue")?.at(-1)).toEqual([100]);
   });
 

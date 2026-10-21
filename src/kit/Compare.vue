@@ -19,7 +19,8 @@ const handleEl = ref<HTMLElement | null>(null);
 let dragging = false;
 
 function setPos(v: number): void {
-  pos.value = Math.min(0.9, Math.max(0.1, v));
+  // round to 2dp so repeated arrow steps never accumulate float drift
+  pos.value = Math.round(Math.min(0.9, Math.max(0.1, v)) * 100) / 100;
   if (props.modelValue !== undefined) emit("update:modelValue", pos.value);
 }
 
