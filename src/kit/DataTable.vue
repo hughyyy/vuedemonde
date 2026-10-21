@@ -76,21 +76,39 @@ function onRow(row: Record<string, unknown>, i: number): void {
               class="data-table__head"
               :class="[`is-${col.align ?? 'left'}`, { 'is-sortable': col.sortable }]"
               :style="col.width ? { width: col.width } : undefined"
-              @click="toggleSort(col)"
+              :aria-sort="col.sortable ? (sort?.field === col.field ? (sort.dir === 'asc' ? 'ascending' : 'descending') : 'none') : undefined"
             >
-              <span class="data-table__head-label">{{ col.header }}</span>
-              <AppIcon
+              <button
                 v-if="col.sortable"
-                :name="sort?.field === col.field ? (sort.dir === 'asc' ? 'chevron-up' : 'chevron-down') : 'chevron-down'"
-                :size="12"
-                class="data-table__sort"
-                :class="{ 'is-active': sort?.field === col.field }"
-              />
+                class="data-table__sortbtn"
+                type="button"
+                :aria-label="`Sort by ${col.header}`"
+                @click="toggleSort(col)"
+              >
+                <span class="data-table__head-label">{{ col.header }}</span>
+                <AppIcon
+                  :name="sort?.field === col.field ? (sort.dir === 'asc' ? 'chevron-up' : 'chevron-down') : 'chevron-down'"
+                  :size="12"
+                  class="data-table__sort"
+                  :class="{ 'is-active': sort?.field === col.field }"
+                />
+              </button>
+              <span v-else class="data-table__head-label">{{ col.header }}</span>
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(row, i) in paged" :key="keyOf(row, i)" :class="rowClass(row, i)" class="data-table__row" @click="onRow(row, i)">
+          <tr
+            v-for="(row, i) in paged"
+            :key="keyOf(row, i)"
+            :class="rowClass(row, i)"
+            class="data-table__row"
+            :aria-selected="selectable ? keyOf(row, i) === selectedKey : undefined"
+            :tabindex="selectable ? 0 : undefined"
+            @click="onRow(row, i)"
+            @keydown.enter.prevent="selectable && onRow(row, i)"
+            @keydown.space.prevent="selectable && onRow(row, i)"
+          >
             <td v-if="selectable" class="data-table__sel">
               <span class="data-table__radio" :class="{ 'is-on': keyOf(row, i) === selectedKey }" />
             </td>
@@ -166,6 +184,25 @@ function onRow(row: Record<string, unknown>, i: number): void {
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);
+}
+.data-table__sortbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.data-table__sortbtn:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+.data-table__head .data-table__sortbtn {
+  font-weight: var(--fw-600);
 }
 .data-table__sort {
   color: var(--text-3);
