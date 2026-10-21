@@ -94,4 +94,8 @@ const emit = defineEmits<{ close: [] }>();
 .app-chip__close:hover {
   opacity: 1;
 }
+.app-chip__close:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring);
+  outline-offset: 2px;
+}
 </style>
