@@ -12,7 +12,7 @@ withDefaults(
 </script>
 
 <template>
-  <div v-if="lines > 0" class="skeleton-text" :style="{ width }">
+  <div v-if="lines > 0" class="skeleton-text" :style="{ width }" aria-hidden="true">
     <span
       v-for="i in lines"
       :key="i"
