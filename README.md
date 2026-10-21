@@ -5,6 +5,11 @@ through) the Nexus visual-editor app's custom UI kit. Every component is a
 hand-written SFC that reads CSS custom-property tokens from a single theme
 stylesheet — no UI-library dependency, no runtime CSS-in-JS, just Vue.
 
+<p align="center">
+  <img src="docs/assets/theme-banner-1.png" width="49%" alt="Themes: dark, light, late-night, thermal, neon-cyberpunk, grunge, granite" />
+  <img src="docs/assets/theme-banner-2.png" width="49%" alt="Themes: classic, high-contrast, bubblegum, matrix, shining-gold, pure-platinum" />
+</p>
+
 ```bash
 npm install            # dev deps
 npm run dev            # the playground (localhost:5199)
@@ -96,6 +101,24 @@ threshold rules, epoch-time axis) · `DonutChart` · `RadarChart` · `ChartLegen
 ### Board (kanban, pointer drag & drop)
 `TaskBoard` · `LaneBoard` — both share one drag engine; mount one at a time on
 any route (their drop handlers are a module singleton).
+
+## Visual catalogue
+
+Every family below is shown in the three catalogue themes — light, dark (the
+default), and thermal. Regenerate whenever a component or theme changes:
+`npm run render:release` (see `docs/release-rendering.md`).
+
+| Family | light | dark | thermal |
+| --- | --- | --- | --- |
+| Primitives | ![](docs/assets/catalogue-primitives-light.png) | ![](docs/assets/catalogue-primitives-dark.png) | ![](docs/assets/catalogue-primitives-thermal.png) |
+| Inputs & Forms | ![](docs/assets/catalogue-inputs-light.png) | ![](docs/assets/catalogue-inputs-dark.png) | ![](docs/assets/catalogue-inputs-thermal.png) |
+| Overlays & Feedback | ![](docs/assets/catalogue-overlays-light.png) | ![](docs/assets/catalogue-overlays-dark.png) | ![](docs/assets/catalogue-overlays-thermal.png) |
+| Navigation | ![](docs/assets/catalogue-navigation-light.png) | ![](docs/assets/catalogue-navigation-dark.png) | ![](docs/assets/catalogue-navigation-thermal.png) |
+| Data Display | ![](docs/assets/catalogue-data-light.png) | ![](docs/assets/catalogue-data-dark.png) | ![](docs/assets/catalogue-data-thermal.png) |
+| Layout | ![](docs/assets/catalogue-layout-light.png) | ![](docs/assets/catalogue-layout-dark.png) | ![](docs/assets/catalogue-layout-thermal.png) |
+| Charts | ![](docs/assets/catalogue-charts-light.png) | ![](docs/assets/catalogue-charts-dark.png) | ![](docs/assets/catalogue-charts-thermal.png) |
+| Calendar | ![](docs/assets/catalogue-calendar-light.png) | ![](docs/assets/catalogue-calendar-dark.png) | ![](docs/assets/catalogue-calendar-thermal.png) |
+| Board | ![](docs/assets/catalogue-board-light.png) | ![](docs/assets/catalogue-board-dark.png) | ![](docs/assets/catalogue-board-thermal.png) |
 
 ## Notes
 

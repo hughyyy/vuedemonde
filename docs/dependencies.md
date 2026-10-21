@@ -29,5 +29,6 @@ SVG strokes (`src/kit/icons.ts`) — no icon package.
 | `vitest` | `^5.0.1` | unit tests |
 | `@vue/test-utils` | `^2.5.1` | component mounting in tests |
 | `happy-dom` | `^20.14.5` | DOM environment for tests |
+| `playwright` | `^1.64.1` | headless Chromium screenshots for the release renderer (`scripts/render-release.mjs`) — dev-time only, never a runtime dep |
 
 No browser-only or OS-level integrations.

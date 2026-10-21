@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import ThemeBar from "./ThemeBar.vue";
+import BannerPrint from "./BannerPrint.vue";
 import { ConfirmDialog, DialogHost, ToastHost } from "@vuedemond";
 import PrimitivesSection from "./sections/PrimitivesSection.vue";
 import InputsSection from "./sections/InputsSection.vue";
@@ -24,11 +25,21 @@ const sections = [
   { id: "board", label: "Board", comp: BoardSection },
 ] as const;
 
+/* Print routes for scripts/render-release.mjs:
+ *   ?print=banner              → theme-showcase banner islands (BannerPrint)
+ *   ?print=family&id=X&theme=T → one section only, theme applied before paint */
+const printParams = new URLSearchParams(location.search);
+const printMode = printParams.get("print");
+const printTheme = printParams.get("theme");
+if (printMode === "family" && printTheme) document.documentElement.dataset.theme = printTheme;
+const printSection = printMode === "family" ? sections.find((s) => s.id === printParams.get("id")) ?? null : null;
+
 function scrollTo(id: string): void {
   document.getElementById(`sec-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 onMounted(() => {
+  if (printMode) return; // print routes own their theme; never restore over it
   // restore the last-used theme/accent when the page reloads
   const theme = localStorage.getItem("vuedemond-theme");
   if (theme) document.documentElement.dataset.theme = theme;
@@ -36,7 +47,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="pg">
+  <BannerPrint v-if="printMode === 'banner'" />
+  <div v-else-if="printSection" id="print-section" class="print-wrap">
+    <component :is="printSection.comp" />
+  </div>
+  <div v-else class="pg">
     <ConfirmDialog />
     <DialogHost />
     <ToastHost />
@@ -160,5 +175,11 @@ button {
   border-top: 1px solid var(--line);
   color: var(--text-3);
   font-size: var(--fs-12);
+}
+.print-wrap {
+  min-height: 100vh;
+  padding: 24px;
+  background: var(--bg);
+  color: var(--text);
 }
 </style>
