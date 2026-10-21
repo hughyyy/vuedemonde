@@ -98,7 +98,9 @@ function toggle(d: Date): void {
   border-bottom: 1px solid var(--line);
 }
 .month-cal__day {
+  min-width: 0; /* 1fr tracks must shrink below nowrap chip content or the last columns get pushed out */
   min-height: 96px;
+  overflow: hidden;
   padding: var(--space-1) var(--space-2);
   border-right: 1px solid var(--divider);
   border-bottom: 1px solid var(--divider);
@@ -134,6 +136,8 @@ function toggle(d: Date): void {
   display: flex;
   flex-direction: column;
   gap: 1px;
+  overflow: hidden;
+  min-width: 0;
 }
 .month-cal__more {
   align-self: flex-start;

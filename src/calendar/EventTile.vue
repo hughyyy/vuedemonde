@@ -18,7 +18,7 @@ function tintOf(e: CalendarEvent) {
 </script>
 
 <template>
-  <button class="event-tile" type="button" :style="{ background: tintOf(event).bg, color: tintOf(event).text }" @click.stop="emit('open')">
+  <button class="event-tile" type="button" :title="event.title" :style="{ background: tintOf(event).bg, color: tintOf(event).text }" @click.stop="emit('open')">
     <span class="event-tile__bar" :style="{ background: tintOf(event).text }" aria-hidden="true" />
     <span class="event-tile__body">
       <span class="event-tile__title">{{ event.title }}</span>

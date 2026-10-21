@@ -15,7 +15,7 @@ const emit = defineEmits<{ open: [] }>();
 </script>
 
 <template>
-  <button class="event-chip" :class="`is-${layout}`" type="button" @click.stop="emit('open')">
+  <button class="event-chip" :class="`is-${layout}`" type="button" :title="event.title" @click.stop="emit('open')">
     <span class="event-chip__time" v-if="layout === 'cell' && !event.allDay && fmtTime(event.start).substring(0, 5)">
       {{ fmtTime(event.start) }}
     </span>
@@ -53,6 +53,7 @@ const emit = defineEmits<{ open: [] }>();
   font-variant-numeric: tabular-nums;
 }
 .event-chip__title {
+  min-width: 0; /* shrink with the cell so ellipsis engages instead of raw clip */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
