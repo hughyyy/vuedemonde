@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useId } from "vue";
 withDefaults(
   defineProps<{
     modelValue: string;
@@ -14,6 +15,7 @@ withDefaults(
 );
 
 const emit = defineEmits<{ "update:modelValue": [value: string] }>();
+const msgId = useId();
 
 function onInput(e: Event): void {
   emit("update:modelValue", (e.target as HTMLTextAreaElement).value);
@@ -29,11 +31,12 @@ function onInput(e: Event): void {
       :placeholder="placeholder"
       :rows="rows"
       :disabled="disabled"
-      :aria-invalid="!!error"
+      :aria-invalid="error ? 'true' : undefined"
+      :aria-describedby="error || hint ? msgId : undefined"
       @input="onInput"
     />
-    <span v-if="error" class="app-textarea__msg is-error" role="alert">{{ error }}</span>
-    <span v-else-if="hint" class="app-textarea__msg">{{ hint }}</span>
+    <span v-if="error" :id="msgId" class="app-textarea__msg is-error" role="alert">{{ error }}</span>
+    <span v-else-if="hint" :id="msgId" class="app-textarea__msg">{{ hint }}</span>
   </label>
 </template>
 
@@ -74,6 +77,13 @@ function onInput(e: Event): void {
 }
 .app-textarea.has-error .app-textarea__control {
   border-color: var(--err);
+}
+.app-textarea__control:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring);
+  outline-offset: 1px;
+}
+.app-textarea.has-error .app-textarea__control:focus-visible {
+  outline-color: var(--err);
 }
 .app-textarea__msg {
   font: 400 var(--fs-12)/1.4 var(--font-body);
