@@ -11,8 +11,10 @@ const props = withDefaults(
     disabled?: boolean;
     showToggle?: boolean;
     strength?: boolean;
+    /** accessible name for the field. */
+    ariaLabel?: string;
   }>(),
-  { placeholder: "", disabled: false, showToggle: true, strength: false },
+  { placeholder: "", disabled: false, showToggle: true, strength: false, ariaLabel: "Password" },
 );
 
 const emit = defineEmits<{ "update:modelValue": [v: string] }>();
@@ -46,6 +48,7 @@ function onInput(e: Event): void {
         :value="modelValue"
         :placeholder="placeholder"
         :disabled="disabled"
+        :aria-label="ariaLabel"
         autocomplete="off"
         @input="onInput"
       />
@@ -54,9 +57,10 @@ function onInput(e: Event): void {
         class="input-password__toggle"
         type="button"
         :aria-label="reveal ? 'Hide password' : 'Show password'"
+        :aria-pressed="reveal"
         @click="reveal = !reveal"
       >
-        <AppIcon :name="reveal ? 'eye' : 'eye'" :size="15" class="input-password__eye" :class="{ 'is-off': !reveal }" />
+        <AppIcon name="eye" :size="15" class="input-password__eye" :class="{ 'is-off': !reveal }" />
       </button>
     </div>
     <div v-if="strength" class="input-password__meter" aria-hidden="true">
