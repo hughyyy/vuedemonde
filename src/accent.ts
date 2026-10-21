@@ -17,7 +17,7 @@
  * wrapper (sets the properties on a target element).
  */
 
-import type { AccentChoice } from "./theme";
+import type { AccentChoice, ThemeId } from "./theme";
 
 export type { AccentChoice }; // single source of truth lives in theme.ts
 
@@ -159,4 +159,53 @@ export function applyAccent(choice: AccentChoice | null, target?: HTMLElement | 
   el.style.setProperty("--accent-soft", t.soft);
   el.style.setProperty("--accent-ink", t.ink);
   el.style.setProperty("--focus-ring", t.strong);
+}
+
+/* ---------------------------------------------------------------------------
+ * Theme accent introspection.
+ *
+ * `themeAccent()` reads a theme's *declared* accent straight from the
+ * `theme.css` stylesheet (`[data-theme="…"]` blocks, `:root` for the default
+ * dark theme) — the single source of truth. It deliberately does NOT use
+ * `getComputedStyle`, because a user-selected accent (U12) is applied as an
+ * inline override on `:root`, which would mask the theme's own colours. Used
+ * by theme-picker UIs so the accent swatches reflect whatever the currently
+ * selected theme actually declares.
+ * ------------------------------------------------------------------------ */
+
+/** A theme's declared accent (+ background), for accent pickers. */
+export type ThemeAccent = { from: string; to: string; bg: string };
+
+/**
+ * The accent colours a theme declares in `theme.css`. Returns `null` when the
+ * stylesheet cannot be read (cross-origin / pre-injection / test env) —
+ * callers fall back to the running computed values.
+ */
+export function themeAccent(theme: ThemeId): ThemeAccent | null {
+  if (typeof document === "undefined") return null;
+  // dark lives on :root; every other theme has a dedicated [data-theme] block.
+  const wanted = theme === "dark" ? ":root" : `[data-theme="${theme}"]`;
+  try {
+    for (const sheet of Array.from(document.styleSheets)) {
+      let rules: CSSRuleList | undefined;
+      try {
+        rules = sheet.cssRules;
+      } catch {
+        rules = undefined; // cross-origin sheet — skip
+      }
+      if (!rules) continue;
+      for (const rule of Array.from(rules)) {
+        if (!(rule instanceof CSSStyleRule)) continue;
+        if (rule.selectorText !== wanted) continue;
+        const s = rule.style;
+        const from = s.getPropertyValue("--accent").trim();
+        if (!from) continue;
+        const to = s.getPropertyValue("--accent-2").trim() || from;
+        return { from, to, bg: s.getPropertyValue("--bg").trim() };
+      }
+    }
+  } catch {
+    // stylesheet unreadable — caller handles
+  }
+  return null;
 }

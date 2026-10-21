@@ -1,6 +1,6 @@
 // @vitest-environment happy-dom
 import { describe, expect, it } from "vitest";
-import { accentTokens, applyAccent, luminance } from "../src/accent";
+import { accentTokens, applyAccent, luminance, themeAccent } from "../src/accent";
 
 describe("accentTokens (U12)", () => {
   it("derives a solid accent's full token set", () => {
@@ -35,5 +35,52 @@ describe("accentTokens (U12)", () => {
     // passing null hands the accent back to the theme (clears the override)
     applyAccent(null, el);
     expect(el.style.getPropertyValue("--accent")).toBe("");
+  });
+});
+
+describe("themeAccent — declared theme accents via CSSOM introspection", () => {
+  it("reads :root for dark and [data-theme] blocks for other themes", () => {
+    const style = document.createElement("style");
+    style.textContent = `
+      :root { --accent: #4f9cf9; --accent-2: #6aaefc; --bg: #101418; }
+      [data-theme="thermal"] { --accent: #ff6a00; --bg: #1a0f08; }
+    `;
+    document.head.append(style);
+    try {
+      expect(themeAccent("dark")).toEqual({ from: "#4f9cf9", to: "#6aaefc", bg: "#101418" });
+      expect(themeAccent("thermal")).toEqual({ from: "#ff6a00", to: "#ff6a00", bg: "#1a0f08" });
+    } finally {
+      style.remove();
+    }
+  });
+
+  it("falls back to --accent when a theme declares no --accent-2", () => {
+    const style = document.createElement("style");
+    style.textContent = `[data-theme="matrix"] { --accent: #00ff41; --bg: #000000; }`;
+    document.head.append(style);
+    try {
+      expect(themeAccent("matrix")).toEqual({ from: "#00ff41", to: "#00ff41", bg: "#000000" });
+    } finally {
+      style.remove();
+    }
+  });
+
+  it("returns null when the theme block is absent or the sheet is unreadable", () => {
+    const style = document.createElement("style");
+    style.textContent = `:root { --accent: #4f9cf9; }`;
+    document.head.append(style);
+    try {
+      // 'bubblegum' has no block in the injected sheet; :root block has no --bg but dark only matches :root
+      const unknown = document.createElement("style");
+      unknown.textContent = `[data-theme="bubblegum"] { color: red; }`;
+      document.head.append(unknown);
+      try {
+        expect(themeAccent("bubblegum")).toBeNull();
+      } finally {
+        unknown.remove();
+      }
+    } finally {
+      style.remove();
+    }
   });
 });
