@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useId } from "vue";
 import type { SelectOption } from "./types";
 
 withDefaults(
@@ -14,6 +15,7 @@ withDefaults(
 );
 
 const emit = defineEmits<{ "update:modelValue": [value: string] }>();
+const msgId = useId();
 
 function onInput(e: Event): void {
   emit("update:modelValue", (e.target as HTMLSelectElement).value);
@@ -28,7 +30,8 @@ function onInput(e: Event): void {
         class="app-select__control"
         :value="modelValue"
         :disabled="disabled"
-        :aria-invalid="!!error"
+        :aria-invalid="error ? 'true' : undefined"
+        :aria-describedby="error ? msgId : undefined"
         @change="onInput"
       >
         <option v-if="placeholder" value="" disabled>{{ placeholder }}</option>
@@ -41,7 +44,7 @@ function onInput(e: Event): void {
         <path d="M6 9l6 6 6-6" />
       </svg>
     </div>
-    <span v-if="error" class="app-select__msg is-error" role="alert">{{ error }}</span>
+    <span v-if="error" :id="msgId" class="app-select__msg is-error" role="alert">{{ error }}</span>
   </label>
 </template>
 
@@ -73,6 +76,10 @@ function onInput(e: Event): void {
 }
 .app-select__control:hover:not(:disabled) {
   border-color: var(--line-strong);
+}
+.app-select__control:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring);
+  outline-offset: 1px;
 }
 .app-select__control:disabled {
   opacity: 0.55;
