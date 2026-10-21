@@ -20,6 +20,9 @@ so it runs on demand rather than on every change.
 - `docs/quality-audit.md` — the living issue register for the phase.
 
 ### Fixed
+- AppInput: hint/error text wired to the control via aria-describedby; aria-invalid omitted when clean; token focus-visible ring.
+- AppTextarea: same describedby/aria-invalid/focus-ring contract as AppInput.
+- AppSelect: same describedby/aria-invalid/focus-ring contract.
 - AppRadio: per-instance radio group name (useId) — multiple groups no longer cancel each other's selection.
 - PaneSection: toggle wired with aria-controls (useId) and a focus ring.
 - AppProgress: aria-valuenow clamped to 0–100 like the bar; indeterminate/spinner animation stops under reduced motion.

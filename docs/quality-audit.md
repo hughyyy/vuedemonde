@@ -20,6 +20,7 @@ same commit.** Anything not yet audited is implicitly `open` on first sight.
 
 | Component | Severity | Observed | Required work | Status |
 | --- | --- | --- | --- | --- |
+| AppInput / AppTextarea / AppSelect | med | hint/error text not associated with the control (aria-describedby missing); aria-invalid="false" rendered when clean; no token focus ring | wire useId-describedby, omit aria-invalid when valid, focus-visible ring | fixed |
 | AppRadio | high | hardcoded name="kit-radio" — two groups on one page collide and cancel each other's selection | per-instance useId group name + test | fixed |
 | PaneSection | med | collapse toggle lacked aria-controls and a focus ring | wire useId + aria-controls; focus-visible ring | fixed |
 | AppProgress | low | aria-valuenow unclamped (announced value can disagree with the bar); indeterminate motion ignored reduced-motion contract | clamp like the width; stop animation under reduced motion | fixed |
