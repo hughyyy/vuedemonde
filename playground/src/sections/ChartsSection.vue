@@ -26,14 +26,24 @@ const radar = [
 ];
 const radarLabels = ["Perf", "Cost", "Reliability", "Security", "Usability", "Velocity"];
 
+/* New gap/threshold/min capability: `null` breaks the run, thresholds draw
+ * dashed rules that join the y-domain, `min` floors it (0 = zero baseline). */
+const gapLabels = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+const gapSeries = [
+  { name: "Requests", points: [1, 2, null, null, 3, 4], color: "#4f9cf9" },
+];
+const gapThresholds = [
+  { value: 3.2, label: "warn", color: "var(--warn)" },
+];
+
 const stacked = ref(false);
 </script>
 
 <template>
-  <div>
+  <div class="wrap">
     <h2 class="sec-title">Charts <span class="hint">dependency-free inline SVG on the tokens</span></h2>
 
-    <DemoCard title="BarChart" desc="Grouped or stacked bars with axes, gridlines and ticks.">
+    <DemoCard class="demo span-2" title="BarChart" desc="Grouped or stacked bars with axes, gridlines and ticks.">
       <BarChart :labels="labels" :series="bars" :stacked="stacked" :height="200" />
       <div class="row">
         <AppToggle v-model="stacked" label="stacked" />
@@ -41,11 +51,15 @@ const stacked = ref(false);
       </div>
     </DemoCard>
 
-    <DemoCard title="LineChart" desc="Sharp or smooth lines with optional fill and dots.">
+    <DemoCard class="demo span-2" title="LineChart" desc="Sharp or smooth lines with optional fill and dots.">
       <LineChart :labels="labels" :series="lines" fill smooth :dots="true" :height="200" />
     </DemoCard>
 
-    <DemoCard title="DonutChart" desc="Ring or pie segments with spacing.">
+    <DemoCard class="demo span-2" title="LineChart — gaps, thresholds, min" desc="null breaks the run, dashed thresholds join the y-domain, min: 0 floors it.">
+      <LineChart :labels="gapLabels" :series="gapSeries" :thresholds="gapThresholds" :min="0" :height="200" />
+    </DemoCard>
+
+    <DemoCard class="demo span-2" title="DonutChart" desc="Ring or pie segments with spacing.">
       <div class="row">
         <DonutChart :data="donut" :size="150" :thickness="22" />
         <DonutChart :data="donut" pie :size="120" :spacing="2" />
@@ -60,6 +74,17 @@ const stacked = ref(false);
 </template>
 
 <style scoped>
+.wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 14px;
+  align-items: start;
+}
+.wrap > .sec-title {
+  grid-column: 1 / -1;
+}
+.span-2 { grid-column: span 2; }
+.span-3 { grid-column: 1 / -1; }
 .sec-title {
   margin: 0 0 16px;
   font-size: var(--fs-20);

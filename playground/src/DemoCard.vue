@@ -24,8 +24,11 @@ defineProps<{
 </template>
 
 <style scoped>
+/* Grid cell in the family sections: no vertical margins — the section grid
+ * owns the gaps, so catalogue renders carry no dead vertical space. */
 .demo {
-  margin-bottom: 16px;
+  margin: 0;
+  padding: 14px;
 }
 .demo-chips {
   display: flex;

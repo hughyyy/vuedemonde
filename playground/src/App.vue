@@ -32,6 +32,7 @@ const printParams = new URLSearchParams(location.search);
 const printMode = printParams.get("print");
 const printTheme = printParams.get("theme");
 if (printMode === "family" && printTheme) document.documentElement.dataset.theme = printTheme;
+if (printMode === "family") document.documentElement.dataset.print = "";
 const printSection = printMode === "family" ? sections.find((s) => s.id === printParams.get("id")) ?? null : null;
 
 function scrollTo(id: string): void {
@@ -49,7 +50,7 @@ onMounted(() => {
 <template>
   <BannerPrint v-if="printMode === 'banner'" />
   <div v-else-if="printSection" id="print-section" class="print-wrap">
-    <component :is="printSection.comp" />
+    <component :is="printSection.comp" :print="printMode === 'family'" />
   </div>
   <div v-else class="pg">
     <ConfirmDialog />
@@ -177,9 +178,25 @@ button {
   font-size: var(--fs-12);
 }
 .print-wrap {
-  min-height: 100vh;
   padding: 24px;
   background: var(--bg);
   color: var(--text);
+}
+/* In print renders every open overlay is captured at once: the drawer slides
+ * in at z 950 (below the dialog scrim 1000) and would be invisible, so the
+ * harness raises it and hides its own backdrop — the dialog scrim is the
+ * single dimmer, so every open state stays legible. Harness-only — the kit's
+ * real z-order is untouched. (Drawer teleports to body, hence html[data-print].) */
+html[data-print] .drawer {
+  z-index: 1550;
+}
+html[data-print] .drawer__backdrop {
+  display: none;
+}
+/* Under prefers-reduced-motion the kit zeroes --dur-*; Vue's drawer
+ * <Transition> then collapses with a 0ms duration and can stick at the
+ * enter-from translate. Pin the panel to its rest position for the render. */
+html[data-print] .drawer__panel {
+  transform: none !important;
 }
 </style>

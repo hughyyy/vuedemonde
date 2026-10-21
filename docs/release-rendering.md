@@ -46,6 +46,26 @@ Outputs (28 PNGs, committed):
    `deviceScaleFactor: 2` with `prefers-reduced-motion` emulated (the kit
    zeroes every `--dur-*` under it) and a fixed 1440×1000 viewport.
 
+## Catalogue quality
+
+- **State coverage:** every component's notable states are represented in the
+  renderings — accordion with one item open and others collapsed, trees with
+  expanded/collapsed/disabled nodes, tabs with an active and a disabled tab,
+  toggle/checkbox on-off trios, all badge/chip tints, determinate +
+  indeterminate progress, paginator on page 2, a live ANSI-coloured Terminal
+  feed, a LineChart with a gap + threshold, both Kanban boards, and open
+  overlays (dialog, drawer, popover, confirm popup, context menu, toasts).
+- **Compact layout:** family sections are CSS grids of 350px+ DemoCard cells
+  (`.span-2`/`.span-3` for wide components), so renders carry no dead vertical
+  space; the catalog is regenerated as one pass.
+- **Print-only harness overrides** (scoped to `html[data-print]`, never in the
+  kit): the Drawer renders at rest above the dialog scrim (`z-index: 1550`,
+  backdrop hidden, transform pinned — reduced-motion zeroes `--dur-*`, which
+  makes Vue's drawer `<Transition>` stick at its enter-from translate), and
+  the Board section statically mounts TaskBoard + LaneBoard side by side (the
+  mount-one-at-a-time rule applies to interactive use, where no static render
+  conflicts).
+
 ## Reproducibility
 
 - Fixed viewport + device scale + reduced motion: image diffs across releases
