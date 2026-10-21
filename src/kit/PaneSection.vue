@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
-
+import { ref, useId } from "vue";
 /**
  * D3 — the shared labelled-section primitive for grouping node-panel controls
  * into scannable sections (Identification · Execution · Looping · Inputs ·
@@ -9,14 +8,16 @@ import { ref } from "vue";
  */
 defineProps<{ title: string }>();
 const open = ref(true);
+const bodyId = useId();
 </script>
 
 <template>
-  <section class="pane-section">
+  <section class="pane-section" :id="bodyId">
     <button
       class="pane-section-head"
       type="button"
       :aria-expanded="open"
+      :aria-controls="bodyId"
       @click="open = !open"
     >
       <span class="pane-section-caret" aria-hidden="true">{{ open ? "▾" : "▸" }}</span>
@@ -41,6 +42,10 @@ const open = ref(true);
   border-bottom: 1px solid var(--line);
   cursor: pointer;
   text-align: left;
+}
+.pane-section-head:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring);
+  outline-offset: -2px;
 }
 .pane-section-caret { font-size: 10px; color: var(--muted); }
 .pane-section-title {
