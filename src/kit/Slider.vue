@@ -19,7 +19,7 @@ const emit = defineEmits<{ "update:modelValue": [v: number] }>();
 
 const trackEl = ref<HTMLElement | null>(null);
 
-const pct = computed(() => ((props.modelValue - props.min) / (props.max - props.min)) * 100);
+const pct = computed(() => ((props.modelValue - props.min) / (props.max - props.min || 1)) * 100);
 
 function clamp(v: number): number {
   return Math.min(props.max, Math.max(props.min, v));
