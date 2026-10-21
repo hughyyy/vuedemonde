@@ -8,7 +8,9 @@ export type IconName =
   | "trash" | "edit" | "copy" | "spinner" | "folder" | "node" | "theme"
   | "question"
   | "home" | "inbox" | "bell" | "chart" | "users" | "calendar" | "credit"
-  | "star" | "more" | "sidebar" | "moon" | "eye";
+  | "star" | "more" | "sidebar" | "moon" | "eye"
+  | "bolt" | "wrench" | "compass" | "flag" | "grid" | "document" | "columns" | "collapse"
+  | "sparkle" | "rows";
 
 const PATHS: Record<IconName, string[]> = {
   run: [
@@ -48,6 +50,16 @@ const PATHS: Record<IconName, string[]> = {
   sidebar: ["M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z", "M9 4v16"],
   moon: ["M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"],
   eye: ["M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z", "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"],
+  bolt: ["M13 2 3 14h9l-1 8 10-12h-9l1-8Z"],
+  wrench: ["M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"],
+  compass: ["M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z", "m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36Z"],
+  flag: ["M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1Z", "M4 22v-7"],
+  grid: ["M4 4h6v6H4z", "M14 4h6v6h-6z", "M4 14h6v6H4z", "M14 14h6v6h-6z"],
+  document: ["M6 2h8l4 4v16H6Z", "M14 2v4h4", "M9 13h6", "M9 17h6"],
+  columns: ["M4 4h6v16H4z", "M14 4h6v16h-6z"],
+  rows: ["M4 4h16v6.5H4z", "M4 13.5h16v6.5H4z"],
+  collapse: ["M4 14h6v6", "M20 10h-6V4", "M14 10 21 3", "M3 21l7-7"],
+  sparkle: ["M12 2.5 15 9 21.5 12 15 15 12 21.5 9 15 2.5 12 9 9Z"],
 };
 
 export function iconPaths(name: IconName): string[] {
