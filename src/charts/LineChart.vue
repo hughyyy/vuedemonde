@@ -23,6 +23,8 @@ const props = withDefaults(
     /** smooth = Catmull-Rom curve through the points; elses sharp L-segments. */
     smooth?: boolean;
     height?: number;
+    /** accessible label for the chart image. */
+    ariaLabel?: string;
     margin?: Partial<ChartMargins>;
     /** horizontal rules drawn over the series; their values join the y-domain. */
     thresholds?: ThresholdDef[];
@@ -131,7 +133,7 @@ function dotPts(s: LineSeries): { x: number; y: number; value: number; i: number
 
 <template>
   <div class="chart">
-    <svg :width="W" :height="height" :viewBox="`0 0 ${W} ${height}`" role="img">
+    <svg :width="W" :height="height" :viewBox="`0 0 ${W} ${height}`" :role="'img'" :aria-label="ariaLabel">
       <line v-for="t in yTicks" :key="t" :x1="M.left" :x2="W - M.right" :y1="yPos(t)" :y2="yPos(t)" class="chart__grid" />
       <text v-for="t in yTicks" :key="'t' + t" :x="M.left - 6" :y="yPos(t) + 3" class="chart__tick" text-anchor="end">
         {{ fmtTick(t) }}

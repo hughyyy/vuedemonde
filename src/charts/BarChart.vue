@@ -11,6 +11,8 @@ const props = withDefaults(
     labels: string[];
     series: BarSeries[];
     height?: number;
+    /** accessible label for the chart image. */
+    ariaLabel?: string;
     stacked?: boolean;
     margin?: Partial<ChartMargins>;
   }>(),
@@ -59,7 +61,7 @@ function spec(sIdx: number, cat: number): { y: number; height: number } {
 
 <template>
   <div class="chart">
-    <svg :width="W" :height="height" :viewBox="`0 0 ${W} ${height}`" role="img">
+    <svg :width="W" :height="height" :viewBox="`0 0 ${W} ${height}`" :role="'img'" :aria-label="ariaLabel">
       <!-- gridlines + y ticks -->
       <line v-for="t in yTicks" :key="t" :x1="M.left" :x2="W - M.right" :y1="yPos(t)" :y2="yPos(t)" class="chart__grid" />
       <text v-for="t in yTicks" :key="'t' + t" :x="M.left - 6" :y="yPos(t) + 3" class="chart__tick" text-anchor="end">

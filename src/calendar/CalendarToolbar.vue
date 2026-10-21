@@ -38,6 +38,8 @@ const emit = defineEmits<{
         class="cal-toolbar__view"
         :class="{ 'is-active': view === v.id }"
         type="button"
+        role="tab"
+        :aria-selected="view === v.id"
         @click="emit('update:view', v.id)"
       >
         {{ v.label }}

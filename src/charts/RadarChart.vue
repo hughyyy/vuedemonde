@@ -16,6 +16,8 @@ const props = withDefaults(
     size?: number;
     rings?: number;
     max?: number;
+    /** accessible label for the chart image. */
+    ariaLabel?: string;
   }>(),
   { size: 280, rings: 4, max: 0 },
 );
@@ -48,7 +50,7 @@ function polygon(s: RadarSeries): string {
 
 <template>
   <div class="chart">
-    <svg :width="size" :height="size" :viewBox="`0 0 ${size} ${size}`" role="img">
+    <svg :width="size" :height="size" :viewBox="`0 0 ${size} ${size}`" :role="'img'" :aria-label="ariaLabel">
       <!-- radial grid rings -->
       <path v-for="(p, i) in ringsPoly" :key="i" :d="p" fill="none" stroke="var(--divider)" stroke-width="1" />
       <!-- axes from centre to each category -->

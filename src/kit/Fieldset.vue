@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useId } from "vue";
 import { AppIcon } from "./index";
 
 /** Fieldset — grouped container with a legend; optionally collapsible. */
@@ -13,6 +14,7 @@ withDefaults(
 );
 
 const emit = defineEmits<{ "update:open": [v: boolean] }>();
+const bodyId = useId();
 </script>
 
 <template>
@@ -23,6 +25,7 @@ const emit = defineEmits<{ "update:open": [v: boolean] }>();
         class="fieldset__toggle"
         type="button"
         :aria-expanded="open"
+        :aria-controls="bodyId"
         @click="emit('update:open', !open)"
       >
         <AppIcon name="chevron-down" :size="13" class="fieldset__chevron" :class="{ 'is-open': open }" />
@@ -30,7 +33,7 @@ const emit = defineEmits<{ "update:open": [v: boolean] }>();
       </button>
       <span v-else class="fieldset__legend-text">{{ legend }}</span>
     </div>
-    <div v-show="open" class="fieldset__body"><slot /></div>
+    <div :id="bodyId" v-show="open" class="fieldset__body"><slot /></div>
   </div>
 </template>
 

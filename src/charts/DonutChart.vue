@@ -18,6 +18,8 @@ const props = withDefaults(
     pie?: boolean;
     /** gap between segments, in degrees. */
     spacing?: number;
+    /** accessible label for the chart image. */
+    ariaLabel?: string;
   }>(),
   { size: 160, thickness: 22, pie: false, spacing: 0 },
 );
@@ -65,7 +67,7 @@ function sectors(): { d: string; color: string; label: string; value: number }[]
 
 <template>
   <div class="chart">
-    <svg :width="size" :height="size" :viewBox="`0 0 ${size} ${size}`" role="img">
+    <svg :width="size" :height="size" :viewBox="`0 0 ${size} ${size}`" :role="'img'" :aria-label="ariaLabel">
       <path v-for="(s, i) in sectors()" :key="i" :d="s.d" :fill="s.color">
         <title>{{ `${s.label}: ${s.value}` }}</title>
       </path>
