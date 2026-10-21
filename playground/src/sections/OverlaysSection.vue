@@ -120,7 +120,9 @@ onMounted(() => {
             <p class="pp">A lightweight anchored panel. Everything is token-driven.</p>
           </Popover>
 
-          <ConfirmPopup ref="cp" message="Archive this card?" confirm-label="Archive">
+          <!-- in print the open dialog sits below the trigger row; opening the
+               popup upward keeps the two states from covering each other -->
+          <ConfirmPopup ref="cp" message="Archive this card?" confirm-label="Archive" :placement="print ? 'top' : 'bottom'">
             <AppButton variant="ghost" size="sm" danger @click="cp?.prompt()">Confirm popup</AppButton>
           </ConfirmPopup>
 
