@@ -15,7 +15,8 @@ withDefaults(
 
 <template>
   <div class="app-progress" :class="[`is-${variant}`, `is-${size}`]" role="progressbar"
-    :aria-valuenow="value" aria-valuemin="0" aria-valuemax="100">
+    :aria-valuenow="value === undefined ? undefined : Math.max(0, Math.min(100, value))"
+    aria-valuemin="0" aria-valuemax="100">
     <template v-if="variant === 'bar'">
       <div v-if="label" class="app-progress__label">{{ label }}</div>
       <div class="app-progress__track">
@@ -74,7 +75,7 @@ withDefaults(
 @media (prefers-reduced-motion: reduce) {
   .app-progress__fill.is-indeterminate,
   .app-progress__spinner {
-    animation-duration: 2.2s;
+    animation: none;
   }
 }
 </style>
