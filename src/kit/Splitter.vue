@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { onBeforeUnmount, onMounted, ref, watch } from "vue";
 
 /**
  * Splitter — resizable two-pane split (side-by-side or stacked) with a
- * draggable gutter. First pane size = `modelValue` fraction (0–1) when bound.
+ * draggable gutter. First pane size = `modelValue` fraction (0–1); the value
+ * is CONTROLLED — the pane re-lays-out to a changed modelValue (e.g. a
+ * restored persisted ratio), so a fresh 50/50 split can never inherit a stale
+ * size from a recycled instance. Keyboard: focusable separator, arrow keys.
  */
 
 const props = withDefaults(
@@ -22,8 +25,32 @@ const gutterEl = ref<HTMLElement | null>(null);
 let dragging = false;
 
 function setSize(v: number): void {
-  size.value = Math.min(0.9, Math.max(0.1, v));
-  if (props.modelValue !== undefined) emit("update:modelValue", size.value);
+  const clamped = Math.min(0.9, Math.max(0.1, Number.isFinite(v) ? v : 0.5));
+  // round to 2dp so repeated arrow steps never accumulate float drift in the
+  // persisted tree (0.7000000000000002 was ugly round-tripping through JSON)
+  size.value = Math.round(clamped * 100) / 100;
+  emit("update:modelValue", size.value);
+}
+
+// Controlled from outside: a changed modelValue (restored ratio, fresh 50/50
+// split, programmatic change) re-lays-out the panes immediately.
+watch(
+  () => props.modelValue,
+  (v) => {
+    if (typeof v === "number") size.value = Math.min(0.9, Math.max(0.1, v));
+  },
+);
+
+const STEP = 0.05;
+function onKeydown(e: KeyboardEvent): void {
+  const horizontal = props.orientation === "horizontal";
+  const inc = e.key === "ArrowRight" || e.key === "ArrowDown";
+  const dec = e.key === "ArrowLeft" || e.key === "ArrowUp";
+  if (!inc && !dec) return;
+  e.preventDefault();
+  // a horizontal split resizes left/right; a vertical one up/down
+  const grow = horizontal ? e.key === "ArrowRight" : e.key === "ArrowDown";
+  setSize(size.value + (grow ? STEP : -STEP));
 }
 
 function onDown(e: PointerEvent): void {
@@ -56,10 +83,20 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="splitter" :class="`is-${orientation}`">
-    <div class="splitter__a" :style="orientation === 'horizontal' ? { flexBasis: size * 100 + '%' } : { flexBasis: size * 100 + '%' }">
+    <div class="splitter__a" :style="{ flexBasis: size * 100 + '%' }">
       <slot name="a" />
     </div>
-    <div ref="gutterEl" class="splitter__gutter" :class="`is-${orientation}`" role="separator" :aria-orientation="orientation" @pointerdown="onDown">
+    <div
+      ref="gutterEl"
+      class="splitter__gutter"
+      :class="`is-${orientation}`"
+      role="separator"
+      tabindex="0"
+      :aria-orientation="orientation"
+      :aria-label="'Resize split (' + Math.round(size * 100) + '%) — drag or arrow keys'"
+      @pointerdown="onDown"
+      @keydown="onKeydown"
+    >
       <slot name="gutter"><span class="splitter__grip" /></slot>
     </div>
     <div class="splitter__b"><slot name="b" /></div>
