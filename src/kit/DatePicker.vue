@@ -112,7 +112,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="date-picker">
-    <button ref="triggerEl" class="date-picker__trigger" type="button" :aria-haspopup="'dialog'" @click="toggle">
+    <button ref="triggerEl" class="date-picker__trigger" type="button" :aria-haspopup="'dialog'" :aria-expanded="open" @click="toggle">
       <AppIcon name="calendar" :size="14" class="date-picker__icon" />
       <span class="date-picker__value" :class="{ 'is-empty': !label }">{{ label || placeholder }}</span>
       <AppIcon name="chevron-down" :size="12" class="date-picker__chevron" />

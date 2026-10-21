@@ -96,7 +96,7 @@ const label = () => selectedPath.value.map((o) => o.label).join(" / ");
 
 <template>
   <div class="cascade-select">
-    <button ref="triggerEl" class="cascade-select__trigger" type="button" :aria-haspopup="'listbox'" @click="toggle">
+    <button ref="triggerEl" class="cascade-select__trigger" type="button" :aria-haspopup="'listbox'" :aria-expanded="open" @click="toggle">
       <span class="cascade-select__value" :class="{ 'is-empty': !selectedPath.length }">{{ selectedPath.length ? label() : placeholder }}</span>
       <AppIcon name="chevron-down" :size="13" class="cascade-select__chevron" />
     </button>
