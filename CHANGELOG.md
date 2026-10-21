@@ -20,6 +20,8 @@ so it runs on demand rather than on every change.
 - `docs/quality-audit.md` — the living issue register for the phase.
 
 ### Fixed
+- DataTable: sortable headers are real buttons with aria-sort; selectable rows keyboard-operable with aria-selected.
+- Tree: items expose aria-level/aria-disabled; selectable rows keyboard-operable.
 - AppAccordion: headers wired to their panels (aria-controls per item).
 - Menubar / MegaMenu / TieredMenu: triggers announce popup type and open state (aria-haspopup + aria-expanded).
 - Carousel: labelled carousel region semantics (role=region, aria-roledescription).
