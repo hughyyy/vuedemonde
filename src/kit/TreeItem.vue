@@ -28,12 +28,22 @@ function childOpen(n: TreeNode): boolean {
 </script>
 
 <template>
-  <div class="tree-item" role="treeitem" :aria-expanded="node.children?.length ? open : undefined" :aria-selected="selectable && selectedId === node.id || undefined">
+  <div
+    class="tree-item"
+    role="treeitem"
+    :aria-level="level + 1"
+    :aria-disabled="node.disabled || undefined"
+    :aria-expanded="node.children?.length ? open : undefined"
+    :aria-selected="selectable && selectedId === node.id || undefined"
+  >
     <div
       class="tree-item__row"
       :class="{ 'is-selected': selectable && selectedId === node.id, 'is-disabled': node.disabled }"
       :style="{ paddingLeft: node.children?.length ? 10 + level * 12 + 'px' : 26 + level * 12 + 'px' }"
+      :tabindex="selectable ? 0 : undefined"
       @click="emit('select', node.id)"
+      @keydown.enter.prevent="selectable && emit('select', node.id)"
+      @keydown.space.prevent="selectable && emit('select', node.id)"
     >
       <button
         v-if="node.children?.length"
