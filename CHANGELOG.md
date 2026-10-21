@@ -20,6 +20,10 @@ so it runs on demand rather than on every change.
 - `docs/quality-audit.md` — the living issue register for the phase.
 
 ### Fixed
+- AppTooltip: bubble hidden from assistive tech until shown; wired via aria-describedby.
+- BlockUI: blocked content becomes inert (no keyboard escape into it).
+- ConfirmPopup: panel announced as a labelled dialog.
+- Popover: new label prop — named dialog panel.
 - FileUpload: drop zone keyboard-operable; native file input inert (tabindex -1).
 - AutoComplete: full combobox contract — named input, aria-expanded/controls, arrow navigation with aria-activedescendant, Escape.
 - DatePicker / CascadeSelect: trigger buttons announce their expanded state (aria-expanded).

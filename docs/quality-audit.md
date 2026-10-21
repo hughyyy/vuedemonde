@@ -27,6 +27,11 @@ same commit.** Anything not yet audited is implicitly `open` on first sight.
 | Listbox | med | click-only listbox — no keyboard path | APG-style arrows/Home/End/Enter + aria-activedescendant | fixed |
 | FileUpload | med | drop zone mouse-only; hidden native input in tab order | keyboard zone (role/tabindex/keys); inert input | fixed |
 | AutoComplete | med | unnamed combobox, click-only suggestions | combobox role + aria-expanded/controls/activedescendant + arrow keys | fixed |
+| AppTooltip | med | tooltip text announced even when invisible | aria-hidden until hover/focus + aria-describedby | fixed |
+| BlockUI | med | blocked content stays focusable/tabbable | inert content while blocked | fixed |
+| ConfirmPopup | med | open panel unnamed | role=dialog + aria-label | fixed |
+| Popover | low | dialog panel unnamed | label prop wired to aria-label | fixed |
+| ContextMenu | info | role=menu with plain buttons (no menuitem roles/arrow nav) | candidate enhancement: ARIA menu pattern | open |
 | DatePicker / CascadeSelect | low | trigger showed haspopup but never announced open state | aria-expanded wiring | fixed |
 | FloatLabel / IftaLabel | med | label and input never associated | for/id wiring on mount | fixed |
 | Slider / Knob | low | degenerate min===max range rendered NaN% fill/arc | guard division by zero | fixed |
