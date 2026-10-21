@@ -185,13 +185,18 @@ button {
 /* In print renders every open overlay is captured at once: the drawer slides
  * in at z 950 (below the dialog scrim 1000) and would be invisible, so the
  * harness raises it and hides its own backdrop — the dialog scrim is the
- * single dimmer, so every open state stays legible. Harness-only — the kit's
- * real z-order is untouched. (Drawer teleports to body, hence html[data-print].) */
+ * single dimmer, so every open state stays legible. The dialog is also
+ * pushed left so the drawer panel at the right edge never covers it.
+ * Harness-only — the kit's real z-order is untouched. (Drawer teleports to
+ * body, hence html[data-print].) */
 html[data-print] .drawer {
   z-index: 1550;
 }
 html[data-print] .drawer__backdrop {
   display: none;
+}
+html[data-print] .app-dialog__scrim {
+  place-items: center start;
 }
 /* Under prefers-reduced-motion the kit zeroes --dur-*; Vue's drawer
  * <Transition> then collapses with a 0ms duration and can stick at the

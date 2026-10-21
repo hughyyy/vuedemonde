@@ -108,17 +108,18 @@ onMounted(() => {
       </div>
     </DemoCard>
 
-    <DemoCard title="Popover / ConfirmPopup / ContextMenu" desc="Anchored floating panels — opened in print mode, trigger-driven live.">
+    <DemoCard class="demo span-2" title="Popover / ConfirmPopup / ContextMenu" desc="Anchored floating panels — opened in print mode, trigger-driven live.">
       <div class="col">
-        <div class="row">
+        <!-- triggers spaced across the full-width card so the anchored panels
+             open side by side instead of stacking (print render) -->
+        <div class="row" style="justify-content: space-between; gap: 24px">
           <Popover v-model:open="popOpen" :width="240" placement="bottom">
             <template #trigger="{ toggle }">
               <AppButton variant="secondary" size="sm" @click="toggle">Popover</AppButton>
             </template>
             <p class="pp">A lightweight anchored panel. Everything is token-driven.</p>
           </Popover>
-        </div>
-        <div class="row">
+
           <ConfirmPopup ref="cp" message="Archive this card?" confirm-label="Archive">
             <AppButton variant="ghost" size="sm" danger @click="cp?.prompt()">Confirm popup</AppButton>
           </ConfirmPopup>
