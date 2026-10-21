@@ -111,6 +111,8 @@
   --panel: var(--surface-1);
   --panel-2: var(--surface-2);
   --muted: var(--text-3);
+  /* hover/focus highlight for menu + option rows (AppMenu, AppSearchInput, AppOptionInput) */
+  --nav-hover-bg: var(--surface-3);
 }
 
 /* Light theme — same shape, light values. The accent block is also
