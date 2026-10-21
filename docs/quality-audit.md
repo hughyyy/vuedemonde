@@ -36,6 +36,9 @@ same commit.** Anything not yet audited is implicitly `open` on first sight.
 | Carousel | low | plain div region | region + aria-roledescription + label | fixed |
 | DataTable | med | click-only sortable headers (no aria-sort, no keyboard); selectable rows mouse-only | sort buttons + aria-sort; row tabindex + Enter/Space + aria-selected | fixed |
 | Tree / TreeItem | med | missing aria-level and aria-disabled; selection mouse-only | aria-level/aria-disabled; keyboard select | fixed |
+| Fieldset | med | toggle not associated with body | aria-controls wiring | fixed |
+| CalendarToolbar | med | tablist without tab roles on the buttons | role=tab + aria-selected | fixed |
+| Charts ×4 | med | role=img svgs unnamed | ariaLabel prop | fixed |
 | AppTabs | low | disabled tab visually distinct? | confirmed adequate (opacity 0.5 + :disabled) — no work | clean |
 | ContextMenu | info | role=menu with plain buttons (no menuitem roles/arrow nav) | candidate enhancement: ARIA menu pattern | open |
 | DatePicker / CascadeSelect | low | trigger showed haspopup but never announced open state | aria-expanded wiring | fixed |

@@ -20,6 +20,9 @@ so it runs on demand rather than on every change.
 - `docs/quality-audit.md` — the living issue register for the phase.
 
 ### Fixed
+- Fieldset: collapse toggle wired to its body (aria-controls).
+- CalendarToolbar: view switcher is a proper tablist (role=tab + aria-selected).
+- Charts (Bar/Line/Donut/Radar): charts take an optional ariaLabel for assistive tech.
 - DataTable: sortable headers are real buttons with aria-sort; selectable rows keyboard-operable with aria-selected.
 - Tree: items expose aria-level/aria-disabled; selectable rows keyboard-operable.
 - AppAccordion: headers wired to their panels (aria-controls per item).
