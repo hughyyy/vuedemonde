@@ -29,6 +29,14 @@ function onDown(e: PointerEvent): void {
   move(e);
 }
 
+function onKey(e: KeyboardEvent): void {
+  const d = e.key === "ArrowRight" ? 0.05 : e.key === "ArrowLeft" ? -0.05 : 0;
+  if (d) {
+    e.preventDefault();
+    setPos(pos.value + d);
+  }
+}
+
 function move(e: PointerEvent): void {
   if (!dragging) return;
   const r = hostEl.value!.getBoundingClientRect();
@@ -46,7 +54,19 @@ onBeforeUnmount(() => window.removeEventListener("pointermove", move));
   <div ref="hostEl" class="compare">
     <div class="compare__clip is-a" :style="{ clipPath: `inset(0 ${100 - pos * 100}% 0 0)` }"><slot name="a" /></div>
     <div class="compare__clip is-b" :style="{ clipPath: `inset(0 0 0 ${pos * 100}%)` }"><slot name="b" /></div>
-    <div ref="handleEl" class="compare__handle" :style="{ left: pos * 100 + '%' }" role="slider" :aria-valuenow="Math.round(pos * 100)" aria-valuemin="0" aria-valuemax="100" @pointerdown="onDown">
+    <div
+      ref="handleEl"
+      class="compare__handle"
+      :style="{ left: pos * 100 + '%' }"
+      role="slider"
+      :aria-valuenow="Math.round(pos * 100)"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-label="Compare divider"
+      tabindex="0"
+      @pointerdown="onDown"
+      @keydown="onKey"
+    >
       <slot name="handle"><span class="compare__grip" /></slot>
     </div>
   </div>
@@ -92,6 +112,10 @@ onBeforeUnmount(() => window.removeEventListener("pointermove", move));
   width: 2px;
   background: var(--surface-1);
   box-shadow: 0 0 0 1px var(--line);
+}
+.compare__handle:focus-visible .compare__grip {
+  outline: var(--focus-ring-width) solid var(--focus-ring);
+  outline-offset: 2px;
 }
 .compare__grip {
   position: relative;
