@@ -228,7 +228,6 @@ describe("Terminal transports seam", () => {
 
 describe("Terminal.vue (kit component)", () => {
   it("renders ANSI-styled runs fed through a transport, with no raw escapes", async () => {
-    const s = new TermSession({ id: "t", label: "T", scrollbackMax: 100 });
     const { transport, feed } = (() => {
       let api: TermTransportApi | null = null;
       const t: TermTransport = {

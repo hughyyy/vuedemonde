@@ -51,7 +51,7 @@ describe("Splitter", () => {
     for (let i = 0; i < 9; i++) await gutter.trigger("keydown", { key: "ArrowRight" });
     expect(wrapper.emitted("update:modelValue")?.at(-1)?.[0]).toBe(0.9);
     const exact = wrapper.emitted("update:modelValue")?.map(([v]) => v);
-    expect(exact?.every((v) => Number.isInteger(v * 100))).toBe(true);
+    expect(exact?.every((v) => Number.isInteger((v as number) * 100))).toBe(true);
   });
 
   it("exposes a focusable separator with a live aria-label", () => {
