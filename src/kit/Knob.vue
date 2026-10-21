@@ -21,7 +21,7 @@ const svgEl = ref<SVGSVGElement | null>(null);
 const R = 26;
 const C = 2 * Math.PI * R;
 
-const pct = computed(() => (props.modelValue - props.min) / (props.max - props.min));
+const pct = computed(() => (props.modelValue - props.min) / (props.max - props.min || 1));
 
 function clamp(v: number): number {
   return Math.min(props.max, Math.max(props.min, v));
