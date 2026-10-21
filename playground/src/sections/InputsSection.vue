@@ -3,7 +3,7 @@ import { computed, onMounted, ref } from "vue";
 import {
   AppCheckbox, AppInput, AppOptionInput, AppRadio, AppSearchInput, AppSelect, AppTextarea, AppToggle,
   AutoComplete, CascadeSelect, Compare, DatePicker, FileUpload, FloatLabel, IconField, IftaLabel, Inplace,
-  InputColor, InputGroup, InputNumber, InputOtp, InputPassword, InputTags, Listbox, Rating,
+  InputColor, InputGroup, InputNumber, InputOtp, InputPassword, InputTags, Knob, Listbox, Rating,
   SelectButton, Slider, ToggleButton,
   type RadioOption, type SelectOption,
 } from "@vuedemond";
