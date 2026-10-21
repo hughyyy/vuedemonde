@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useId } from "vue";
 withDefaults(
   defineProps<{
     modelValue: string;
@@ -18,6 +19,7 @@ withDefaults(
 );
 
 const emit = defineEmits<{ "update:modelValue": [value: string] }>();
+const msgId = useId();
 
 function onInput(e: Event): void {
   emit("update:modelValue", (e.target as HTMLInputElement).value);
@@ -33,11 +35,12 @@ function onInput(e: Event): void {
       :value="modelValue"
       :placeholder="placeholder"
       :disabled="disabled"
-      :aria-invalid="!!error"
+      :aria-invalid="error ? 'true' : undefined"
+      :aria-describedby="error || hint ? msgId : undefined"
       @input="onInput"
     />
-    <span v-if="error" class="app-input__msg is-error" role="alert">{{ error }}</span>
-    <span v-else-if="hint" class="app-input__msg">{{ hint }}</span>
+    <span v-if="error" :id="msgId" class="app-input__msg is-error" role="alert">{{ error }}</span>
+    <span v-else-if="hint" :id="msgId" class="app-input__msg">{{ hint }}</span>
   </label>
 </template>
 
@@ -78,6 +81,10 @@ function onInput(e: Event): void {
 }
 .app-input.has-error .app-input__control {
   border-color: var(--err);
+}
+.app-input__control:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring);
+  outline-offset: 1px;
 }
 .app-input.has-error .app-input__control:focus-visible {
   outline-color: var(--err);
