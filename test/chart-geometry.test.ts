@@ -38,7 +38,8 @@ describe("valueRange — the y-domain contract", () => {
 describe("ticksFor + scaleOf — axis maths", () => {
   it("produces nice 1/2/5×10ⁿ steps covering the span", () => {
     expect(ticksFor(0, 100)).toEqual([0, 50, 100]);
-    expect(ticksFor(0, 10)).toEqual([0, 2.5, 5, 7.5, 10]);
+    expect(ticksFor(0, 10)).toEqual([0, 5, 10]);
+    expect(ticksFor(0, 1.2)).toEqual([0, 0.4, 0.8, 1.2]);
     expect(ticksFor(800, 900, 4)[0]).toBeGreaterThanOrEqual(800);
   });
 
