@@ -1,27 +1,33 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { AppBadge, AppButton, AppChip, AppIcon, AppInput, AppToggle, THEME_IDS, THEME_LABELS } from "@vuedemond";
+import { AppBadge, AppButton, AppChip, AppIcon, AppInput, AppToggle, THEME_LABELS } from "@vuedemond";
 
 /**
  * Theme-showcase banner — the release-rendering harness (Tier 1).
- * Rendered under `?print=banner`; each column is a `data-theme` island so one
+ * Rendered under `?print=banner`; each card is a `data-theme` island so one
  * screenshot pass shows every theme. Consumed by scripts/render-release.mjs.
+ *
+ * Layout: two rows of 8 theme cards — the dark themes first, then the
+ * remaining themes with all light themes grouped together at the end.
  */
 
 const input = ref("Hello vuedemond");
 const on = ref(true);
 
-const halves = [THEME_IDS.slice(0, 7), THEME_IDS.slice(7)] as const;
+const rows = [
+  ["dark", "late-night", "thermal", "neon-cyberpunk", "grunge", "granite", "classic", "high-contrast"],
+  ["bubblegum", "matrix", "shining-gold", "light", "pure-platinum", "mint", "sunshine", "monotone"],
+] as const;
 
 const iconNames = ["star", "check", "bell", "chart", "calendar"] as const;
 </script>
 
 <template>
-  <div class="banner">
-    <div v-for="(half, hi) in halves" :key="hi" :id="hi === 0 ? 'banner-a' : 'banner-b'" class="banner__half">
-      <div v-for="id in half" :key="id" class="banner__col" :data-theme="id">
+  <div id="banner" class="banner">
+    <div v-for="(row, ri) in rows" :key="ri" class="banner__row">
+      <div v-for="id in row" :key="id" class="banner__col" :data-theme="id">
         <h2 class="banner__title">{{ THEME_LABELS[id].split(" (")[0] }}</h2>
-        <div class="banner__row">
+        <div class="banner__row-inner">
           <span class="banner__label">Button</span>
           <div class="banner__stack">
             <AppButton>Primary</AppButton>
@@ -30,11 +36,11 @@ const iconNames = ["star", "check", "bell", "chart", "calendar"] as const;
             <AppButton variant="danger">Danger</AppButton>
           </div>
         </div>
-        <div class="banner__row">
+        <div class="banner__row-inner">
           <span class="banner__label">Input</span>
           <AppInput v-model="input" placeholder="Type…" />
         </div>
-        <div class="banner__row">
+        <div class="banner__row-inner">
           <span class="banner__label">Pills</span>
           <div class="banner__stack">
             <AppBadge tint="ok">ok</AppBadge>
@@ -43,11 +49,11 @@ const iconNames = ["star", "check", "bell", "chart", "calendar"] as const;
             <AppChip tint="accent">chip</AppChip>
           </div>
         </div>
-        <div class="banner__row">
+        <div class="banner__row-inner">
           <span class="banner__label">Toggle</span>
           <div class="banner__stack"><AppToggle v-model="on" label="Live" /></div>
         </div>
-        <div class="banner__row">
+        <div class="banner__row-inner">
           <span class="banner__label">Icons</span>
           <div class="banner__icons">
             <AppIcon v-for="n in iconNames" :key="n" :name="n" :size="16" />
@@ -61,10 +67,11 @@ const iconNames = ["star", "check", "bell", "chart", "calendar"] as const;
 <style scoped>
 .banner {
   display: flex;
+  flex-direction: column;
   gap: var(--space-4);
   padding: var(--space-5);
 }
-.banner__half {
+.banner__row {
   display: flex;
   gap: var(--space-4);
 }
@@ -83,7 +90,7 @@ const iconNames = ["star", "check", "bell", "chart", "calendar"] as const;
   font-weight: var(--fw-600);
   color: var(--text);
 }
-.banner__row + .banner__row {
+.banner__row-inner + .banner__row-inner {
   margin-top: var(--space-4);
 }
 .banner__label {

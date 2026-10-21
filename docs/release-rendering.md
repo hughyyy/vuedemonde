@@ -16,13 +16,14 @@ npm run render:release banner     # Tier 1 only
 npm run render:release catalogue  # Tier 2 only
 ```
 
-Outputs (29 PNGs, committed):
+Outputs (28 PNGs, committed):
 
-- `docs/assets/theme-banner-1.png` + `theme-banner-2.png` — Tier 1: the theme
-  showcase. Basic components (AppButton variants, AppInput, AppBadge/AppChip,
-  AppToggle, AppIcon row) rendered as row items under all 13 themes as
-  columns; split into two images (7 + 6 columns) so each fits a README half.
-  Embedded at the top of `README.md`.
+- `docs/assets/theme-banner.png` — Tier 1: the theme showcase. Basic
+  components (AppButton variants, AppInput, AppBadge/AppChip, AppToggle,
+  AppIcon row) rendered as row items under all 16 themes as cards in **two
+  rows of 8** — the dark themes first, then the remaining themes with all
+  light themes (`light`, `pure-platinum`, `mint`, `sunshine`, `monotone`)
+  grouped together at the end. Embedded at the top of `README.md`.
 - `docs/assets/catalogue-<family>-<theme>.png` — Tier 2: every component
   family (primitives, inputs, overlays, navigation, data, layout, charts,
   calendar, board) under the three catalogue themes (light, dark default,
@@ -41,7 +42,7 @@ Outputs (29 PNGs, committed):
    - `?print=family&id=<id>&theme=<theme>` → renders only that family section,
      with the theme applied to `<html>` before first paint. The route never
      restores localStorage over a print request.
-3. Screenshots `#banner-a` / `#banner-b` / `#print-section` at
+3. Screenshots `#banner` / `#print-section` at
    `deviceScaleFactor: 2` with `prefers-reduced-motion` emulated (the kit
    zeroes every `--dur-*` under it) and a fixed 1440×1000 viewport.
 
@@ -58,5 +59,5 @@ Outputs (29 PNGs, committed):
 - CI enforcement: a job that re-runs `render:release` and fails on a PNG diff
   would catch stale images automatically.
 - Tier 2 granularity is family-level today; very large families could split
-  into per-component images if the README grows too heavy (27 images ≈ 6 MB
-  now).
+  into per-component images if the README grows too heavy (27 catalogue
+  images ≈ 6 MB now).

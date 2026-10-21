@@ -4,7 +4,7 @@
  *
  * Consumption model:
  *   import { AppButton, DataTable, ... } from "vuedemond";
- *   import "vuedemond/theme.css";   // design tokens + 13 themes (required)
+ *   import "vuedemond/theme.css";   // design tokens + 16 themes (required)
  *   import "vuedemond/kit.css";     // small optional global helpers
  *
  * The components ship pre-scoped and token-driven — they have zero styling on

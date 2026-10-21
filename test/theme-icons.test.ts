@@ -18,6 +18,9 @@ describe("theme ids", () => {
       "matrix",
       "shining-gold",
       "pure-platinum",
+      "mint",
+      "sunshine",
+      "monotone",
     ];
     expect(THEME_IDS).toEqual(blocks);
   });

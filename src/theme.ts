@@ -19,6 +19,9 @@ export const THEME_IDS = [
   "matrix",
   "shining-gold",
   "pure-platinum",
+  "mint",
+  "sunshine",
+  "monotone",
 ] as const;
 
 export type ThemeId = (typeof THEME_IDS)[number];
@@ -43,6 +46,9 @@ export const THEME_LABELS: Record<ThemeId, string> = {
   matrix: "Matrix",
   "shining-gold": "Shining Gold",
   "pure-platinum": "Pure Platinum",
+  mint: "Mint (light green)",
+  sunshine: "Sunshine (warm light)",
+  monotone: "Monotone (pure greyscale)",
 };
 
 /**

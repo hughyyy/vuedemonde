@@ -12,7 +12,7 @@
  *
  * How it works: builds the playground (`vite build` → dist-demo), serves it
  * with `vite preview`, then drives headless Chromium against the print routes:
- *   ?print=banner                           → theme islands, one column per theme
+ *   ?print=banner                           → theme islands, 2 rows of 8 cards
  *   ?print=family&id=<id>&theme=<theme>     → one family section, theme applied
  * Outputs are committed under docs/assets/ and referenced by README.md.
  *
@@ -79,9 +79,8 @@ async function shot(page, sel, path) {
 
 async function renderBanner(page) {
   await page.goto(`${BASE}/?print=banner`);
-  await shot(page, "#banner-a", join(ASSETS, "theme-banner-1.png"));
-  await shot(page, "#banner-b", join(ASSETS, "theme-banner-2.png"));
-  console.log("  banner → theme-banner-1.png (themes 1–7), theme-banner-2.png (themes 8–13)");
+  await shot(page, "#banner", join(ASSETS, "theme-banner.png"));
+  console.log("  banner → theme-banner.png (two rows of 8 theme cards, light themes grouped)");
 }
 
 async function renderCatalogue(page) {
