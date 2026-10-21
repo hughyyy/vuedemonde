@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { AppButton, AppSelect, AppToggle, notify, THEME_IDS, THEME_LABELS, type ThemeId, type AccentChoice, applyAccent } from "@vuedemond";
+import { AppButton, AppSelect, AppToggle, notify, THEME_IDS, THEME_LABELS, type ThemeId, type AccentChoice, applyAccent } from "@vuedemonde";
 
 const theme = ref<ThemeId>("dark");
 
 watch(theme, (t) => {
   document.documentElement.dataset.theme = t;
-  localStorage.setItem("vuedemond-theme", t);
+  localStorage.setItem("vuedemonde-theme", t);
 });
 
 const accentOn = ref(true);
@@ -71,7 +71,7 @@ const themeOptions = THEME_IDS.map((id) => ({ value: id, label: THEME_LABELS[id]
         </div>
       </div>
 
-      <AppButton size="sm" variant="secondary" icon="info" @click="notify('info', 'Welcome to the vuedemond playground')">
+      <AppButton size="sm" variant="secondary" icon="info" @click="notify('info', 'Welcome to the Vue de monde playground')">
         Notify
       </AppButton>
     </div>

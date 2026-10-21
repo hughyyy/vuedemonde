@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AppPanel, AppBadge } from "@vuedemond";
+import { AppPanel, AppBadge } from "@vuedemonde";
 
 defineProps<{
   title: string;

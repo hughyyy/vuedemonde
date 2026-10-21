@@ -5,7 +5,7 @@ import {
   TermSession, Terminal, TextEditor, Timeline, Tree, TreeSelect, TreeTable, VirtualScroller, notify,
   type ColumnDef, type OrgNode, type TermTransport, type TermTransportApi,
   type TimelineItem, type TreeNode,
-} from "@vuedemond";
+} from "@vuedemonde";
 import DemoCard from "../DemoCard.vue";
 
 /** Not barrel-exported by the kit — mirror the component's item shape. */

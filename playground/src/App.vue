@@ -2,7 +2,7 @@
 import { onMounted } from "vue";
 import ThemeBar from "./ThemeBar.vue";
 import BannerPrint from "./BannerPrint.vue";
-import { ConfirmDialog, DialogHost, ToastHost } from "@vuedemond";
+import { ConfirmDialog, DialogHost, ToastHost } from "@vuedemonde";
 import PrimitivesSection from "./sections/PrimitivesSection.vue";
 import InputsSection from "./sections/InputsSection.vue";
 import OverlaysSection from "./sections/OverlaysSection.vue";
@@ -42,7 +42,7 @@ function scrollTo(id: string): void {
 onMounted(() => {
   if (printMode) return; // print routes own their theme; never restore over it
   // restore the last-used theme/accent when the page reloads
-  const theme = localStorage.getItem("vuedemond-theme");
+  const theme = localStorage.getItem("vuedemonde-theme");
   if (theme) document.documentElement.dataset.theme = theme;
 });
 </script>
@@ -60,7 +60,7 @@ onMounted(() => {
       <div class="pg-brand">
         <span class="pg-brand-mark">◆</span>
         <div>
-          <h1 class="pg-brand-name">vuedemond</h1>
+          <h1 class="pg-brand-name">Vue de monde</h1>
           <p class="pg-brand-sub">Vue 3 · token-driven · zero-dependency kit</p>
         </div>
       </div>
@@ -83,7 +83,7 @@ onMounted(() => {
         <component :is="s.comp" />
       </section>
       <footer class="pg-foot">
-        vuedemond — extracted from the Nexus app's custom UI kit. Components consume
+        Vue de monde — extracted from the Nexus app's custom UI kit. Components consume
         <code>var(--…)</code> tokens from <code>theme.css</code>; theme and accent are runtime switches.
       </footer>
     </main>

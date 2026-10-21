@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [
     vue(),
     {
-      name: "vuedemond-copy-css",
+      name: "vuedemonde-copy-css",
       closeBundle() {
         mkdirSync("dist", { recursive: true });
         for (const css of ["theme.css", "kit.css"]) {
@@ -22,10 +22,10 @@ export default defineConfig({
     emptyOutDir: true,
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
-      name: "Vuedemond",
-      fileName: "vuedemond",
+      name: "Vuedemonde",
+      fileName: "vuedemonde",
       formats: ["es"],
-      cssFileName: "vuedemond",
+      cssFileName: "vuedemonde",
     },
     rollupOptions: {
       external: ["vue"],

@@ -1,5 +1,5 @@
 {
-  "name": "vuedemond",
+  "name": "vuedemonde",
   "version": "0.2.1",
   "description": "Lightweight Vue 3 component + design-token library (forked from the Nexus app's custom UI kit)",
   "type": "module",
@@ -7,17 +7,17 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/vuedemond.js",
-  "module": "./dist/vuedemond.js",
+  "main": "./dist/vuedemonde.js",
+  "module": "./dist/vuedemonde.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/vuedemond.js"
+      "import": "./dist/vuedemonde.js"
     },
     "./theme.css": "./dist/theme.css",
     "./kit.css": "./dist/kit.css",
-    "./vuedemond.css": "./dist/vuedemond.css"
+    "./vuedemonde.css": "./dist/vuedemonde.css"
   },
   "sideEffects": false,
   "scripts": {

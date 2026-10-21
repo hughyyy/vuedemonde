@@ -61,7 +61,7 @@ same commit.** Anything not yet audited is implicitly `open` on first sight.
 | AppChip | low | removable close button lacked a focus ring | focus-visible ring | fixed |
 | Skeleton | med | text-line mode not hidden from assistive tech | aria-hidden on text mode | fixed |
 | AppButton | med | no accessible name for icon-only buttons; no aria-busy while loading; no focus-visible ring; spinner ignores reduced motion | add ariaLabel prop + aria-busy + focus-visible + static spinner under reduced motion, with a11y tests | fixed |
-| InputsSection (catalogue) | med | `<Knob>` used without import — the component silently never rendered in the catalogue; caught by the first `test:audit` run | import Knob from `@vuedemond` in the section | fixed |
+| InputsSection (catalogue) | med | `<Knob>` used without import — the component silently never rendered in the catalogue; caught by the first `test:audit` run | import Knob from `@vuedemonde` in the section | fixed |
 | Calendar EventTile / EventChip | med | long titles clipped at the container edge with no ellipsis; in the month grid they stretched the 1fr columns and pushed Friday/Saturday out of the card | min-width:0 on day cells + events container; title ellipsis with full title on hover (title attr) | fixed |
 | WeekCalendar / DayCalendar | low | time-axis labels not vertically centred on their grid lines; day view has inert whitespace when events are sparse | measured: label vs hour-rule delta is a uniform −0.5 px (sub-pixel glyph metric) in both views — centring verified; whitespace is inherent to a fixed-hour grid | verified — no change |
 | AppTabs | low | disabled tab lacks a visually distinct state (catalogue check) | confirm `.is-disabled` styling exists; strengthen if indistinguishable | open |

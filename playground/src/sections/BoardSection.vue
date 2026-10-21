@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { AppTabs, LaneBoard, TaskBoard, type TabDef } from "@vuedemond";
+import { AppTabs, LaneBoard, TaskBoard, type TabDef } from "@vuedemonde";
 import DemoCard from "../DemoCard.vue";
 
 defineProps<{ print?: boolean }>();

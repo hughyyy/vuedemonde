@@ -1,6 +1,6 @@
 # dependencies.md
 
-Vuedemond's dependency register — every third-party package the library ships
+Vue de monde's dependency register — every third-party package the library ships
 code against, and why. Anything new must be named here (module + version) with
 its justification before it lands.
 

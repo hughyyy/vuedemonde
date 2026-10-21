@@ -1,9 +1,11 @@
-# vuedemond
+# Vue de monde
 
 A lightweight Vue 3 component + design-token library, extracted from (and built
 through) the Nexus visual-editor app's custom UI kit. Every component is a
 hand-written SFC that reads CSS custom-property tokens from a single theme
 stylesheet — no UI-library dependency, no runtime CSS-in-JS, just Vue.
+
+Published as the npm package **`vuedemonde`**.
 
 <p align="center">
   <img src="docs/assets/theme-banner.png" width="100%" alt="All 16 themes: two rows of 8 theme cards — dark themes first, light themes grouped together" />
@@ -21,16 +23,16 @@ npm run build          # library → dist/ (ESM + CSS + d.ts)
 
 ```ts
 // any Vue 3 (≥3.5) project
-import { AppButton, DataTable, notify, THEME_LABELS } from "vuedemond";
-import "vuedemond/theme.css";  // required — the tokens + 16 themes
-import "vuedemond/kit.css";    // optional — global helpers (board drag, ripple)
+import { AppButton, DataTable, notify, THEME_LABELS } from "vuedemonde";
+import "vuedemonde/theme.css";  // required — the tokens + 16 themes
+import "vuedemonde/kit.css";    // optional — global helpers (board drag, ripple)
 
 createApp(App).use(FormDirectives).mount("#app"); // optional: v-mask/v-key-filter/v-ripple...
 ```
 
 The library is ESM (`.js` + `.d.ts`), so consume it through a bundler (Vite, etc.).
 `vue` is a peer dependency. `theme.css` and `kit.css` are also bundled into the
-single `vuedemond.css` convenience entry if you prefer one import.
+single `vuedemonde.css` convenience entry if you prefer one import.
 
 ## Theming
 

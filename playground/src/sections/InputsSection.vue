@@ -6,7 +6,7 @@ import {
   InputColor, InputGroup, InputNumber, InputOtp, InputPassword, InputTags, Knob, Listbox, Rating,
   SelectButton, Slider, ToggleButton,
   type RadioOption, type SelectOption,
-} from "@vuedemond";
+} from "@vuedemonde";
 import DemoCard from "../DemoCard.vue";
 
 /** Not barrel-exported by the kit — mirror the component's option shape. */
@@ -124,7 +124,7 @@ onMounted(async () => {
     const input = upEl.querySelector<HTMLInputElement>('input[type="file"]');
     if (input) {
       const dt = new DataTransfer();
-      dt.items.add(new File(['{ "kit": "vuedemond" }'], "design-tokens.json", { type: "application/json" }));
+      dt.items.add(new File(['{ "kit": "vuedemonde" }'], "design-tokens.json", { type: "application/json" }));
       dt.items.add(new File(["--accent: #4f9cf9;"], "theme.css", { type: "text/css" }));
       Object.defineProperty(input, "files", { value: dt.files, configurable: true });
       input.dispatchEvent(new Event("change", { bubbles: true }));

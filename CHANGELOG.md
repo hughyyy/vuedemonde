@@ -13,6 +13,12 @@ individually; regression coverage lives in the opt-in render-audit suite
 fails on any console error/warning. It is not part of the default `npm test`,
 so it runs on demand rather than on every change.
 
+### Changed
+- Project renamed `vuedemond` → `vuedemonde`: package name, folder/repo, the
+  `@vuedemonde` path alias, dist artefact names (`vuedemonde.js` /
+  `vuedemonde.css`), the `vuedemonde-ripple` keyframes, and the playground's
+  persisted theme key. User-facing branding is set as **Vue de monde**.
+
 ### Added
 - Render-audit suite (`audit/`, `vitest.audit.config.ts`): mounts all nine
   family sections (print mode) under dark/light/thermal + the theme banner

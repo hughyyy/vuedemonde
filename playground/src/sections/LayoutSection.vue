@@ -4,7 +4,7 @@ import {
   AppButton, AppInput, AppPanel, AppSelect, Card, DeferredContent, Divider,
   Fieldset, FileUpload, Fluid, MediaGallery, MeterGroup, PaneSection, ScrollArea,
   Splitter, Stepper, Toolbar, VirtualScroller, type SelectOption, type StepperItem,
-} from "@vuedemond";
+} from "@vuedemonde";
 import DemoCard from "../DemoCard.vue";
 
 defineProps<{ print?: boolean }>();
@@ -41,7 +41,7 @@ const toolOpts: SelectOption[] = [
 const longList = Array.from({ length: 1000 }, (_, i) => `row-${String(i).padStart(3, "0")}`);
 
 const gallery = Array.from({ length: 8 }, (_, i) => ({
-  src: `https://picsum.photos/seed/vuedemond${i}/400/260`,
+  src: `https://picsum.photos/seed/vuedemonde${i}/400/260`,
   alt: `Sample ${i + 1}`,
 }));
 

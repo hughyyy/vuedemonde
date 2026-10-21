@@ -5,7 +5,7 @@ import {
   ScrollTop, TieredMenu, notify,
   type AccordionItem, type BreadcrumbItem, type DockItem, type MegaItem,
   type MenubarItem, type MenuItem, type TabDef, type TieredItem,
-} from "@vuedemond";
+} from "@vuedemonde";
 import DemoCard from "../DemoCard.vue";
 
 const props = defineProps<{ print?: boolean }>();

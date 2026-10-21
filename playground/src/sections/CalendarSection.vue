@@ -4,7 +4,7 @@ import {
   CalendarToolbar, DayCalendar, EventChip, EventTile, MonthCalendar,
   SchedulerView, WeekCalendar,
   type CalendarEvent, type CalendarViewId, ev, seedEvents,
-} from "@vuedemond";
+} from "@vuedemonde";
 import DemoCard from "../DemoCard.vue";
 
 defineProps<{ print?: boolean }>();

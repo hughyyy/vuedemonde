@@ -3,7 +3,7 @@ import { ref } from "vue";
 import {
   AppAvatar, AppBadge, AppButton, AppChip, AppIcon, AppMessage, AppProgress,
   AvatarStack, Divider, Skeleton, type IconName,
-} from "@vuedemond";
+} from "@vuedemonde";
 import DemoCard from "../DemoCard.vue";
 
 defineProps<{ print?: boolean }>();

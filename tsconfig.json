@@ -14,8 +14,8 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@vuedemond": ["src/index.ts"],
-      "@vuedemond/*": ["src/*"]
+      "@vuedemonde": ["src/index.ts"],
+      "@vuedemonde/*": ["src/*"]
     }
   },
   "include": ["src", "playground", "test"]

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { AppBadge, AppButton, AppChip, AppIcon, AppInput, AppToggle, THEME_LABELS } from "@vuedemond";
+import { AppBadge, AppButton, AppChip, AppIcon, AppInput, AppToggle, THEME_LABELS } from "@vuedemonde";
 
 /**
  * Theme-showcase banner — the release-rendering harness (Tier 1).
@@ -11,7 +11,7 @@ import { AppBadge, AppButton, AppChip, AppIcon, AppInput, AppToggle, THEME_LABEL
  * remaining themes with all light themes grouped together at the end.
  */
 
-const input = ref("Hello vuedemond");
+const input = ref("Vue de monde");
 const on = ref(true);
 
 const rows = [

@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import {
   CHART_COLORS, AppToggle, BarChart, ChartLegend, DonutChart, LineChart, RadarChart,
-} from "@vuedemond";
+} from "@vuedemonde";
 import DemoCard from "../DemoCard.vue";
 
 const labels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

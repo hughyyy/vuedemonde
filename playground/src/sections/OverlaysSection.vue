@@ -4,7 +4,7 @@ import {
   AppButton, AppDialog, AppMessage, AppTooltip, BlockUI, CommandMenu, ConfirmPopup,
   ContextMenu, Drawer, openDialog, Popover, ToastHost, confirm, notify,
   type CommandItem, type MenuAction,
-} from "@vuedemond";
+} from "@vuedemonde";
 import DemoCard from "../DemoCard.vue";
 
 const props = defineProps<{ print?: boolean }>();

@@ -1,5 +1,5 @@
 /* ============================================================================
- * Vuedemond global helper layer — the handful of non-scoped rules the kit
+ * Vue de monde global helper layer — the handful of non-scoped rules the kit
  * components need at runtime. Import alongside `theme.css` (also optional: it
  * only matters if you use the board drag or the `v-ripple` directive).
  * ========================================================================= */
@@ -27,11 +27,11 @@
   background: currentColor;
   opacity: 0.35;
   transform: scale(0);
-  animation: vuedemond-ripple 0.55s var(--ease-out, ease-out);
+  animation: vuedemonde-ripple 0.55s var(--ease-out, ease-out);
   pointer-events: none;
 }
 
-@keyframes vuedemond-ripple {
+@keyframes vuedemonde-ripple {
   to {
     transform: scale(1);
     opacity: 0;

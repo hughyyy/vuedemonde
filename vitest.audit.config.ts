@@ -16,7 +16,7 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      "@vuedemond": src,
+      "@vuedemonde": src,
     },
   },
   test: {

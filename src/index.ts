@@ -1,11 +1,11 @@
 /**
- * Vuedemond — a lightweight Vue 3 component + design-token library, extracted
+ * Vue de monde — a lightweight Vue 3 component + design-token library, extracted
  * and made standalone from the Nexus visual-editor app's custom UI kit.
  *
  * Consumption model:
- *   import { AppButton, DataTable, ... } from "vuedemond";
- *   import "vuedemond/theme.css";   // design tokens + 16 themes (required)
- *   import "vuedemond/kit.css";     // small optional global helpers
+ *   import { AppButton, DataTable, ... } from "vuedemonde";
+ *   import "vuedemonde/theme.css";   // design tokens + 16 themes (required)
+ *   import "vuedemonde/kit.css";     // small optional global helpers
  *
  * The components ship pre-scoped and token-driven — they have zero styling on
  * their own beyond `var(--…)` reads from `theme.css`, so theming is a single
