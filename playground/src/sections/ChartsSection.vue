@@ -14,6 +14,7 @@ const lines = [
   { name: "Requests", points: [2, 4, 3, 8, 6, 12, 9], color: "#4f9cf9" },
   { name: "Errors", points: [1, 1, 2, 1, 3, 2, 4], color: "#f25d5d" },
 ];
+const lineLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const donut = [
   { label: "Platform", value: 34, color: "#4f9cf9" },
   { label: "Data", value: 26, color: "#f97316" },
@@ -28,7 +29,7 @@ const radarLabels = ["Perf", "Cost", "Reliability", "Security", "Usability", "Ve
 
 /* New gap/threshold/min capability: `null` breaks the run, thresholds draw
  * dashed rules that join the y-domain, `min` floors it (0 = zero baseline). */
-const gapLabels = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+const gapLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const gapSeries = [
   { name: "Requests", points: [1, 2, null, null, 3, 4], color: "#4f9cf9" },
 ];
@@ -52,7 +53,7 @@ const stacked = ref(false);
     </DemoCard>
 
     <DemoCard class="demo span-2" title="LineChart" desc="Sharp or smooth lines with optional fill and dots.">
-      <LineChart :labels="labels" :series="lines" fill smooth :dots="true" :height="200" />
+      <LineChart :labels="lineLabels" :series="lines" fill smooth :dots="true" :height="200" />
     </DemoCard>
 
     <DemoCard class="demo span-2" title="LineChart — gaps, thresholds, min" desc="null breaks the run, dashed thresholds join the y-domain, min: 0 floors it.">
