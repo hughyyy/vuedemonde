@@ -41,6 +41,8 @@ single `vuedemond.css` convenience entry if you prefer one import.
   `applyAccent({ kind: "gradient", from, to })` derives `--accent`, `--accent-2`,
   `--accent-gradient`, `--accent-strong`, `--accent-soft`, `--accent-ink` and
   `--focus-ring` and writes them to `:root`; `applyAccent(null)` resets.
+  `themeAccent(themeId)` reads a theme's *declared* accent straight from the
+  stylesheet (for theme pickers that must ignore a running user override).
 - Reduced motion is built in: under `prefers-reduced-motion` all `--dur-*` go to `0ms`.
 
 ## The playground
@@ -56,7 +58,8 @@ accent switcher in the header.
 `AppMessage` · `AppProgress` · `Skeleton` · `Divider`
 
 ### Inputs & forms
-`AppInput` · `AppTextarea` · `AppSelect` · `AppCheckbox` · `AppToggle` ·
+`AppInput` · `AppTextarea` · `AppSelect` · `AppSearchInput` · `AppOptionInput` ·
+`AppCheckbox` · `AppToggle` ·
 `AppRadio` · `ToggleButton` · `SelectButton` · `Listbox` · `AutoComplete` ·
 `InputNumber` · `Slider` · `Rating` · `Knob` · `Compare` · `InputColor` ·
 `InputTags` · `DatePicker` · `InputOtp` · `InputPassword` · `InputGroup` ·
@@ -73,16 +76,18 @@ accent switcher in the header.
 `Dock` · `Breadcrumb` · `Carousel` · `ScrollTop` · `DeferredContent`
 
 ### Data display
-`DataTable` · `Paginator` · `DataView` · `VirtualScroller` · `Tree` ·
-`TreeTable` · `TreeSelect` · `OrderList` · `PickList` · `Timeline` ·
-`Terminal` · `TextEditor` · `OrgChart` · `MeterGroup`
+`DataTable` · `Paginator` · `DataView` · `VirtualScroller` · `AppVirtualList`
+(dynamic-height virtualiser) · `Tree` · `TreeTable` · `TreeSelect` ·
+`OrderList` · `PickList` · `Timeline` · `Terminal` (streaming ANSI, tabs,
+transports) · `TextEditor` · `OrgChart` · `MeterGroup`
 
 ### Layout
 `AppPanel` · `Card` · `Fieldset` · `Splitter` · `ScrollArea` · `Toolbar` ·
 `Fluid` · `Stepper` · `MediaGallery` · `PaneSection`
 
 ### Charts (dependency-free inline SVG)
-`BarChart` · `LineChart` · `DonutChart` · `RadarChart` · `ChartLegend`
+`BarChart` · `LineChart` (gap-aware: `null` points break the line, dashed
+threshold rules, epoch-time axis) · `DonutChart` · `RadarChart` · `ChartLegend`
 
 ### Calendar
 `MonthCalendar` · `WeekCalendar` · `DayCalendar` · `SchedulerView` ·

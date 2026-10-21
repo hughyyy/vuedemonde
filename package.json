@@ -1,6 +1,6 @@
 {
   "name": "vuedemond",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Lightweight Vue 3 component + design-token library (forked from the Nexus app's custom UI kit)",
   "type": "module",
   "license": "MIT",
