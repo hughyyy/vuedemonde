@@ -20,6 +20,7 @@ so it runs on demand rather than on every change.
 - `docs/quality-audit.md` — the living issue register for the phase.
 
 ### Fixed
+- AppButton: aria-label/aria-busy for icon-only and loading states, focus-visible ring, spinner stops under reduced motion.
 - InputsSection (playground): the Knob demo referenced the component without
   importing it, so it silently never rendered in the catalogue — caught by the
   first audit run.

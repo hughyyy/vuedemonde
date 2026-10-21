@@ -20,6 +20,7 @@ same commit.** Anything not yet audited is implicitly `open` on first sight.
 
 | Component | Severity | Observed | Required work | Status |
 | --- | --- | --- | --- | --- |
+| AppButton | med | no accessible name for icon-only buttons; no aria-busy while loading; no focus-visible ring; spinner ignores reduced motion | add ariaLabel prop + aria-busy + focus-visible + static spinner under reduced motion, with a11y tests | fixed |
 | InputsSection (catalogue) | med | `<Knob>` used without import — the component silently never rendered in the catalogue; caught by the first `test:audit` run | import Knob from `@vuedemond` in the section | fixed |
 | Calendar EventTile / EventChip | low | long titles clip at container edge without ellipsis (catalogue check) | verify component markup; add `text-overflow: ellipsis` / line-clamp with `title` attr | open |
 | WeekCalendar / DayCalendar | low | time-axis labels not vertically centred on their grid lines; day view has inert whitespace when events are sparse | nudge tick text offset; (whitespace is inherent to a time grid — document, don't fight) | open |

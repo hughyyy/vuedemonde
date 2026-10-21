@@ -11,6 +11,8 @@ withDefaults(
     icon?: IconName;
     type?: "button" | "submit";
     title?: string;
+    /** accessible name for icon-only buttons (no label slot); falls back to `title`. */
+    ariaLabel?: string;
   }>(),
   {
     variant: "primary",
@@ -31,6 +33,8 @@ defineEmits<{ click: [event: MouseEvent] }>();
     :type="type"
     :disabled="disabled || loading"
     :title="title"
+    :aria-label="ariaLabel ?? title"
+    :aria-busy="loading || undefined"
     @click="$emit('click', $event)"
   >
     <AppIcon v-if="loading" name="spinner" class="is-spin" :size="size === 'sm' ? 13 : 15" />
@@ -56,6 +60,10 @@ defineEmits<{ click: [event: MouseEvent] }>();
 .app-button:disabled {
   opacity: 0.55;
   cursor: not-allowed;
+}
+.app-button:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
 }
 .app-button.is-sm {
   padding: var(--space-1) var(--space-2);
@@ -120,7 +128,7 @@ defineEmits<{ click: [event: MouseEvent] }>();
 }
 @media (prefers-reduced-motion: reduce) {
   .is-spin {
-    animation-duration: 1.6s;
+    animation: none;
   }
 }
 </style>
