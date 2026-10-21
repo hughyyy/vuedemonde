@@ -72,7 +72,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown));
         :aria-label="title"
       >
         <header class="app-dialog__head">
-          <h2 class="app-dialog__title">{{ title }}</h2>
+          <h2 class="app-dialog__title"><slot name="title">{{ title }}</slot></h2>
           <button class="app-dialog__close" type="button" aria-label="Close" @click="emit('close')">
             <AppIcon name="close" :size="14" />
           </button>
