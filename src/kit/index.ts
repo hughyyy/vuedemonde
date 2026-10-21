@@ -20,6 +20,7 @@ export { default as AppDialog } from "./AppDialog.vue";
 export { default as AppTabs } from "./AppTabs.vue";
 export { default as AppAccordion } from "./AppAccordion.vue";
 export { default as AppTooltip } from "./AppTooltip.vue";
+export { default as AppVirtualList } from "./AppVirtualList.vue";
 export { default as AppMessage } from "./AppMessage.vue";
 export { default as AppEmptyState } from "./AppEmptyState.vue";
 export { default as AppProgress } from "./AppProgress.vue";
