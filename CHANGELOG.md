@@ -20,6 +20,7 @@ so it runs on demand rather than on every change.
 - `docs/quality-audit.md` — the living issue register for the phase.
 
 ### Fixed
+- InputsSection (playground): print-mode panel opens now pin scroll to top — teleported panels (DatePicker/CascadeSelect) were anchored against a scrolled viewport, floating ~620px off their triggers (caught by the per-card visual audit).
 - Fieldset: collapse toggle wired to its body (aria-controls).
 - CalendarToolbar: view switcher is a proper tablist (role=tab + aria-selected).
 - Charts (Bar/Line/Donut/Radar): charts take an optional ariaLabel for assistive tech.

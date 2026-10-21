@@ -30,6 +30,7 @@ same commit.** Anything not yet audited is implicitly `open` on first sight.
 | AppTooltip | med | tooltip text announced even when invisible | aria-hidden until hover/focus + aria-describedby | fixed |
 | BlockUI | med | blocked content stays focusable/tabbable | inert content while blocked | fixed |
 | ConfirmPopup | med | open panel unnamed | role=dialog + aria-label | fixed |
+| InputsSection (playground harness) | med | DatePicker/CascadeSelect print-open panels landed ~620px off the trigger (open fired after scroll anchoring shifted the viewport) | scrollTo(0,0) before panel opens | fixed |
 | Popover | low | dialog panel unnamed | label prop wired to aria-label | fixed |
 | AppAccordion | med | headers not associated with panels | aria-controls via per-item ids | fixed |
 | Menubar / MegaMenu / TieredMenu | med | triggers never announced popup/open state | aria-haspopup + aria-expanded | fixed |

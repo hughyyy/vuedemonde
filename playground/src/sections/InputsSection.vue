@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, nextTick, onMounted, ref } from "vue";
 import {
   AppCheckbox, AppInput, AppOptionInput, AppRadio, AppSearchInput, AppSelect, AppTextarea, AppToggle,
   AutoComplete, CascadeSelect, Compare, DatePicker, FileUpload, FloatLabel, IconField, IftaLabel, Inplace,
@@ -106,7 +106,7 @@ const cascadeWrap = ref<HTMLElement | null>(null);
 const otpWrap = ref<HTMLElement | null>(null);
 const uploadWrap = ref<HTMLElement | null>(null);
 
-onMounted(() => {
+onMounted(async () => {
   // InputOtp — populate the six cells (local state, not prop-driven).
   const otpEl = otpWrap.value;
   if (otpEl) {
@@ -132,6 +132,12 @@ onMounted(() => {
   }
   if (!props.print) return;
   // print mode: open the normally-interactive panels so renders show them open.
+  // The page may have scrolled during mount (scroll anchoring after the OTP /
+  // file-list injections); the anchored panels measure the trigger in viewport
+  // coords, so pin scroll to the top first (per-card audit caught a 600px+ drift).
+  window.scrollTo(0, 0);
+  await document.fonts?.ready;
+  await nextTick();
   dateWrap.value?.querySelector<HTMLElement>(".date-picker__trigger")?.click();
   cascadeWrap.value?.querySelector<HTMLElement>(".cascade-select__trigger")?.click();
   // focus last — the trigger clicks above steal focus and would blur it closed
