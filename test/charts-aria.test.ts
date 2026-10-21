@@ -10,7 +10,7 @@ const img = (w: VueWrapper) => w.find("svg").attributes("aria-label");
 
 describe("charts — accessible image labels", () => {
   it("exposes an optional label on every chart svg", () => {
-    const bar = mount(BarChart, { props: { labels: ["a"], series: [{ name: "s", values: [1] }], ariaLabel: "Monthly revenue" } });
+    const bar = mount(BarChart, { props: { labels: ["a"], series: [{ name: "s", data: [1] }], ariaLabel: "Monthly revenue" } });
     expect(img(bar)).toBe("Monthly revenue");
     const donut = mount(DonutChart, { props: { data: [{ label: "x", value: 1 }], ariaLabel: "Disk usage" } });
     expect(img(donut)).toBe("Disk usage");
