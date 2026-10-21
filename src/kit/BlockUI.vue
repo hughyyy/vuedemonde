@@ -10,7 +10,7 @@ withDefaults(
 
 <template>
   <div class="blockui">
-    <div class="blockui__content"><slot /></div>
+    <div class="blockui__content" :inert="blocked"><slot /></div>
     <Transition name="fade">
       <div v-if="blocked" class="blockui__mask" role="status" :aria-label="message || 'Blocked'">
         <span v-if="message" class="blockui__msg">{{ message }}</span>

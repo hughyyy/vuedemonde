@@ -92,7 +92,7 @@ defineExpose({ prompt });
     <slot />
     <Teleport to="body">
       <Transition name="menu-pop">
-        <div v-if="open" ref="panelEl" class="confirm-popup__panel" :style="pos">
+        <div v-if="open" ref="panelEl" class="confirm-popup__panel" :style="pos" role="dialog" :aria-label="message">
           <p class="confirm-popup__msg">{{ message }}</p>
           <div class="confirm-popup__actions">
             <AppButton variant="ghost" size="sm" @click="settle(false)">{{ cancelLabel }}</AppButton>

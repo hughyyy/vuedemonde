@@ -13,6 +13,8 @@ const props = withDefaults(
     placement?: "bottom" | "top";
     align?: "start" | "end";
     width?: number;
+    /** accessible name for the dialog panel. */
+    label?: string;
   }>(),
   { open: undefined, placement: "bottom", align: "start", width: 260 },
 );
@@ -96,7 +98,7 @@ onBeforeUnmount(() => {
     <slot name="trigger" :toggle="toggle" :open="isOpen" />
     <Teleport to="body">
       <Transition name="menu-pop">
-        <div v-if="isOpen" ref="panelEl" class="popover__panel" role="dialog" :style="{ ...pos, ...(width ? { width: width + 'px' } : {}) }" @keydown="onPanelKeydown">
+        <div v-if="isOpen" ref="panelEl" class="popover__panel" role="dialog" :aria-label="label" :style="{ ...pos, ...(width ? { width: width + 'px' } : {}) }" @keydown="onPanelKeydown">
           <slot />
         </div>
       </Transition>

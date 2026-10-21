@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, useId } from "vue";
 withDefaults(
   defineProps<{
     text: string;
@@ -6,12 +7,24 @@ withDefaults(
   }>(),
   { placement: "top" },
 );
+const shown = ref(false);
+const bubbleId = useId();
 </script>
 
 <template>
-  <span class="app-tooltip" :class="`is-${placement}`" tabindex="0">
+  <span
+    class="app-tooltip"
+    :class="`is-${placement}`"
+    tabindex="0"
+    :aria-describedby="bubbleId"
+    @mouseenter="shown = true"
+    @mouseleave="shown = false"
+    @focusin="shown = true"
+    @focusout="shown = false"
+  >
     <slot />
-    <span class="app-tooltip__bubble" role="tooltip">{{ text }}</span>
+    <!-- hidden from assistive tech until actually shown (hover/focus) -->
+    <span class="app-tooltip__bubble" role="tooltip" :id="bubbleId" :aria-hidden="!shown">{{ text }}</span>
   </span>
 </template>
 
