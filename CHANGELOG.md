@@ -4,7 +4,7 @@ All notable changes to vuedemonde are recorded here, per the quality-work
 convention: **every component fix lands with its own commit, a changelog
 entry, and an update to `docs/quality-audit.md`**.
 
-## 0.2.1 — quality focus phase (unreleased)
+## 0.2.1 — quality focus phase (released 2026-10-22 — first publish to npm as `vuedemonde`)
 
 Beginning of the QA pass over the full component inventory: every component is
 audited for rendering errors, accessibility and edge states. Fixes commit
