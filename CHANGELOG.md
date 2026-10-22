@@ -18,6 +18,10 @@ so it runs on demand rather than on every change.
   `@vuedemonde` path alias, dist artefact names (`vuedemonde.js` /
   `vuedemonde.css`), the `vuedemonde-ripple` keyframes, and the playground's
   persisted theme key. User-facing branding is set as **Vue de monde**.
+- Every theme block now declares `color-scheme` (`light` for `light`,
+  `pure-platinum`, `mint`, `sunshine`, `monotone`; `dark` otherwise) so native
+  controls, scrollbars and form widgets match the palette instead of staying
+  light on dark themes. Generated blocks did this already; the ship list did not.
 
 ### Added
 - Render-audit suite (`audit/`, `vitest.audit.config.ts`): mounts all nine
@@ -33,9 +37,22 @@ so it runs on demand rather than on every change.
   `docs/theme-builder.md`, round-trip tested against all 16 shipped blocks.
 
 ### Fixed
-- ChartsSection (playground): line/gap demos had more points than labels — the trailing dot rendered past the svg edge.
-- BarChart: grouped bars used the complement height (innerH − value) so they grew past the baseline, clipping at the svg edge and covering the x-axis labels (caught by the per-card visual audit).
-- OverlaysSection (playground): anchored-panel card is full-width with triggers spread — popover/confirm/context panels render side by side instead of stacking.
+- Theme builder preview (playground): the pane put the cards on `--bg` and showed
+  `--canvas-bg` as a 40 px strip, so editing the canvas colour repainted almost
+  nothing. It is now an app shell — `bg` page, `surface-1` top bar/sidebar,
+  `canvas-bg` work area with the cards nested on it, plus a scrim + dialog
+  specimen for `--overlay`, rich text on `canvas-bg`, and explicit
+  `--link`/`--reasoning` swatches (no kit component consumes those two).
+- Theme builder share links: `decodeSpec` accepted `{id, anchors}` with anchors
+  missing, and a missing anchor reached `parseHex(undefined)` and blanked the
+  page. Every anchor is now required and validity-checked, unknown overrides are
+  dropped, missing knobs default, and the hash tracks later edits instead of
+  restoring a stale draft.
+- Theme builder editing: picking a colour for `overlay` / `*-soft` no longer
+  drops the token's alpha (a 14 % tint used to become a solid fill); invalid hex
+  text reverts instead of reaching the emitted CSS; ids are normalised and
+  empty/shipped-clashing ids are reported; lock buttons carry an `aria-label`
+  instead of announcing "◇".
 - `test/theme-icons.test.ts`: the expected theme-id list is parsed from
   `theme.css` instead of duplicated, so the stylesheet and `THEME_IDS` cannot
   drift (the builder's registration step relies on this).

@@ -51,6 +51,9 @@ must be imported explicitly — load your own theme override after `theme.css`.
   `themeAccent(themeId)` reads a theme's *declared* accent straight from the
   stylesheet (for theme pickers that must ignore a running user override).
 - Reduced motion is built in: under `prefers-reduced-motion` all `--dur-*` go to `0ms`.
+- Each block also declares `color-scheme` (`light` for `light`, `pure-platinum`,
+  `mint`, `sunshine`, `monotone`; `dark` otherwise) so native controls,
+  scrollbars and form widgets match the palette.
 
 ### Building a theme
 
@@ -60,6 +63,14 @@ the surface and text ladders, line weights, `--accent-strong/-soft/-ink`,
 the `*-soft` tints and the three shadows. Any derived token can be unlocked and
 overridden; a shipped theme can be loaded as a starting point, and the draft is
 shareable as a link.
+
+The preview is a miniature app shell rather than a swatch grid, because the
+surface tokens only make sense nested: `--bg` is the page, `--surface-1` the top
+bar/sidebar/cards, and `--canvas-bg` the work area the cards sit on (it has one
+consumer in the kit — `TextEditor`'s code blocks — so it is the *content*
+surface, not the page background). A clipped scrim + dialog specimen covers
+`--overlay`, and `--link`/`--reasoning` are drawn explicitly since no component
+consumes them yet.
 
 Three export forms come out of the same block:
 
