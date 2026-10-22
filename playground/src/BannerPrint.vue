@@ -7,8 +7,10 @@ import { AppBadge, AppButton, AppChip, AppIcon, AppInput, AppToggle, THEME_LABEL
  * Rendered under `?print=banner`; each card is a `data-theme` island so one
  * screenshot pass shows every theme. Consumed by scripts/render-release.mjs.
  *
- * Layout: two rows of 8 theme cards — the dark themes first, then the
- * remaining themes with all light themes grouped together at the end.
+ * Layout is curated, not derived: dark themes first, light themes grouped at
+ * the end, 8 per row. A new theme is placed here deliberately — and the audit's
+ * `banner__col` count (=== THEME_IDS.length) fails until it is, so the banner
+ * cannot silently omit one.
  */
 
 const input = ref("Vue de monde");

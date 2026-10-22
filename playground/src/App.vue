@@ -3,6 +3,7 @@ import { onMounted } from "vue";
 import ThemeBar from "./ThemeBar.vue";
 import BannerPrint from "./BannerPrint.vue";
 import { ConfirmDialog, DialogHost, ToastHost } from "@vuedemonde";
+import ThemeBuilder from "./builder/ThemeBuilder.vue";
 import PrimitivesSection from "./sections/PrimitivesSection.vue";
 import InputsSection from "./sections/InputsSection.vue";
 import OverlaysSection from "./sections/OverlaysSection.vue";
@@ -27,20 +28,24 @@ const sections = [
 
 /* Print routes for scripts/render-release.mjs:
  *   ?print=banner              → theme-showcase banner islands (BannerPrint)
- *   ?print=family&id=X&theme=T → one section only, theme applied before paint */
-const printParams = new URLSearchParams(location.search);
-const printMode = printParams.get("print");
-const printTheme = printParams.get("theme");
+ *   ?print=family&id=X&theme=T → one section only, theme applied before paint
+ * `?build` is the theme builder; its preview is scoped to the pane, so the
+ * shell keeps whatever theme the page loaded with. */
+const params = new URLSearchParams(location.search);
+const printMode = params.get("print");
+const printTheme = params.get("theme");
 if (printMode === "family" && printTheme) document.documentElement.dataset.theme = printTheme;
 if (printMode === "family") document.documentElement.dataset.print = "";
-const printSection = printMode === "family" ? sections.find((s) => s.id === printParams.get("id")) ?? null : null;
+const printSection = printMode === "family" ? sections.find((s) => s.id === params.get("id")) ?? null : null;
+const buildMode = params.has("build");
 
 function scrollTo(id: string): void {
   document.getElementById(`sec-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 onMounted(() => {
-  if (printMode) return; // print routes own their theme; never restore over it
+  // print routes and the builder own their theme; never restore over them
+  if (printMode || buildMode) return;
   // restore the last-used theme/accent when the page reloads
   const theme = localStorage.getItem("vuedemonde-theme");
   if (theme) document.documentElement.dataset.theme = theme;
@@ -48,7 +53,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <BannerPrint v-if="printMode === 'banner'" />
+  <ThemeBuilder v-if="buildMode" />
+  <BannerPrint v-else-if="printMode === 'banner'" />
   <div v-else-if="printSection" id="print-section" class="print-wrap">
     <component :is="printSection.comp" :print="printMode === 'family'" />
   </div>
@@ -75,6 +81,7 @@ onMounted(() => {
           {{ s.label }}
         </a>
       </nav>
+      <a class="pg-nav-item pg-nav-item--tool" href="?build">Theme builder →</a>
     </aside>
 
     <main class="pg-main">
@@ -161,6 +168,13 @@ button {
 .pg-nav-item:hover {
   background: var(--surface-2);
   color: var(--text);
+}
+.pg-nav-item--tool {
+  margin-top: var(--space-3);
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-3);
+  border-radius: 0;
+  color: var(--accent);
 }
 .pg-main {
   padding: 24px 32px 60px;

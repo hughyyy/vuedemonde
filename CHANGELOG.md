@@ -24,11 +24,21 @@ so it runs on demand rather than on every change.
   family sections (print mode) under dark/light/thermal + the theme banner
   under all 16 themes; asserts zero console errors/warnings.
 - `docs/quality-audit.md` — the living issue register for the phase.
+- Theme builder (`/?build` in the playground): pick 13 anchor colours, derive
+  the other 21 tokens, unlock any derived value, preview on the real kit, and
+  export the block as a selectable theme (`[data-theme]` + registration), a
+  fixed `:root` theme, or a default `:root:not([data-theme])` theme. Contrast is
+  reported against the shipped themes' envelope; state is shareable via URL.
+  Core model in `playground/src/builder/theme-spec.ts`, documented in
+  `docs/theme-builder.md`, round-trip tested against all 16 shipped blocks.
 
 ### Fixed
 - ChartsSection (playground): line/gap demos had more points than labels — the trailing dot rendered past the svg edge.
 - BarChart: grouped bars used the complement height (innerH − value) so they grew past the baseline, clipping at the svg edge and covering the x-axis labels (caught by the per-card visual audit).
 - OverlaysSection (playground): anchored-panel card is full-width with triggers spread — popover/confirm/context panels render side by side instead of stacking.
+- `test/theme-icons.test.ts`: the expected theme-id list is parsed from
+  `theme.css` instead of duplicated, so the stylesheet and `THEME_IDS` cannot
+  drift (the builder's registration step relies on this).
 - App.vue (print harness): dialog left-aligned in print so the open drawer never covers it.
 - InputsSection (playground): print-mode panel opens now pin scroll to top — teleported panels (DatePicker/CascadeSelect) were anchored against a scrolled viewport, floating ~620px off their triggers (caught by the per-card visual audit).
 - Fieldset: collapse toggle wired to its body (aria-controls).

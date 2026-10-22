@@ -31,8 +31,9 @@ createApp(App).use(FormDirectives).mount("#app"); // optional: v-mask/v-key-filt
 ```
 
 The library is ESM (`.js` + `.d.ts`), so consume it through a bundler (Vite, etc.).
-`vue` is a peer dependency. `theme.css` and `kit.css` are also bundled into the
-single `vuedemonde.css` convenience entry if you prefer one import.
+`vue` is a peer dependency. Component styles ship in `vuedemonde.css`; the token
+sheet (`theme.css`) and the optional helpers (`kit.css`) are separate files and
+must be imported explicitly — load your own theme override after `theme.css`.
 
 ## Theming
 
@@ -51,11 +52,35 @@ single `vuedemonde.css` convenience entry if you prefer one import.
   stylesheet (for theme pickers that must ignore a running user override).
 - Reduced motion is built in: under `prefers-reduced-motion` all `--dur-*` go to `0ms`.
 
+### Building a theme
+
+`npm run dev` → **`/?build`** — pick the anchors (background, surfaces, text,
+accent pair, status colours, links), and the remaining tokens derive from them:
+the surface and text ladders, line weights, `--accent-strong/-soft/-ink`,
+the `*-soft` tints and the three shadows. Any derived token can be unlocked and
+overridden; a shipped theme can be loaded as a starting point, and the draft is
+shareable as a link.
+
+Three export forms come out of the same block:
+
+| Mode | Selector | Use |
+| --- | --- | --- |
+| Selectable | `[data-theme="id"]` | pasted into `src/theme.css` + registered in `src/theme.ts` |
+| Fixed | `:root` | a follow-on stylesheet imported after `theme.css`; locks the app to the palette |
+| Default | `:root:not([data-theme])` | applies until something selects a theme; still overridable |
+
+The export pane carries the CSS, the registration lines and the docs checklist
+(theme list + the "16 themes" counts + banner regeneration). Contrast is
+reported against the shipped themes' own envelope — informational, never
+blocking. See `docs/theme-builder.md` for the token model and the derivation
+proportions.
+
 ## The playground
 
-`npm run dev` opens a lightweight interactive catalogue (`playground/`) that
-dogfoods the library: every family is a live, editable example with a theme +
-accent switcher in the header.
+`npm run dev` also opens the lightweight interactive catalogue (`playground/`)
+that dogfoods the library: every family is a live, editable example with a theme
+and accent switcher in the header. The theme builder is the same dev server at
+`/?build`.
 
 ## Component inventory
 

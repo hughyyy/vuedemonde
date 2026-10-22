@@ -1,28 +1,20 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { isThemeId, THEME_IDS, THEME_LABELS } from "../src/theme";
 import { ICON_NAMES, iconPaths } from "../src/kit/icons";
 
 describe("theme ids", () => {
-  it("covers every theme block shipped in theme.css", () => {
-    const blocks = [
-      "dark",
-      "light",
-      "late-night",
-      "thermal",
-      "neon-cyberpunk",
-      "grunge",
-      "granite",
-      "classic",
-      "high-contrast",
-      "bubblegum",
-      "matrix",
-      "shining-gold",
-      "pure-platinum",
-      "mint",
-      "sunshine",
-      "monotone",
-    ];
+  it("matches the blocks shipped in theme.css, in order", () => {
+    const css = readFileSync("src/theme.css", "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+    const blocks = ["dark", ...[...css.matchAll(/\[data-theme="([^"]+)"\]/g)].map((m) => m[1]!)];
     expect(THEME_IDS).toEqual(blocks);
+  });
+
+  it("declares :root as the dark theme and nothing else on the root selector", () => {
+    const css = readFileSync("src/theme.css", "utf8");
+    const roots = [...css.matchAll(/(?<![\w-]):root\s*\{([^}]*)\}/g)].map((m) => m[1]!);
+    expect(roots.length).toBeGreaterThan(0);
+    expect(roots[0]).toContain("--bg:");
   });
 
   it("labels every id, defaults to dark on junk", () => {

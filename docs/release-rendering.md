@@ -23,7 +23,10 @@ Outputs (28 PNGs, committed):
   AppIcon row) rendered as row items under all 16 themes as cards in **two
   rows of 8** — the dark themes first, then the remaining themes with all
   light themes (`light`, `pure-platinum`, `mint`, `sunshine`, `monotone`)
-  grouped together at the end. Embedded at the top of `README.md`.
+  grouped together at the end. The rows are curated in `BannerPrint.vue`, and
+  the audit's `banner__col` count (=== `THEME_IDS.length`) fails if a new theme
+  is not placed there — the banner cannot silently omit one. Embedded at the
+  top of `README.md`.
 - `docs/assets/catalogue-<family>-<theme>.png` — Tier 2: every component
   family (primitives, inputs, overlays, navigation, data, layout, charts,
   calendar, board) under the three catalogue themes (light, dark default,

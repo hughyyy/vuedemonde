@@ -8,9 +8,10 @@ same commit.** Anything not yet audited is implicitly `open` on first sight.
 ## Process
 
 1. Run the repeatable net: `npm run test:audit` (mounts every family section
-   under dark/light/thermal + the banner under all 16 themes; fails on ANY
-   console error/warning). This suite is the regression harness for the phase —
-   opt-in by design, so it runs on demand, not on every change.
+   under dark/light/thermal, the banner under all 16 themes, and the theme
+   builder page; fails on ANY console error/warning). This suite is the
+   regression harness for the phase — opt-in by design, so it runs on demand,
+   not on every change.
 2. Visual pass per component: catalogue renders (`npm run render:release`) +
    reading the SFC for a11y (focus, keyboard, aria), edge states
    (empty/disabled/loading/long content) and prop/emit consistency.

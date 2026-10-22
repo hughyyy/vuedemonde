@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 import { mount, type VueWrapper } from "@vue/test-utils";
 import { THEME_IDS } from "../src/theme";
 import BannerPrint from "../playground/src/BannerPrint.vue";
+import ThemeBuilder from "../playground/src/builder/ThemeBuilder.vue";
 import BoardSection from "../playground/src/sections/BoardSection.vue";
 import CalendarSection from "../playground/src/sections/CalendarSection.vue";
 import ChartsSection from "../playground/src/sections/ChartsSection.vue";
@@ -16,9 +17,9 @@ import PrimitivesSection from "../playground/src/sections/PrimitivesSection.vue"
 /**
  * Render audit — the repeatable zero-rendering-error net (docs/quality-audit.md
  * §Process). Mounts every family section in print mode (all components, open
- * overlay states included) under the three catalogue themes, and the theme
- * banner under all 16 themes. Any console.error / console.warn (Vue warnings
- * included) fails the case.
+ * overlay states included) under the three catalogue themes, the theme banner
+ * under all 16 themes, and the theme builder page. Any console.error /
+ * console.warn (Vue warnings included) fails the case.
  */
 
 type ConsoleSpy = { calls: unknown[][]; restore: () => void };
@@ -93,4 +94,25 @@ describe("audit: theme banner renders under every theme", () => {
       }
     });
   }
+});
+
+describe("audit: theme builder page", () => {
+  it("mounts and renders every anchor swatch without console noise", async () => {
+    const errs = capture("error");
+    const warns = capture("warn");
+    try {
+      const wrapper = mount(ThemeBuilder);
+      await settle(wrapper as VueWrapper);
+      expect(wrapper.find(".build__title").text()).toBe("Theme builder");
+      // 13 anchors + 0 derived (untouched tokens are hidden behind "Show all")
+      expect(wrapper.findAll('input[type="color"]')).toHaveLength(13);
+      expect(wrapper.find(".bvp").exists()).toBe(true);
+      expect(errs.calls, `console.error: ${errs.calls.map((c) => c.join(" ")).join(" || ")}`).toHaveLength(0);
+      expect(warns.calls, `console.warn: ${warns.calls.map((c) => c.join(" ")).join(" || ")}`).toHaveLength(0);
+      wrapper.unmount();
+    } finally {
+      errs.restore();
+      warns.restore();
+    }
+  });
 });
