@@ -542,14 +542,42 @@ export function encodeSpec(spec: ThemeSpec): string {
   return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 }
 
+/**
+ * Decode share-state defensively: the hash is user-controlled, so a malformed
+ * link must yield `null` rather than a spec with missing anchors (which would
+ * reach `parseHex` as `undefined` and blank the page). Every anchor is required
+ * and must be a real hex colour; unknown tokens in `overrides` are dropped.
+ */
 export function decodeSpec(raw: string): ThemeSpec | null {
   try {
     const b64 = raw.replace(/-/g, "+").replace(/_/g, "/");
     const bin = atob(b64);
     const bytes = Uint8Array.from(bin, (c) => c.charCodeAt(0));
-    const value = JSON.parse(new TextDecoder().decode(bytes)) as ThemeSpec;
-    if (!value || typeof value.id !== "string" || !value.anchors) return null;
-    return value;
+    const value = JSON.parse(new TextDecoder().decode(bytes)) as Partial<ThemeSpec>;
+    if (!value || typeof value.id !== "string" || typeof value.label !== "string") return null;
+    if (value.mode !== "dark" && value.mode !== "light") return null;
+    if (!value.anchors || typeof value.anchors !== "object") return null;
+    const anchors = {} as Record<AnchorName, string>;
+    for (const name of ANCHORS) {
+      const colour = value.anchors[name];
+      if (typeof colour !== "string" || !parseHex(colour)) return null;
+      anchors[name] = colour;
+    }
+    const overrides: Partial<Record<TokenName, string>> = {};
+    for (const [token, colour] of Object.entries(value.overrides ?? {})) {
+      if (typeof colour !== "string") continue;
+      if (!(THEME_TOKEN_ORDER as readonly string[]).includes(token)) continue;
+      overrides[token as TokenName] = colour;
+    }
+    return {
+      id: value.id,
+      label: value.label,
+      mode: value.mode,
+      anchors,
+      softAlpha: typeof value.softAlpha === "number" ? value.softAlpha : 0.14,
+      shadowStrength: typeof value.shadowStrength === "number" ? value.shadowStrength : 1,
+      overrides,
+    };
   } catch {
     return null;
   }

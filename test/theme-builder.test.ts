@@ -62,6 +62,16 @@ describe("round-trip: every shipped theme survives parse → derive → emit", (
       for (const token of THEME_TOKEN_ORDER) {
         if (spec.overrides[token] === undefined) expect(derived[token]).toBe(tokens![token]);
       }
+
+      // 3. the emitted block declares the same color-scheme the shipped one does
+      //    ("dark" lives on :root, the rest in their [data-theme] blocks — the
+      //    selector includes the brace so prose mentions in comments don't match)
+      const selector = id === "dark" ? /:root\s*\{/ : new RegExp(`\\[data-theme="${id}"]\\s*\\{`);
+      const start = themeCss.search(selector);
+      const shippedScheme = /color-scheme:\s*(dark|light);/.exec(themeCss.slice(start))?.[1];
+      expect(shippedScheme, `${id} declares no color-scheme`).toBeDefined();
+      expect(emitted).toContain(`color-scheme: ${shippedScheme};`);
+      expect(spec.mode).toBe(shippedScheme);
     });
   }
 
@@ -198,7 +208,34 @@ describe("shareable state", () => {
 
   it("returns null for junk instead of throwing", () => {
     expect(decodeSpec("not-base64!!")).toBeNull();
-    expect(decodeSpec("e30")).toBeNull();
+    expect(decodeSpec("e30")).toBeNull(); // "{}"
+    expect(decodeSpec(btoa(JSON.stringify({ id: "x", label: "X" })))).toBeNull();
+  });
+
+  it("refuses a payload with a missing or malformed anchor", () => {
+    const spec = defaultSpec();
+    const missing = { ...spec, anchors: { ...spec.anchors, bg: undefined } };
+    expect(decodeSpec(btoa(JSON.stringify(missing)))).toBeNull();
+    const broken = { ...spec, anchors: { ...spec.anchors, accent: "not-a-colour" } };
+    expect(decodeSpec(btoa(JSON.stringify(broken)))).toBeNull();
+  });
+
+  it("drops unknown override tokens and repairs missing knobs", () => {
+    const spec = defaultSpec();
+    const raw = btoa(
+      JSON.stringify({
+        ...spec,
+        overrides: { ...spec.overrides, "text-3": "#ff0000", "not-a-token": "#00ff00" },
+        softAlpha: undefined,
+        shadowStrength: undefined,
+      }),
+    );
+    const decoded = decodeSpec(raw)!;
+    expect(decoded).not.toBeNull();
+    expect(decoded.overrides["text-3"]).toBe("#ff0000");
+    expect(decoded.overrides).not.toHaveProperty("not-a-token");
+    expect(decoded.softAlpha).toBe(0.14);
+    expect(decoded.shadowStrength).toBe(1);
   });
 });
 

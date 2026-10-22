@@ -13,7 +13,17 @@
  * too. The previous inline values are restored on unmount.
  */
 import { computed, onMounted, ref, watch } from "vue";
-import { AppButton, AppMessage, AppPanel, AppToggle, Fieldset, THEME_IDS, THEME_LABELS } from "@vuedemonde";
+import {
+  AppButton,
+  AppMessage,
+  AppPanel,
+  AppToggle,
+  Fieldset,
+  THEME_IDS,
+  THEME_LABELS,
+  parseHex,
+  withAlpha,
+} from "@vuedemonde";
 import {
   ANCHOR_GROUPS,
   DERIVED_GROUPS,
@@ -111,7 +121,26 @@ onMounted(() => {
 /* ---- actions ---- */
 
 function setAnchor(key: AnchorName, value: string): void {
-  spec.value = { ...spec.value, anchors: { ...spec.value.anchors, [key]: value } };
+  if (!parseHex(value)) return;
+  spec.value = { ...spec.value, anchors: { ...spec.value.anchors, [key]: value.trim() } };
+}
+
+/**
+ * Ids end up inside a CSS selector, so they are normalised to `[a-z0-9-]` as the
+ * user types. An empty id would emit `[data-theme=""]` (which matches nothing),
+ * and reusing a shipped id would shadow that theme, so both are reported.
+ */
+const idProblem = computed(() => {
+  if (!spec.value.id) return "Required — the selector would match nothing.";
+  if (shipped.some((theme) => theme.id === spec.value.id)) {
+    return `Shadows the shipped "${spec.value.id}" theme.`;
+  }
+  return "";
+});
+
+function renameTheme(raw: string): void {
+  const id = raw.toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "");
+  spec.value = { ...spec.value, id };
 }
 
 /** The colour an input shows: the override when unlocked, else the derivation. */
@@ -122,6 +151,17 @@ function derivedHex(token: TokenName): string {
   const rgb = /rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)/i.exec(value);
   if (!rgb) return "#000000";
   return `#${[1, 2, 3].map((i) => Number(rgb[i]).toString(16).padStart(2, "0")).join("")}`;
+}
+
+/** Commit an anchor hex field; invalid text reverts the input to the anchor. */
+function commitAnchor(key: AnchorName, event: Event): void {
+  const input = event.target as HTMLInputElement;
+  const value = input.value.trim();
+  if (!parseHex(value)) {
+    input.value = spec.value.anchors[key];
+    return;
+  }
+  setAnchor(key, value);
 }
 
 function isOverridden(token: TokenName): boolean {
@@ -135,8 +175,30 @@ function toggleOverride(token: TokenName): void {
   spec.value = { ...spec.value, overrides };
 }
 
+/**
+ * A colour picker hands back `#rrggbb`, but `overlay` and every `*-soft` are
+ * `rgba(…)`. Setting the hex verbatim would silently drop the alpha and turn a
+ * 14 % tint into a solid fill, so for those tokens the picked colour is
+ * re-wrapped at the alpha the token already carries.
+ */
 function setOverride(token: TokenName, value: string): void {
-  spec.value = { ...spec.value, overrides: { ...spec.value.overrides, [token]: value } };
+  const previous = resolved.value[token];
+  const alpha = /rgba\([^)]*,\s*([\d.]+)\s*\)/.exec(previous)?.[1];
+  const isHex = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(value.trim());
+  const next = alpha && isHex ? withAlpha(value.trim(), Number(alpha)) : value;
+  spec.value = { ...spec.value, overrides: { ...spec.value.overrides, [token]: next } };
+}
+
+/** Hex/colour text fields commit only a parseable colour (or a full shadow). */
+function commitToken(token: TokenName, event: Event): void {
+  const input = event.target as HTMLInputElement;
+  const value = input.value.trim();
+  const valid = SHADOW_TOKENS[token] ? value.length > 0 : Boolean(parseHex(value)) || /^rgba?\(/.test(value);
+  if (!valid) {
+    input.value = resolved.value[token];
+    return;
+  }
+  setOverride(token, value);
 }
 
 function resetOverrides(): void {
@@ -201,15 +263,26 @@ function download(): void {
 }
 
 function share(): void {
-  const encoded = encodeSpec(spec.value);
-  location.hash = `spec=${encoded}`;
-  localStorage.setItem("vuedemonde-builder", encoded);
+  location.hash = `spec=${encodeSpec(spec.value)}`;
+  localStorage.setItem("vuedemonde-builder", encodeSpec(spec.value));
   void copy(location.href, "link");
+}
+
+/**
+ * Keep the URL in step with the draft once a link has been shared. Otherwise the
+ * stale hash wins over localStorage on the next load and silently discards edits.
+ */
+function syncHash(): void {
+  if (!location.hash.startsWith("#spec=")) return;
+  history.replaceState(null, "", `#spec=${encodeSpec(spec.value)}`);
 }
 
 watch(
   spec,
-  (value) => localStorage.setItem("vuedemonde-builder", encodeSpec(value)),
+  (value) => {
+    localStorage.setItem("vuedemonde-builder", encodeSpec(value));
+    syncHash();
+  },
   { deep: true },
 );
 
@@ -249,8 +322,9 @@ for (const id of THEME_IDS) shippedOptions.push({ value: id, label: THEME_LABELS
                 class="build__text"
                 :value="spec.id"
                 spellcheck="false"
-                @input="spec = { ...spec, id: ($event.target as HTMLInputElement).value.replace(/[^a-z0-9-]/g, '-') }"
+                @input="renameTheme(($event.target as HTMLInputElement).value)"
               />
+              <span v-if="idProblem" class="build__field-msg">{{ idProblem }}</span>
             </label>
             <label class="build__field">
               <span>Label</span>
@@ -286,7 +360,7 @@ for (const id of THEME_IDS) shippedOptions.push({ value: id, label: THEME_LABELS
                 class="build__hex"
                 :value="spec.anchors[key]"
                 spellcheck="false"
-                @change="setAnchor(key, ($event.target as HTMLInputElement).value)"
+                @change="commitAnchor(key, $event)"
               />
             </label>
           </div>
@@ -338,10 +412,11 @@ for (const id of THEME_IDS) shippedOptions.push({ value: id, label: THEME_LABELS
                   type="button"
                   :class="{ 'is-on': isOverridden(token) }"
                   :aria-pressed="isOverridden(token)"
-                  :title="isOverridden(token) ? 'Revert to derived value' : 'Unlock and edit this token'"
+                  :aria-label="isOverridden(token) ? `Revert --${token} to its derived value` : `Pin an explicit value for --${token}`"
+                  :title="isOverridden(token) ? 'Revert to derived value' : 'Pin an explicit value'"
                   @click="toggleOverride(token)"
                 >
-                  {{ isOverridden(token) ? "◆" : "◇" }}
+                  <span aria-hidden="true">{{ isOverridden(token) ? "◆" : "◇" }}</span>
                 </button>
                 <input
                   v-if="!SHADOW_TOKENS[token]"
@@ -358,7 +433,7 @@ for (const id of THEME_IDS) shippedOptions.push({ value: id, label: THEME_LABELS
                   :class="{ 'build__hex--wide': SHADOW_TOKENS[token] }"
                   :value="resolved[token]"
                   spellcheck="false"
-                  @change="setOverride(token, ($event.target as HTMLInputElement).value)"
+                  @change="commitToken(token, $event)"
                 />
               </div>
             </div>
@@ -549,6 +624,10 @@ for (const id of THEME_IDS) shippedOptions.push({ value: id, label: THEME_LABELS
   gap: 2px;
   font-size: var(--fs-12);
   color: var(--text-2);
+}
+.build__field-msg {
+  color: var(--warn);
+  font-size: 11px;
 }
 .build__field--inline {
   flex-direction: row;
