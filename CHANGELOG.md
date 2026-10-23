@@ -95,5 +95,23 @@ so it runs on demand rather than on every change.
 - InputsSection (playground): the Knob demo referenced the component without
   importing it, so it silently never rendered in the catalogue — caught by the
   first audit run.
+- Terminal ANSI parser: runs now snapshot their style at write time. SGR
+  resets that mutate in place (`22`/`23`/`24`/`27`/`39`/`49`) previously
+  rewrote already-committed runs retroactively and merged adjacent runs of
+  different styles — `\x1b[1mbold\x1b[22mnormal` rendered fully unstyled.
+  Found by the new edge-case matrix (multi-parameter SGR, selective resets,
+  cursor/erase sequences, clock-stamped lines).
+- `v-mask`: typed slots now skip (drop) characters that do not fit the slot
+  instead of freezing on them, and `X` advances the stream — a stray letter
+  in a numeric field no longer blocks every later slot (`1a2b3` with
+  `###` now yields `123`, and `XX-XX` with `a1b2` yields `a1-b2`).
+- Tree: the first expand click on a default-closed node did nothing (the
+  fold-set only recorded explicit folds, so toggling a closed-by-default node
+  marked it folded again instead of opening it). Expansion overrides are now
+  an explicit open/closed map, so a manual toggle flips the CURRENT state —
+  first-click expand works, and a folded node stays folded under `expandAll`.
+- TreeItem: row clicks no longer emit `select` in non-selectable trees (the
+  row was already unfocusable and keyboard-gated; the click path is gated to
+  match).
 
 _Populated per component as the audit proceeds._
