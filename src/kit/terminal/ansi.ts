@@ -275,7 +275,11 @@ export class AnsiParser {
     if (last && sameStyle(last.style, style)) {
       last.text += text;
     } else {
-      this.current.runs.push({ text, style });
+      // Snapshot the live style: SGR mutations below (`delete`/key writes on
+      // `this.style`) must never rewrite runs already committed — without the
+      // copy, a later `\x1b[22m`/`\x1b[39m` would strip earlier runs' styles
+      // retroactively and adjacent runs would merge despite a style change.
+      this.current.runs.push({ text, style: { ...style } });
     }
     this.current.cursor += text.length;
     this.current.width += text.length;

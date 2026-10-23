@@ -1,5 +1,5 @@
 // @vitest-environment happy-dom
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { nextTick } from "vue";
 import { mount } from "@vue/test-utils";
 import { AnsiParser, ansiColorCss, splitAt, XTERM256, type TermRun } from "../src/kit/terminal/ansi";
@@ -128,13 +128,134 @@ describe("Terminal ANSI parser", () => {
     expect(p.lines[0].runs.some((r) => r.style.fgIndex === 2)).toBe(true);
   });
 
-  it("splitAt splits a run straddling the column boundary", () => {
+  it("splits a run straddling the column boundary", () => {
     const p = new AnsiParser();
     p.push("\x1b[32mabcdef\n");
     const [head, tail] = splitAt(p.lines[0], 2);
     expect(head[0].text).toBe("ab");
     expect(tail[0].text).toBe("cdef");
     expect(head[0].style.fgIndex).toBe(2);
+  });
+
+  it("splitAt at column 0 and beyond the width keeps runs intact", () => {
+    const p = new AnsiParser();
+    p.push("abc\n");
+    const [head0, tail0] = splitAt(p.lines[0], 0);
+    expect(head0).toEqual([]);
+    expect(tail0[0].text).toBe("abc");
+    const [headW, tailW] = splitAt(p.lines[0], 99);
+    expect(headW[0].text).toBe("abc");
+    expect(tailW).toEqual([]);
+  });
+
+  it("parses background colours: 16 (48;n), bright (100..107), 256 (48;5), truecolour (48;2)", () => {
+    const p = new AnsiParser();
+    p.push("\x1b[41mbg-red\x1b[0m\x1b[48;5;21mbg-256\x1b[0m\x1b[48;2;1;2;3mbg-rgb\x1b[0m\x1b[107mbg-bright\x1b[0m");
+    const runs = pendingRuns(p);
+    expect(runs[0].style.bgIndex).toBe(1);
+    expect(runs[1].style.bgIndex).toBe(21);
+    expect(runs[2].style.bgRgb).toEqual([1, 2, 3]);
+    expect(runs[3].style.bgIndex).toBe(15);
+  });
+
+  it("tracks bold/dim/italic/underline/inverse and their resets (22/23/24/27)", () => {
+    const p = new AnsiParser();
+    p.push("\x1b[1;3;4;7mcombo\x1b[22;23;24;27mplain");
+    const runs = pendingRuns(p);
+    expect(runs[0].style).toMatchObject({ bold: true, italic: true, underline: true, inverse: true });
+    expect(runs[1].style).toEqual({});
+  });
+
+  it("resets fg/bg selectively via 39/49", () => {
+    const p = new AnsiParser();
+    p.push("\x1b[31;44mstyled\x1b[39mfg-clear\x1b[49mbg-clear");
+    const runs = pendingRuns(p);
+    expect(runs[0].style).toMatchObject({ fgIndex: 1, bgIndex: 4 });
+    expect(runs[1].style).toEqual({ bgIndex: 4 });
+    expect(runs[2].style).toEqual({});
+  });
+
+  it("an empty or malformed SGR (\x1b[m, \x1b[;m) resets nothing and renders nothing", () => {
+    const p = new AnsiParser();
+    p.push("a\x1b[mb\x1b[;mc\n");
+    expect(textOf(p)).toBe("abc");
+    const q = new AnsiParser();
+    q.push("\x1b[9999mnoop\x1b[0m");
+    expect(pendingRuns(q)[0].text).toBe("noop");
+  });
+
+  it("drops malformed 38/48 sequences without consuming the next parameter", () => {
+    const p = new AnsiParser();
+    // 38;X (unknown mode) then 31 — the 31 must still colour the text
+    p.push("\x1b[38;9;31mred?");
+    expect(pendingRuns(p)[0].style.fgIndex).toBe(1);
+  });
+
+  it("bright foreground 90..97 maps to indices 8..15", () => {
+    const p = new AnsiParser();
+    p.push("\x1b[91mbright");
+    expect(pendingRuns(p)[0].style.fgIndex).toBe(9);
+  });
+
+  it("CSI n C advances the cursor (beyond content); CSI n D steps back and overwrites", () => {
+    const p = new AnsiParser();
+    p.push("abc\x1b[2CXY\n"); // cursor forward 2 past the end — appends
+    expect(textOf(p)).toBe("abcXY");
+    const q = new AnsiParser();
+    q.push("abc\x1b[2DXY\n"); // back 2 then write over
+    expect(textOf(q)).toBe("aXY");
+  });
+
+  it("CSI 1 K erases to the start of the line; CSI 0 K erases from the cursor to the end", () => {
+    const p = new AnsiParser();
+    p.push("abcdef\x1b[1Krest\n");
+    expect(textOf(p)).toBe("      rest");
+    const q = new AnsiParser();
+    q.push("abcdef\x1b[1D\x1b[0Kg\n"); // back 1, erase from cursor 5, write g
+    expect(textOf(q)).toBe("abcdeg");
+  });
+
+  it("ESC c (RIS) and CSI 3 J clear the whole buffer", () => {
+    const p = new AnsiParser();
+    p.push("keep?");
+    p.push("\x1bcfresh\n");
+    expect(textOf(p)).toBe("fresh");
+    const q = new AnsiParser();
+    q.push("a\nb\x1b[3Jc");
+    expect(q.lines).toHaveLength(0);
+    expect(pendingRuns(q)[0].text).toBe("c");
+  });
+
+  it("OSC title sequences and DCS are swallowed entirely", () => {
+    const p = new AnsiParser();
+    p.push("\x1b]0;My Title\x07after-bel");
+    p.push("\x1b]0;Other\x1b\\after-st");
+    p.push("\x1bP1;2|payload\x1b\\done\n");
+    expect(textOf(p)).toBe("after-belafter-stdone");
+  });
+
+  it("stamps startedAt from the injected clock on the line that begins", () => {
+    let t = 1000;
+    const p = new AnsiParser({ now: () => t });
+    p.push("first\n"); // commits line 0 (clock 1000) and opens line 1 (clock 1000)
+    t = 2000;
+    p.push("second\n"); // commits line 1, opens the current line at clock 2000
+    expect(p.lines[0].startedAt).toBe(1000);
+    expect(p.lines[1].startedAt).toBe(1000);
+    expect(p.current.startedAt).toBe(2000);
+  });
+
+  it("ansiColorCss maps palette 0..15 from the caller and 16..255 from xterm; out-of-range falls back", () => {
+    const palette = ["#a", "#b", "#c", "#d", "#e", "#f", "#g", "#h"];
+    expect(ansiColorCss(0, palette)).toBe("#a");
+    expect(ansiColorCss(7, palette)).toBe("#h");
+    expect(ansiColorCss(16, palette)).toBe(XTERM256[16]);
+    expect(ansiColorCss(300, palette)).toBe("#h"); // out of range → palette[7]
+    expect(ansiColorCss(300, [])).toBe("#cccccc"); // empty palette → default
+    expect(XTERM256).toHaveLength(256);
+    expect(XTERM256[231]).toBe("#ffffff");
+    expect(XTERM256[232]).toBe("#080808");
+    expect(XTERM256[255]).toBe("#eeeeee");
   });
 });
 
@@ -170,6 +291,59 @@ describe("TermSession", () => {
     expect(s.lineAt(0).source).toBe("server");
     expect(s.lineAt(1).source).toBe("vite");
     expect(s.lineAt(2).source).toBe("vite");
+  });
+
+  it("append accepts raw bytes via TextDecoder", () => {
+    const s = new TermSession({ id: "t", label: "T" });
+    s.append(new TextEncoder().encode("héllo\n"));
+    expect(s.text()).toBe("héllo");
+  });
+
+  it("an empty chunk is a no-op: no content, no notification", () => {
+    const s = new TermSession({ id: "t", label: "T" });
+    s.append("", "server");
+    expect(s.text()).toBe("");
+    const fn = vi.fn();
+    s.onChange(fn);
+    s.append("");
+    expect(fn).not.toHaveBeenCalled();
+  });
+
+  it("scrollbackMax of 0 keeps only the in-progress line", () => {
+    const s = new TermSession({ id: "t", label: "T", scrollbackMax: 0, followTail: false });
+    s.append("a\nb");
+    expect(s.totalLines).toBe(1);
+    expect(s.text()).toBe("b");
+  });
+
+  it("lineAt past the committed lines returns the in-progress line; text() trims trailing spaces", () => {
+    const s = new TermSession({ id: "t", label: "T" });
+    s.append("a\nb  \n");
+    expect(s.lineAt(99)).toBe(s.lineAt(2));
+    expect(s.text()).toBe("a\nb");
+  });
+
+  it("unsubscribe stops notifications; clear() notifies listeners once", () => {
+    const s = new TermSession({ id: "t", label: "T" });
+    const fn = vi.fn();
+    const off = s.onChange(fn);
+    s.append("x");
+    expect(fn).toHaveBeenCalledTimes(1);
+    off();
+    s.append("y");
+    expect(fn).toHaveBeenCalledTimes(1);
+    s.clear();
+    expect(fn).toHaveBeenCalledTimes(1);
+    expect(s.text()).toBe("");
+  });
+
+  it("dispose() detaches every listener", () => {
+    const s = new TermSession({ id: "t", label: "T" });
+    const fn = vi.fn();
+    s.onChange(fn);
+    s.dispose();
+    s.append("x");
+    expect(fn).not.toHaveBeenCalled();
   });
 });
 
