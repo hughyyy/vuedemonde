@@ -2,7 +2,11 @@
 
 Vision-gated visual regression for the kit's render surface: every component
 family across themes, interaction states and the app shell is re-rendered and
-compared against the previous render. The comparison is two-stage and cheap
+compared against the previous render.
+
+This harness is separate from the release catalogue images. Family/theming
+coverage here is unrelated to the per-component, six-theme catalogue redesign
+proposed in `docs/per-component-rendering.md`. The comparison is two-stage and cheap
 by design — a full pixel diff only runs when a compact fingerprint disagrees,
 and **only genuinely changed frames are handed to a vision model** for
 analysis.
@@ -48,7 +52,7 @@ Every run rebuilds the demo (`vite build` → `dist-demo/`) and serves it with
     `elementFromPoint`, so open scrims/drawers can't block it); skipped
     frames are reported, never failed;
   - `focus` — keyboard focus on the same control (focus ring visible).
-- `banner-all-themes` — the 16-theme showcase island.
+- `banner-all-themes` — the 24-theme showcase island.
 - `shell-dark-default` — the full playground app shell (sidebar + page).
 
 ## Determinism — read before trusting a diff

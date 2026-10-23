@@ -13,6 +13,8 @@ import LayoutSection from "./sections/LayoutSection.vue";
 import ChartsSection from "./sections/ChartsSection.vue";
 import CalendarSection from "./sections/CalendarSection.vue";
 import BoardSection from "./sections/BoardSection.vue";
+import ComponentPrint from "./ComponentPrint.vue";
+import { COMPONENT_DEMOS } from "./catalogue";
 
 const sections = [
   { id: "primitives", label: "Primitives", comp: PrimitivesSection },
@@ -29,15 +31,32 @@ const sections = [
 /* Print routes for scripts/render-release.mjs:
  *   ?print=banner              → theme-showcase banner islands (BannerPrint)
  *   ?print=family&id=X&theme=T → one section only, theme applied before paint
+ *   ?print=component&id=X&theme=T → ONE component demo (ComponentPrint) — the
+ *                                 per-component catalogue render
  * `?build` is the theme builder; its preview is scoped to the pane, so the
- * shell keeps whatever theme the page loaded with. */
+ * shell keeps whatever theme the page loaded with.
+ *
+ * Both themed print routes put the theme on `<html>` rather than on a wrapper:
+ * overlay panels teleport to <body> and would otherwise keep the page theme. */
 const params = new URLSearchParams(location.search);
 const printMode = params.get("print");
 const printTheme = params.get("theme");
-if (printMode === "family" && printTheme) document.documentElement.dataset.theme = printTheme;
-if (printMode === "family") document.documentElement.dataset.print = "";
+const THEMED_PRINT = printMode === "family" || printMode === "component";
+if (THEMED_PRINT && printTheme) document.documentElement.dataset.theme = printTheme;
+if (THEMED_PRINT) document.documentElement.dataset.print = "";
 const printSection = printMode === "family" ? sections.find((s) => s.id === params.get("id")) ?? null : null;
+/* Unknown ids fall through to the catalogue shell instead of a blank page, so a
+ * stale renderer id is visible rather than silently empty. */
+const printComponent =
+  printMode === "component" ? COMPONENT_DEMOS[params.get("id") ?? ""] ?? null : null;
 const buildMode = params.has("build");
+
+/* Renderer plumbing: scripts/render-release.mjs drives ?print=component per id,
+ * and reads the id/width list from here so the registry stays the single source
+ * of truth (it cannot import .vue demos from Node). Playground-only global. */
+(window as unknown as { __CATALOGUE_MANIFEST__: unknown }).__CATALOGUE_MANIFEST__ = Object.entries(
+  COMPONENT_DEMOS,
+).map(([id, e]) => ({ id, group: e.group, wide: e.wide ?? false, shot: e.shot ?? null }));
 
 function scrollTo(id: string): void {
   document.getElementById(`sec-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -55,6 +74,12 @@ onMounted(() => {
 <template>
   <ThemeBuilder v-if="buildMode" />
   <BannerPrint v-else-if="printMode === 'banner'" />
+  <ComponentPrint
+    v-else-if="printComponent"
+    :id="params.get('id') ?? ''"
+    :theme="printTheme ?? 'dark'"
+    :entry="printComponent"
+  />
   <div v-else-if="printSection" id="print-section" class="print-wrap">
     <component :is="printSection.comp" :print="printMode === 'family'" />
   </div>

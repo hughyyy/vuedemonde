@@ -1,0 +1,638 @@
+[
+  {
+    "id": "AppAvatar",
+    "group": "primitives",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AppBadge",
+    "group": "primitives",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AppButton",
+    "group": "primitives",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AppChip",
+    "group": "primitives",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AppEmptyState",
+    "group": "primitives",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AppIcon",
+    "group": "primitives",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "AppMessage",
+    "group": "primitives",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AppProgress",
+    "group": "primitives",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AvatarStack",
+    "group": "primitives",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "ConfirmDialog",
+    "group": "primitives",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "DialogHost",
+    "group": "primitives",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "Divider",
+    "group": "primitives",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "Skeleton",
+    "group": "primitives",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AppCheckbox",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AppInput",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AppOptionInput",
+    "group": "inputs",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "AppRadio",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AppSearchInput",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AppSelect",
+    "group": "inputs",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "AppTextarea",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AppToggle",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AutoComplete",
+    "group": "inputs",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "CascadeSelect",
+    "group": "inputs",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "Compare",
+    "group": "inputs",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "DatePicker",
+    "group": "inputs",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "FileUpload",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "FloatLabel",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "IconField",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "IftaLabel",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "Inplace",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "InputColor",
+    "group": "inputs",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "InputGroup",
+    "group": "inputs",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "InputNumber",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "InputOtp",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "InputPassword",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "InputTags",
+    "group": "inputs",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "Knob",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "Listbox",
+    "group": "inputs",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "Rating",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "SelectButton",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "Slider",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "ToggleButton",
+    "group": "inputs",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AppDialog",
+    "group": "overlays",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "AppTooltip",
+    "group": "overlays",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "BlockUI",
+    "group": "overlays",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "CommandMenu",
+    "group": "overlays",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "ConfirmPopup",
+    "group": "overlays",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "ContextMenu",
+    "group": "overlays",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "Drawer",
+    "group": "overlays",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "Popover",
+    "group": "overlays",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "ToastHost",
+    "group": "overlays",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AppAccordion",
+    "group": "navigation",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "AppMenu",
+    "group": "navigation",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "AppTabs",
+    "group": "navigation",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "Breadcrumb",
+    "group": "navigation",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "Carousel",
+    "group": "navigation",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "DeferredContent",
+    "group": "navigation",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "Dock",
+    "group": "navigation",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "MegaMenu",
+    "group": "navigation",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "Menubar",
+    "group": "navigation",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "ScrollTop",
+    "group": "navigation",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "TieredMenu",
+    "group": "navigation",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "AppVirtualList",
+    "group": "data",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "DataTable",
+    "group": "data",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "DataView",
+    "group": "data",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "MeterGroup",
+    "group": "data",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "OrderList",
+    "group": "data",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "OrgChart",
+    "group": "data",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "Paginator",
+    "group": "data",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "PickList",
+    "group": "data",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "Terminal",
+    "group": "data",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "TextEditor",
+    "group": "data",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "Timeline",
+    "group": "data",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "Tree",
+    "group": "data",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "TreeSelect",
+    "group": "data",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "TreeTable",
+    "group": "data",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "VirtualScroller",
+    "group": "data",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "AppPanel",
+    "group": "layout",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "Card",
+    "group": "layout",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "Fieldset",
+    "group": "layout",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "Fluid",
+    "group": "layout",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "MediaGallery",
+    "group": "layout",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "PaneSection",
+    "group": "layout",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "ScrollArea",
+    "group": "layout",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "Splitter",
+    "group": "layout",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "Stepper",
+    "group": "layout",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "Toolbar",
+    "group": "layout",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "BarChart",
+    "group": "charts",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "ChartLegend",
+    "group": "charts",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "DonutChart",
+    "group": "charts",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "LineChart",
+    "group": "charts",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "RadarChart",
+    "group": "charts",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "CalendarToolbar",
+    "group": "calendar",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "DayCalendar",
+    "group": "calendar",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "EventChip",
+    "group": "calendar",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "EventDialog",
+    "group": "calendar",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "EventTile",
+    "group": "calendar",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "MonthCalendar",
+    "group": "calendar",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "SchedulerView",
+    "group": "calendar",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "WeekCalendar",
+    "group": "calendar",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "BoardCard",
+    "group": "board",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "BoardColumn",
+    "group": "board",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "BoardToolbar",
+    "group": "board",
+    "wide": false,
+    "shot": null
+  },
+  {
+    "id": "LaneBoard",
+    "group": "board",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "TaskBoard",
+    "group": "board",
+    "wide": true,
+    "shot": null
+  },
+  {
+    "id": "TaskDialog",
+    "group": "board",
+    "wide": false,
+    "shot": null
+  }
+]

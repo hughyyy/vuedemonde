@@ -446,4 +446,31 @@ describe("Terminal.vue (kit component)", () => {
     expect(wrapper.find(".term-input").exists()).toBe(false);
     wrapper.unmount();
   });
+
+  it("picks the ANSI palette from the resolved background, not the theme id", async () => {
+    // `light` is one of many light themes; the others previously fell through to
+    // the dark ANSI palette because only the literal id "light" was matched.
+    const style = document.createElement("style");
+    style.textContent = `:root { --bg: #101418; }
+      [data-theme="mint"] { --bg: #f0f7f2; }
+      [data-theme="matrix"] { --bg: #020603; }`;
+    document.head.append(style);
+    const transport: TermTransport = { id: "t", label: "T", attach() {}, dispose() {} };
+    const mountFor = async (theme: string): Promise<string[]> => {
+      document.documentElement.dataset.theme = theme;
+      const wrapper = mount(Terminal, { props: { transport, showTimestamps: false } });
+      await nextTick();
+      const classes = wrapper.classes();
+      wrapper.unmount();
+      return classes;
+    };
+    try {
+      expect(await mountFor("mint")).toContain("term-light");
+      expect(await mountFor("matrix")).toContain("term-dark");
+      expect(await mountFor("never-shipped")).toContain("term-dark"); // :root fallback
+    } finally {
+      style.remove();
+      delete document.documentElement.dataset.theme;
+    }
+  });
 });

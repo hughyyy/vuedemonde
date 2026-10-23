@@ -7,18 +7,22 @@ import { AppBadge, AppButton, AppChip, AppIcon, AppInput, AppToggle, THEME_LABEL
  * Rendered under `?print=banner`; each card is a `data-theme` island so one
  * screenshot pass shows every theme. Consumed by scripts/render-release.mjs.
  *
- * Layout is curated, not derived: dark themes first, light themes grouped at
- * the end, 8 per row. A new theme is placed here deliberately — and the audit's
- * `banner__col` count (=== THEME_IDS.length) fails until it is, so the banner
- * cannot silently omit one.
+ * Layout is curated, not derived: every dark theme in the first row, every
+ * light theme in the second, each column a dark theme above its light
+ * counterpart (neutral greys, warm earths, cool jewel tones). A new theme is
+ * placed here deliberately — and the audit's `banner__col` count
+ * (=== THEME_IDS.length) fails until it is, so the banner cannot silently
+ * omit one.
  */
 
 const input = ref("Vue de monde");
 const on = ref(true);
 
 const rows = [
-  ["dark", "late-night", "thermal", "neon-cyberpunk", "grunge", "granite", "classic", "high-contrast"],
-  ["bubblegum", "matrix", "shining-gold", "light", "pure-platinum", "mint", "sunshine", "monotone"],
+  // 12 dark themes
+  ["dark", "late-night", "thermal", "neon-cyberpunk", "grunge", "granite", "classic", "high-contrast", "amethyst", "bubblegum", "matrix", "shining-gold"],
+  // 12 light themes, in the same column order as their dark counterparts above
+  ["light", "sunshine", "clay", "lagoon", "citron", "pure-platinum", "monotone", "high-contrast-light", "lavender", "sakura", "mint", "gilt"],
 ] as const;
 
 const iconNames = ["star", "check", "bell", "chart", "calendar"] as const;

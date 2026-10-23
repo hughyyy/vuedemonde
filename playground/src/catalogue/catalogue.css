@@ -1,0 +1,52 @@
+/**
+ * Catalogue demo layout helpers.
+ *
+ * One demo SFC per exported component lives in this directory. Each renders a
+ * single component in its notable states into `.cat-demo`, and the release
+ * renderer screenshots `#component-shot` once per theme (see
+ * docs/per-component-rendering.md). These helpers are global (imported once by
+ * `ComponentPrint.vue`) rather than repeated in 106 scoped `style` blocks.
+ *
+ * Only layout lives here — every colour comes from the theme tokens, so a demo
+ * renders correctly under all six catalogue themes and any future theme.
+ */
+
+.cat-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* Horizontal cluster of sibling states (button variants, badge tints, …). */
+.cat-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Vertical stack — one state per line. */
+.cat-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Let a child fill the demo width (tables, trees, panels). */
+.cat-fill {
+  width: 100%;
+}
+
+/* Small monospaced caption for a sub-group inside a demo. */
+.cat-label {
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-12);
+}
+
+/* Fixed measurement box so charts/boards render a stable size. */
+.cat-box {
+  width: 100%;
+}

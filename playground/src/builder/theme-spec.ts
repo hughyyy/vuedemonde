@@ -416,7 +416,7 @@ export function emitRegistration(spec: ThemeSpec): string {
     `  "${id}",`,
     "// 3. src/theme.ts — THEME_LABELS:",
     `  "${id}": "${spec.label}",`,
-    '// 4. Docs: add the id to the README theme list and update the "16 themes"',
+    '// 4. Docs: add the id to the README theme list and update the "24 themes"',
     "//    counts (README ×2, docs/release-rendering.md, docs/quality-audit.md).",
     "// 5. playground/src/BannerPrint.vue — place the id in the curated rows",
     "//    (dark themes first, lights last), then: npm run render:release banner",

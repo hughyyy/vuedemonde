@@ -98,7 +98,7 @@ hence "import after `theme.css`". The fixed block must not be pasted into
 `theme.css`: it would become the default for every consumer of the package.
 
 A selectable theme also needs the docs counts updated (README theme list and the
-"16 themes" mentions in `README.md`, `docs/release-rendering.md`,
+"24 themes" mentions in `README.md`, `docs/release-rendering.md`,
 `docs/quality-audit.md`), the id placed in `BannerPrint.vue`'s curated rows,
 and the banner re-rendered. The id list in `test/theme-icons.test.ts` is parsed
 from `theme.css`, so that file needs no edit — the export pane emits the

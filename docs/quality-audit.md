@@ -8,7 +8,7 @@ same commit.** Anything not yet audited is implicitly `open` on first sight.
 ## Process
 
 1. Run the repeatable net: `npm run test:audit` (mounts every family section
-   under dark/light/thermal, the banner under all 16 themes, and the theme
+   under dark/light/thermal, the banner under all 24 themes, and the theme
    builder page; fails on ANY console error/warning). This suite is the
    regression harness for the phase — opt-in by design, so it runs on demand,
    not on every change.
@@ -69,6 +69,8 @@ same commit.** Anything not yet audited is implicitly `open` on first sight.
 | VirtualScroller | info | no prop to control scroll position; catalogue cannot show a tail state | expose `scrollTo`/`scrollTop` prop (enhancement, not a defect) | open |
 | DataTable | info | no expandable in-place detail rows (mocks logs console built its own table for this) | `expandable` mode + detail slot (enhancement) | open |
 | AppTooltip | info | hover/focus-only — no static representation possible in renders (documented) | none — documented limitation | open |
+| Terminal | med | light/dark ANSI polarity matched only the theme id `"light"` — every other light theme (mint, sunshine, pure-platinum, monotone, + the 7 new ones) rendered the dark ANSI palette | read polarity from resolved `--bg` luminance (≥ 0.35, the builder's boundary) + regression test | fixed |
+| Catalogue (release renderer) | info | Tier 2 was 27 family PNGs × 3 themes — cluttered, open dialogs buried siblings, no way to cite one component | per-component composites (106 × 6 themes, WebP) + registry parity test + per-demo audit; see docs/per-component-rendering.md | fixed |
 | _Populated by the audit run — see commits_ | | | | |
 
 Severity: `crit` breaks rendering, `high` broken state/behavior, `med`

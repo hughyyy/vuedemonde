@@ -86,7 +86,13 @@ unexplained diff.
   drag engine, views).
 - `src/accent.ts` / `src/theme.ts` — accent derivation + theme registry.
 - `playground/` — catalogue sections (`sections/*.vue`), print routes
-  (`?print=family&id=&theme=`, `?print=banner`), theme builder (`/?build`).
+  (`?print=family&id=&theme=`, `?print=component&id=&theme=`, `?print=banner`),
+  theme builder (`/?build`); also builds to a static site (`npm run build:demo`
+  → `dist-demo/`) — hosting plan in `docs/github-pages.md` (not deployed).
+  Per-component demos live in `playground/src/catalogue/*.demo.vue`, registered
+  by `scripts/catalogue-registry.mjs`; see `docs/per-component-rendering.md`.
 - `audit/` + `vitest.audit.config.ts` — console-error render harness.
-- `scripts/` — `render-release.mjs` (README PNGs), `visual-regression.mjs` +
+- `scripts/` — `render-release.mjs` (banner + per-component catalogue),
+  `catalogue-registry.mjs` (regenerates `playground/src/catalogue/index.ts`),
+  `catalogue-readme.mjs` (README tables), `visual-regression.mjs` +
   `visual-compare.mjs` (visual harness), `setup-npm-token.sh`.

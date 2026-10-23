@@ -509,7 +509,7 @@ for (const id of THEME_IDS) shippedOptions.push({ value: id, label: THEME_LABELS
 
           <AppMessage v-if="exportMode === 'selectable'" kind="warn">
             A selectable theme also needs its id in <code>src/theme.ts</code> and
-            <code>test/theme-icons.test.ts</code>, plus the "16 themes" docs counts — use
+            <code>test/theme-icons.test.ts</code>, plus the "24 themes" docs counts — use
             <em>Copy registration</em>.
           </AppMessage>
 

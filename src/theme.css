@@ -4,10 +4,12 @@
  * consume tokens, never raw hex.
  *
  * Themes: dark-first (default on :root), light overrides under
- * [data-theme="light"], plus Late Night / Thermal / Neon Cyberpunk / Grunge /
- * Granite / Classic / High Contrast blocks below. `settings.ui.theme` carries
- * the id and `web/src/accent.ts` (U12 accent injection) sits on top of whatever
- * theme block is active.
+ * [data-theme="light"], plus the extra dark blocks (Late Night, Thermal, Neon
+ * Cyberpunk, Grunge, Granite, Classic, High Contrast, Amethyst, Bubblegum,
+ * Matrix, Shining Gold) and the light blocks (Pure Platinum, Mint, Sunshine,
+ * Monotone, Sakura, Lavender, Lagoon, Citron, Clay, Gilt, High Contrast Light)
+ * below. `settings.ui.theme` carries the id and `web/src/accent.ts` (U12 accent
+ * injection) sits on top of whatever theme block is active.
  *
  * Legacy aliases (--panel/--muted/…) live at the bottom of the :root map so the
  * existing flat stylesheet keeps working while it migrates; they reference the
@@ -487,6 +489,51 @@
   --shadow-modal: 0 12px 48px rgba(0, 0, 0, 0.9);
 }
 
+/* ---- Amethyst — deep violet night with a lilac glow ---- */
+[data-theme="amethyst"] {
+  color-scheme: dark;
+
+  --bg: #0d0a17;
+  --surface-1: #151022;
+  --surface-2: #1f1b2a;
+  --surface-3: #282433;
+  --canvas-bg: #090613;
+  --overlay: rgba(4, 2, 10, 0.6);
+
+  --text: #e2d9f7;
+  --text-2: #b3abc6;
+  --text-3: #827c92;
+  --text-disabled: #555063;
+
+  --line: #2d2939;
+  --line-strong: #3c3848;
+  --divider: #221f2d;
+
+  --accent: #a06cff;
+  --accent-2: #8b4fe8;
+  --accent-gradient: linear-gradient(var(--accent), var(--accent-2));
+  --accent-strong: #b186ff;
+  --accent-soft: rgba(160, 108, 255, 0.15);
+  --accent-ink: #130d1f;
+
+  --ok: #57d98d;
+  --ok-soft: rgba(87, 217, 141, 0.15);
+  --warn: #e8b25c;
+  --warn-soft: rgba(232, 178, 92, 0.15);
+  --err: #f0708c;
+  --err-soft: rgba(240, 112, 140, 0.15);
+  --run: #c9a35a;
+  --run-soft: rgba(201, 163, 90, 0.15);
+  --info: #5fa8ff;
+  --info-soft: rgba(95, 168, 255, 0.15);
+  --link: #b98cff;
+  --reasoning: #c4a3ff;
+
+  --shadow-raised: 0 1px 2px rgba(6, 2, 18, 0.35);
+  --shadow-overlay: 0 6px 24px rgba(6, 2, 18, 0.5);
+  --shadow-modal: 0 12px 48px rgba(6, 2, 18, 0.6);
+}
+
 /* ---- Bubblegum — playful hot-pink / cyan on a plum-dark base ---- */
 [data-theme="bubblegum"] {
   color-scheme: dark;
@@ -800,6 +847,321 @@
   --shadow-raised: 0 1px 2px rgba(0, 0, 0, 0.1);
   --shadow-overlay: 0 6px 24px rgba(0, 0, 0, 0.14);
   --shadow-modal: 0 12px 48px rgba(0, 0, 0, 0.2);
+}
+
+/* ---- Sakura — blush-pink paper with a deep rose accent ---- */
+[data-theme="sakura"] {
+  color-scheme: light;
+
+  --bg: #fdf3f6;
+  --surface-1: #ffffff;
+  --surface-2: #f5eaed;
+  --surface-3: #ebdfe3;
+  --canvas-bg: #f8ecf1;
+  --overlay: rgba(58, 26, 38, 0.36);
+
+  --text: #3a1a26;
+  --text-2: #644953;
+  --text-3: #816972;
+  --text-disabled: #b09da3;
+
+  --line: #dfd1d6;
+  --line-strong: #cdbdc3;
+  --divider: #eee2e6;
+
+  --accent: #c2255c;
+  --accent-2: #a61e4d;
+  --accent-gradient: linear-gradient(var(--accent), var(--accent-2));
+  --accent-strong: #9b1e4a;
+  --accent-soft: rgba(194, 37, 92, 0.13);
+  --accent-ink: #ffffff;
+
+  --ok: #1f8a52;
+  --ok-soft: rgba(31, 138, 82, 0.13);
+  --warn: #b0620d;
+  --warn-soft: rgba(176, 98, 13, 0.13);
+  --err: #c0392b;
+  --err-soft: rgba(192, 57, 43, 0.13);
+  --run: #a06a16;
+  --run-soft: rgba(160, 106, 22, 0.13);
+  --info: #0a7fbf;
+  --info-soft: rgba(10, 127, 191, 0.13);
+  --link: #a61e4d;
+  --reasoning: #b5652d;
+
+  --shadow-raised: 0 1px 2px rgba(74, 24, 42, 0.12);
+  --shadow-overlay: 0 6px 24px rgba(74, 24, 42, 0.18);
+  --shadow-modal: 0 12px 48px rgba(74, 24, 42, 0.24);
+}
+
+/* ---- Lavender — pale lilac wash with a violet accent ---- */
+[data-theme="lavender"] {
+  color-scheme: light;
+
+  --bg: #f6f4fd;
+  --surface-1: #ffffff;
+  --surface-2: #edebf5;
+  --surface-3: #e3e0ec;
+  --canvas-bg: #efeafb;
+  --overlay: rgba(36, 26, 61, 0.36);
+
+  --text: #241a3d;
+  --text-2: #524967;
+  --text-3: #716a83;
+  --text-disabled: #a39db1;
+
+  --line: #d5d2df;
+  --line-strong: #c2bece;
+  --divider: #e6e3ee;
+
+  --accent: #6242c4;
+  --accent-2: #5533b0;
+  --accent-gradient: linear-gradient(var(--accent), var(--accent-2));
+  --accent-strong: #4e359d;
+  --accent-soft: rgba(98, 66, 196, 0.13);
+  --accent-ink: #ffffff;
+
+  --ok: #1f8a52;
+  --ok-soft: rgba(31, 138, 82, 0.13);
+  --warn: #a86a10;
+  --warn-soft: rgba(168, 106, 16, 0.13);
+  --err: #b93b4e;
+  --err-soft: rgba(185, 59, 78, 0.13);
+  --run: #9a6a1a;
+  --run-soft: rgba(154, 106, 26, 0.13);
+  --info: #2f6fdb;
+  --info-soft: rgba(47, 111, 219, 0.13);
+  --link: #5533b0;
+  --reasoning: #8a5fbf;
+
+  --shadow-raised: 0 1px 2px rgba(46, 32, 84, 0.12);
+  --shadow-overlay: 0 6px 24px rgba(46, 32, 84, 0.18);
+  --shadow-modal: 0 12px 48px rgba(46, 32, 84, 0.24);
+}
+
+/* ---- Lagoon — cool aqua wash with a deep teal accent ---- */
+[data-theme="lagoon"] {
+  color-scheme: light;
+
+  --bg: #eef8f8;
+  --surface-1: #ffffff;
+  --surface-2: #e4eff0;
+  --surface-3: #dae6e6;
+  --canvas-bg: #e7f4f4;
+  --overlay: rgba(16, 48, 51, 0.36);
+
+  --text: #103033;
+  --text-2: #405b5e;
+  --text-3: #61797b;
+  --text-disabled: #96a9aa;
+
+  --line: #ccd9d9;
+  --line-strong: #b7c7c7;
+  --divider: #dde8e9;
+
+  --accent: #0f766e;
+  --accent-2: #0b5f58;
+  --accent-gradient: linear-gradient(var(--accent), var(--accent-2));
+  --accent-strong: #0c5e58;
+  --accent-soft: rgba(15, 118, 110, 0.13);
+  --accent-ink: #ffffff;
+
+  --ok: #1f8a52;
+  --ok-soft: rgba(31, 138, 82, 0.13);
+  --warn: #b06b12;
+  --warn-soft: rgba(176, 107, 18, 0.13);
+  --err: #bf3f4a;
+  --err-soft: rgba(191, 63, 74, 0.13);
+  --run: #9a6a1a;
+  --run-soft: rgba(154, 106, 26, 0.13);
+  --info: #0a7fbf;
+  --info-soft: rgba(10, 127, 191, 0.13);
+  --link: #0b5f58;
+  --reasoning: #a06a2a;
+
+  --shadow-raised: 0 1px 2px rgba(9, 58, 58, 0.12);
+  --shadow-overlay: 0 6px 24px rgba(9, 58, 58, 0.18);
+  --shadow-modal: 0 12px 48px rgba(9, 58, 58, 0.24);
+}
+
+/* ---- Citron — pale chartreuse paper with an olive accent ---- */
+[data-theme="citron"] {
+  color-scheme: light;
+
+  --bg: #f8f9ee;
+  --surface-1: #ffffff;
+  --surface-2: #eff0e5;
+  --surface-3: #e5e7da;
+  --canvas-bg: #f2f4e2;
+  --overlay: rgba(43, 48, 22, 0.36);
+
+  --text: #2b3016;
+  --text-2: #575c45;
+  --text-3: #767965;
+  --text-disabled: #a7a998;
+
+  --line: #d8dacd;
+  --line-strong: #c5c7b9;
+  --divider: #e8e9dd;
+
+  --accent: #76890b;
+  --accent-2: #5f7009;
+  --accent-gradient: linear-gradient(var(--accent), var(--accent-2));
+  --accent-strong: #5e6e09;
+  --accent-soft: rgba(118, 137, 11, 0.15);
+  --accent-ink: #0e1001;
+
+  --ok: #3f7a24;
+  --ok-soft: rgba(63, 122, 36, 0.15);
+  --warn: #a06a0c;
+  --warn-soft: rgba(160, 106, 12, 0.15);
+  --err: #b03a2e;
+  --err-soft: rgba(176, 58, 46, 0.15);
+  --run: #8a6a12;
+  --run-soft: rgba(138, 106, 18, 0.15);
+  --info: #2f6f9f;
+  --info-soft: rgba(47, 111, 159, 0.15);
+  --link: #5f7009;
+  --reasoning: #7a6a1a;
+
+  --shadow-raised: 0 1px 2px rgba(58, 66, 12, 0.12);
+  --shadow-overlay: 0 6px 24px rgba(58, 66, 12, 0.18);
+  --shadow-modal: 0 12px 48px rgba(58, 66, 12, 0.24);
+}
+
+/* ---- Clay — warm sand paper with a terracotta accent ---- */
+[data-theme="clay"] {
+  color-scheme: light;
+
+  --bg: #f7f2ee;
+  --surface-1: #fffdfb;
+  --surface-2: #efe9e5;
+  --surface-3: #e5dfdb;
+  --canvas-bg: #f2ebe5;
+  --overlay: rgba(51, 37, 29, 0.36);
+
+  --text: #33251d;
+  --text-2: #5e514a;
+  --text-3: #7b7069;
+  --text-disabled: #a9a19b;
+
+  --line: #d9d2ce;
+  --line-strong: #c7bfba;
+  --divider: #e8e2de;
+
+  --accent: #b0442f;
+  --accent-2: #8f3626;
+  --accent-gradient: linear-gradient(var(--accent), var(--accent-2));
+  --accent-strong: #8d3626;
+  --accent-soft: rgba(176, 68, 47, 0.14);
+  --accent-ink: #ffffff;
+
+  --ok: #3f7a48;
+  --ok-soft: rgba(63, 122, 72, 0.14);
+  --warn: #9a6a12;
+  --warn-soft: rgba(154, 106, 18, 0.14);
+  --err: #a83226;
+  --err-soft: rgba(168, 50, 38, 0.14);
+  --run: #8a6414;
+  --run-soft: rgba(138, 100, 20, 0.14);
+  --info: #3d6a94;
+  --info-soft: rgba(61, 106, 148, 0.14);
+  --link: #8f3626;
+  --reasoning: #8f5a2a;
+
+  --shadow-raised: 0 1px 2px rgba(74, 32, 20, 0.12);
+  --shadow-overlay: 0 6px 24px rgba(74, 32, 20, 0.18);
+  --shadow-modal: 0 12px 48px rgba(74, 32, 20, 0.24);
+}
+
+/* ---- Gilt — warm ivory paper with an antique-gold accent ---- */
+[data-theme="gilt"] {
+  color-scheme: light;
+
+  --bg: #f8f7f3;
+  --surface-1: #ffffff;
+  --surface-2: #efeeea;
+  --surface-3: #e6e4e0;
+  --canvas-bg: #f2f0e6;
+  --overlay: rgba(46, 42, 30, 0.36);
+
+  --text: #2e2a1e;
+  --text-2: #5a564c;
+  --text-3: #78756c;
+  --text-disabled: #a8a69e;
+
+  --line: #d9d7d2;
+  --line-strong: #c6c4be;
+  --divider: #e8e7e2;
+
+  --accent: #8a6a0a;
+  --accent-2: #6f5508;
+  --accent-gradient: linear-gradient(var(--accent), var(--accent-2));
+  --accent-strong: #6e5508;
+  --accent-soft: rgba(138, 106, 10, 0.15);
+  --accent-ink: #ffffff;
+
+  --ok: #3f7a3f;
+  --ok-soft: rgba(63, 122, 63, 0.15);
+  --warn: #9a6a0a;
+  --warn-soft: rgba(154, 106, 10, 0.15);
+  --err: #a8352b;
+  --err-soft: rgba(168, 53, 43, 0.15);
+  --run: #7a5f0a;
+  --run-soft: rgba(122, 95, 10, 0.15);
+  --info: #3b6a94;
+  --info-soft: rgba(59, 106, 148, 0.15);
+  --link: #7a5d08;
+  --reasoning: #8a6a20;
+
+  --shadow-raised: 0 1px 2px rgba(66, 54, 14, 0.12);
+  --shadow-overlay: 0 6px 24px rgba(66, 54, 14, 0.18);
+  --shadow-modal: 0 12px 48px rgba(66, 54, 14, 0.24);
+}
+
+/* ---- High Contrast Light — white/black counterpart to High Contrast ---- */
+[data-theme="high-contrast-light"] {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --surface-1: #f7f7f7;
+  --surface-2: #ededed;
+  --surface-3: #dedede;
+  --canvas-bg: #ffffff;
+  --overlay: rgba(0, 0, 0, 0.55);
+
+  --text: #000000;
+  --text-2: #1a1a1a;
+  --text-3: #333333;
+  --text-disabled: #6b6b6b;
+
+  --line: #8a8a8a;
+  --line-strong: #5a5a5a;
+  --divider: #d4d4d4;
+
+  --accent: #0033cc;
+  --accent-2: #002699;
+  --accent-gradient: linear-gradient(var(--accent), var(--accent-2));
+  --accent-strong: #0029a3;
+  --accent-soft: rgba(0, 51, 204, 0.16);
+  --accent-ink: #ffffff;
+
+  --ok: #0a6b2a;
+  --ok-soft: rgba(10, 107, 42, 0.16);
+  --warn: #7a5000;
+  --warn-soft: rgba(122, 80, 0, 0.16);
+  --err: #b00020;
+  --err-soft: rgba(176, 0, 32, 0.16);
+  --run: #6a4a00;
+  --run-soft: rgba(106, 74, 0, 0.16);
+  --info: #005f9e;
+  --info-soft: rgba(0, 95, 158, 0.16);
+  --link: #0033cc;
+  --reasoning: #5a3aa8;
+
+  --shadow-raised: 0 1px 2px rgba(0, 0, 0, 0.14);
+  --shadow-overlay: 0 6px 24px rgba(0, 0, 0, 0.2);
+  --shadow-modal: 0 12px 48px rgba(0, 0, 0, 0.26);
 }
 
 /* Reduced motion: zero out every duration token — animations that read

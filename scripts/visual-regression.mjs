@@ -3,7 +3,7 @@
  * Visual regression harness for the kit's render surface.
  *
  * The harness renders the whole catalogue (every family section across themes
- * and interaction states, plus the 16-theme banner and the app shell),
+ * and interaction states, plus the 24-theme banner and the app shell),
  * screenshots each frame, then compares it against the previous render:
  *
  *   1. cheap gate — 64-bit dHash per frame (one downsample pass);
@@ -44,6 +44,8 @@ const CURRENT = join(DIR, "current");
 const DIFF = join(DIR, "diff");
 const RESULTS = join(DIR, "results.json");
 const PORT = 5281;
+/** Banner page width: two rows of 12 cards + gaps + padding. */
+const BANNER_WIDTH = 2120;
 const BASE = `http://127.0.0.1:${PORT}`;
 
 const FAMILIES = ["primitives", "inputs", "overlays", "navigation", "data", "layout", "charts", "calendar", "board"];
@@ -70,7 +72,7 @@ function matrix() {
       }
     }
   }
-  shots.push({ id: "banner-all-themes", kind: "banner", interaction: "base", viewport: { width: 1440, height: 1000 }, url: `${BASE}/?print=banner`, selector: "#banner" });
+  shots.push({ id: "banner-all-themes", kind: "banner", interaction: "base", viewport: { width: BANNER_WIDTH, height: 1000 }, url: `${BASE}/?print=banner`, selector: "#banner" });
   shots.push({ id: "shell-dark-default", kind: "shell", interaction: "base", viewport: { width: 1280, height: 900 }, url: `${BASE}/`, selector: null });
   return shots;
 }

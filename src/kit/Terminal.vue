@@ -4,6 +4,7 @@ import { ansiColorCss, type TermLine, type TermStyle } from "./terminal/ansi";
 import { TermSession } from "./terminal/session";
 import type { TermSource, TermTransport } from "./terminal/transports";
 import AppButton from "./AppButton.vue";
+import { luminance } from "../accent";
 
 /**
  * Terminal — reusable kit terminal: a self-built streaming ANSI renderer with
@@ -313,14 +314,22 @@ const themeClass = computed(() => {
   return isLightTheme.value ? "light" : "dark";
 });
 
-/** Live-track the app theme (`data-theme` on <html>, driven by the shell and
- * the gallery's QA theme switcher) so the ANSI palette follows it. */
+/**
+ * Live-track the app theme (`data-theme` on <html>, driven by the shell and the
+ * gallery's QA theme switcher) so the ANSI palette follows it.
+ *
+ * Polarity comes from the *resolved* background, not the theme id: `light` is
+ * one id among many light themes (`mint`, `sunshine`, `pure-platinum`,
+ * `monotone`, `sakura`, …), so matching the literal id left every other light
+ * theme on the dark ANSI palette. `luminance` is the same 0.35 boundary the
+ * theme builder uses to pick its ladder.
+ */
 const isLightTheme = ref(false);
 let themeObserver: MutationObserver | undefined;
 function syncTheme(): void {
-  isLightTheme.value =
-    (typeof document !== "undefined" &&
-      document.documentElement.getAttribute("data-theme")) === "light";
+  if (typeof document === "undefined") return;
+  const bg = getComputedStyle(document.documentElement).getPropertyValue("--bg").trim();
+  isLightTheme.value = bg !== "" && luminance(bg) >= 0.35;
 }
 
 /* ---- lifecycle ------------------------------------------------------- */

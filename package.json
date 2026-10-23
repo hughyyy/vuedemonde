@@ -45,14 +45,15 @@
     "typecheck": "vue-tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "render:release": "node scripts/render-release.mjs",
+    "render:release": "node scripts/render-release.mjs && node scripts/catalogue-readme.mjs",
     "visual:capture": "node scripts/visual-regression.mjs capture",
     "visual:test": "node scripts/visual-regression.mjs test",
     "visual:update": "node scripts/visual-regression.mjs update",
     "visual:report": "node scripts/visual-regression.mjs report",
     "build:demo": "vite build --config vite.demo.config.ts",
     "test:audit": "vitest run --config vitest.audit.config.ts",
-    "prepublishOnly": "npm run typecheck && npm test && npm run build && npm run build:types"
+    "prepublishOnly": "npm run typecheck && npm test && npm run build && npm run build:types",
+    "render:catalogue": "node scripts/catalogue-readme.mjs --check && node scripts/catalogue-registry.mjs"
   },
   "peerDependencies": {
     "vue": "^3.5.0"

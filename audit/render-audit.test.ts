@@ -18,7 +18,7 @@ import PrimitivesSection from "../playground/src/sections/PrimitivesSection.vue"
  * Render audit — the repeatable zero-rendering-error net (docs/quality-audit.md
  * §Process). Mounts every family section in print mode (all components, open
  * overlay states included) under the three catalogue themes, the theme banner
- * under all 16 themes, and the theme builder page. Any console.error /
+ * under all 24 themes, and the theme builder page. Any console.error /
  * console.warn (Vue warnings included) fails the case.
  */
 

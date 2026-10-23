@@ -1,0 +1,369 @@
+{
+ "AppAccordion": {
+  "group": "navigation"
+ },
+ "AppAvatar": {
+  "group": "primitives"
+ },
+ "AppBadge": {
+  "group": "primitives"
+ },
+ "AppButton": {
+  "group": "primitives"
+ },
+ "AppCheckbox": {
+  "group": "inputs"
+ },
+ "AppChip": {
+  "group": "primitives"
+ },
+ "AppDialog": {
+  "group": "overlays",
+  "wide": true
+ },
+ "AppEmptyState": {
+  "group": "primitives"
+ },
+ "AppIcon": {
+  "group": "primitives",
+  "wide": true
+ },
+ "AppInput": {
+  "group": "inputs"
+ },
+ "AppMenu": {
+  "group": "navigation",
+  "wide": true
+ },
+ "AppMessage": {
+  "group": "primitives"
+ },
+ "AppOptionInput": {
+  "group": "inputs",
+  "wide": true
+ },
+ "AppPanel": {
+  "group": "layout"
+ },
+ "AppProgress": {
+  "group": "primitives"
+ },
+ "AppRadio": {
+  "group": "inputs"
+ },
+ "AppSearchInput": {
+  "group": "inputs"
+ },
+ "AppSelect": {
+  "group": "inputs",
+  "wide": true
+ },
+ "AppTabs": {
+  "group": "navigation"
+ },
+ "AppTextarea": {
+  "group": "inputs"
+ },
+ "AppToggle": {
+  "group": "inputs"
+ },
+ "AppTooltip": {
+  "group": "overlays"
+ },
+ "AppVirtualList": {
+  "group": "data"
+ },
+ "AutoComplete": {
+  "group": "inputs",
+  "wide": true
+ },
+ "AvatarStack": {
+  "group": "primitives"
+ },
+ "BarChart": {
+  "group": "charts"
+ },
+ "BlockUI": {
+  "group": "overlays"
+ },
+ "BoardCard": {
+  "group": "board"
+ },
+ "BoardColumn": {
+  "group": "board"
+ },
+ "BoardToolbar": {
+  "group": "board"
+ },
+ "Breadcrumb": {
+  "group": "navigation"
+ },
+ "CalendarToolbar": {
+  "group": "calendar"
+ },
+ "Card": {
+  "group": "layout"
+ },
+ "Carousel": {
+  "group": "navigation",
+  "wide": true
+ },
+ "CascadeSelect": {
+  "group": "inputs",
+  "wide": true
+ },
+ "ChartLegend": {
+  "group": "charts"
+ },
+ "CommandMenu": {
+  "group": "overlays",
+  "wide": true
+ },
+ "Compare": {
+  "group": "inputs",
+  "wide": true
+ },
+ "ConfirmDialog": {
+  "group": "primitives",
+  "wide": true
+ },
+ "ConfirmPopup": {
+  "group": "overlays",
+  "wide": true
+ },
+ "ContextMenu": {
+  "group": "overlays",
+  "wide": true
+ },
+ "DataTable": {
+  "group": "data",
+  "wide": true
+ },
+ "DataView": {
+  "group": "data",
+  "wide": true
+ },
+ "DatePicker": {
+  "group": "inputs",
+  "wide": true
+ },
+ "DayCalendar": {
+  "group": "calendar",
+  "wide": true
+ },
+ "DeferredContent": {
+  "group": "navigation"
+ },
+ "DialogHost": {
+  "group": "primitives",
+  "wide": true
+ },
+ "Divider": {
+  "group": "primitives"
+ },
+ "Dock": {
+  "group": "navigation",
+  "wide": true
+ },
+ "DonutChart": {
+  "group": "charts"
+ },
+ "Drawer": {
+  "group": "overlays",
+  "wide": true
+ },
+ "EventChip": {
+  "group": "calendar"
+ },
+ "EventDialog": {
+  "group": "calendar"
+ },
+ "EventTile": {
+  "group": "calendar"
+ },
+ "Fieldset": {
+  "group": "layout"
+ },
+ "FileUpload": {
+  "group": "inputs"
+ },
+ "FloatLabel": {
+  "group": "inputs"
+ },
+ "Fluid": {
+  "group": "layout",
+  "wide": true
+ },
+ "IconField": {
+  "group": "inputs"
+ },
+ "IftaLabel": {
+  "group": "inputs"
+ },
+ "Inplace": {
+  "group": "inputs"
+ },
+ "InputColor": {
+  "group": "inputs",
+  "wide": true
+ },
+ "InputGroup": {
+  "group": "inputs",
+  "wide": true
+ },
+ "InputNumber": {
+  "group": "inputs"
+ },
+ "InputOtp": {
+  "group": "inputs"
+ },
+ "InputPassword": {
+  "group": "inputs"
+ },
+ "InputTags": {
+  "group": "inputs",
+  "wide": true
+ },
+ "Knob": {
+  "group": "inputs"
+ },
+ "LaneBoard": {
+  "group": "board",
+  "wide": true
+ },
+ "LineChart": {
+  "group": "charts"
+ },
+ "Listbox": {
+  "group": "inputs",
+  "wide": true
+ },
+ "MediaGallery": {
+  "group": "layout",
+  "wide": true
+ },
+ "MegaMenu": {
+  "group": "navigation",
+  "wide": true
+ },
+ "Menubar": {
+  "group": "navigation"
+ },
+ "MeterGroup": {
+  "group": "data"
+ },
+ "MonthCalendar": {
+  "group": "calendar",
+  "wide": true
+ },
+ "OrderList": {
+  "group": "data",
+  "wide": true
+ },
+ "OrgChart": {
+  "group": "data",
+  "wide": true
+ },
+ "Paginator": {
+  "group": "data",
+  "wide": true
+ },
+ "PaneSection": {
+  "group": "layout",
+  "wide": true
+ },
+ "PickList": {
+  "group": "data",
+  "wide": true
+ },
+ "Popover": {
+  "group": "overlays",
+  "wide": true
+ },
+ "RadarChart": {
+  "group": "charts"
+ },
+ "Rating": {
+  "group": "inputs"
+ },
+ "SchedulerView": {
+  "group": "calendar",
+  "wide": true
+ },
+ "ScrollArea": {
+  "group": "layout",
+  "wide": true
+ },
+ "ScrollTop": {
+  "group": "navigation"
+ },
+ "SelectButton": {
+  "group": "inputs"
+ },
+ "Skeleton": {
+  "group": "primitives"
+ },
+ "Slider": {
+  "group": "inputs"
+ },
+ "Splitter": {
+  "group": "layout",
+  "wide": true
+ },
+ "Stepper": {
+  "group": "layout"
+ },
+ "TaskBoard": {
+  "group": "board",
+  "wide": true
+ },
+ "TaskDialog": {
+  "group": "board"
+ },
+ "Terminal": {
+  "group": "data",
+  "wide": true
+ },
+ "TextEditor": {
+  "group": "data",
+  "wide": true
+ },
+ "TieredMenu": {
+  "group": "navigation",
+  "wide": true
+ },
+ "Timeline": {
+  "group": "data",
+  "wide": true
+ },
+ "ToastHost": {
+  "group": "overlays"
+ },
+ "ToggleButton": {
+  "group": "inputs"
+ },
+ "Toolbar": {
+  "group": "layout",
+  "wide": true
+ },
+ "Tree": {
+  "group": "data",
+  "wide": true
+ },
+ "TreeSelect": {
+  "group": "data",
+  "wide": true
+ },
+ "TreeTable": {
+  "group": "data",
+  "wide": true
+ },
+ "VirtualScroller": {
+  "group": "data",
+  "wide": true
+ },
+ "WeekCalendar": {
+  "group": "calendar",
+  "wide": true
+ }
+}

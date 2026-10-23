@@ -15,6 +15,7 @@ export const THEME_IDS = [
   "granite",
   "classic",
   "high-contrast",
+  "amethyst",
   "bubblegum",
   "matrix",
   "shining-gold",
@@ -22,6 +23,13 @@ export const THEME_IDS = [
   "mint",
   "sunshine",
   "monotone",
+  "sakura",
+  "lavender",
+  "lagoon",
+  "citron",
+  "clay",
+  "gilt",
+  "high-contrast-light",
 ] as const;
 
 export type ThemeId = (typeof THEME_IDS)[number];
@@ -42,6 +50,7 @@ export const THEME_LABELS: Record<ThemeId, string> = {
   granite: "Granite",
   classic: "Classic",
   "high-contrast": "High Contrast",
+  amethyst: "Amethyst (violet dark)",
   bubblegum: "Bubblegum",
   matrix: "Matrix",
   "shining-gold": "Shining Gold",
@@ -49,6 +58,13 @@ export const THEME_LABELS: Record<ThemeId, string> = {
   mint: "Mint (light green)",
   sunshine: "Sunshine (warm light)",
   monotone: "Monotone (pure greyscale)",
+  sakura: "Sakura (blush pink)",
+  lavender: "Lavender (pale violet)",
+  lagoon: "Lagoon (cool aqua)",
+  citron: "Citron (olive light)",
+  clay: "Clay (terracotta)",
+  gilt: "Gilt (antique gold)",
+  "high-contrast-light": "High Contrast Light",
 };
 
 /**
