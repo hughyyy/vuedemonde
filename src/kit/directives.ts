@@ -15,10 +15,23 @@ export const mask: Directive<HTMLInputElement, string> = {
       let out = "";
       let d = 0;
       for (const ch of pat) {
-        if (ch === "#") out += /\d/.test(digitsAndLetters[d] ?? "") ? digitsAndLetters[d++]! : "";
-        else if (ch === "A") out += /[a-zA-Z]/.test(digitsAndLetters[d] ?? "") ? digitsAndLetters[d++]! : "";
-        else if (ch === "X") out += digitsAndLetters[d] ?? "";
-        else out += ch;
+        // Typed slots consume one char from the cleaned stream. Chars that do
+        // not fit the slot are DROPPED (skipped), never re-tried — a stray
+        // letter in a numeric field must not freeze every later slot.
+        if (ch === "#") {
+          while (d < digitsAndLetters.length && !/\d/.test(digitsAndLetters[d]!)) d++;
+          if (d >= digitsAndLetters.length) break;
+          out += digitsAndLetters[d++]!;
+        } else if (ch === "A") {
+          while (d < digitsAndLetters.length && !/[a-zA-Z]/.test(digitsAndLetters[d]!)) d++;
+          if (d >= digitsAndLetters.length) break;
+          out += digitsAndLetters[d++]!;
+        } else if (ch === "X") {
+          if (d >= digitsAndLetters.length) break;
+          out += digitsAndLetters[d++]!;
+        } else {
+          out += ch;
+        }
       }
       el.value = out;
     });
