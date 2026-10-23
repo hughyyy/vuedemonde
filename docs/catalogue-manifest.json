@@ -3,636 +3,742 @@
     "id": "AppAvatar",
     "group": "primitives",
     "wide": false,
-    "shot": null
+    "shot": 360,
+    "overlay": false
   },
   {
     "id": "AppBadge",
     "group": "primitives",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "AppButton",
     "group": "primitives",
     "wide": false,
-    "shot": null
+    "shot": 480,
+    "overlay": false
   },
   {
     "id": "AppChip",
     "group": "primitives",
     "wide": false,
-    "shot": null
+    "shot": 480,
+    "overlay": false
   },
   {
     "id": "AppEmptyState",
     "group": "primitives",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "AppIcon",
     "group": "primitives",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "AppMessage",
     "group": "primitives",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "AppProgress",
     "group": "primitives",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "AvatarStack",
     "group": "primitives",
     "wide": false,
-    "shot": null
+    "shot": 480,
+    "overlay": false
   },
   {
     "id": "ConfirmDialog",
     "group": "primitives",
     "wide": true,
-    "shot": null
+    "shot": 300,
+    "overlay": true
   },
   {
     "id": "DialogHost",
     "group": "primitives",
     "wide": true,
-    "shot": null
+    "shot": 300,
+    "overlay": true
   },
   {
     "id": "Divider",
     "group": "primitives",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "Skeleton",
     "group": "primitives",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "AppCheckbox",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "AppInput",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "AppOptionInput",
     "group": "inputs",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "AppRadio",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": 360,
+    "overlay": false
   },
   {
     "id": "AppSearchInput",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "AppSelect",
     "group": "inputs",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "AppTextarea",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "AppToggle",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "AutoComplete",
     "group": "inputs",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "CascadeSelect",
     "group": "inputs",
     "wide": true,
-    "shot": null
+    "shot": 600,
+    "overlay": true
   },
   {
     "id": "Compare",
     "group": "inputs",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "DatePicker",
     "group": "inputs",
     "wide": true,
-    "shot": null
+    "shot": 480,
+    "overlay": true
   },
   {
     "id": "FileUpload",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "FloatLabel",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": 360,
+    "overlay": false
   },
   {
     "id": "IconField",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": 360,
+    "overlay": false
   },
   {
     "id": "IftaLabel",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": 360,
+    "overlay": false
   },
   {
     "id": "Inplace",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": 480,
+    "overlay": false
   },
   {
     "id": "InputColor",
     "group": "inputs",
     "wide": true,
-    "shot": null
+    "shot": 420,
+    "overlay": false
   },
   {
     "id": "InputGroup",
     "group": "inputs",
     "wide": true,
-    "shot": null
+    "shot": 480,
+    "overlay": false
   },
   {
     "id": "InputNumber",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": 360,
+    "overlay": false
   },
   {
     "id": "InputOtp",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": 480,
+    "overlay": false
   },
   {
     "id": "InputPassword",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": 300,
+    "overlay": false
   },
   {
     "id": "InputTags",
     "group": "inputs",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "Knob",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": 360,
+    "overlay": false
   },
   {
     "id": "Listbox",
     "group": "inputs",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "Rating",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "SelectButton",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "Slider",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "ToggleButton",
     "group": "inputs",
     "wide": false,
-    "shot": null
+    "shot": 360,
+    "overlay": false
   },
   {
     "id": "AppDialog",
     "group": "overlays",
     "wide": true,
-    "shot": null
+    "shot": 540,
+    "overlay": true
   },
   {
     "id": "AppTooltip",
     "group": "overlays",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "BlockUI",
     "group": "overlays",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "CommandMenu",
     "group": "overlays",
     "wide": true,
-    "shot": null
+    "shot": 480,
+    "overlay": true
   },
   {
     "id": "ConfirmPopup",
     "group": "overlays",
     "wide": true,
-    "shot": null
+    "shot": 480,
+    "overlay": true
   },
   {
     "id": "ContextMenu",
     "group": "overlays",
     "wide": true,
-    "shot": null
+    "shot": 420,
+    "overlay": true
   },
   {
     "id": "Drawer",
     "group": "overlays",
     "wide": true,
-    "shot": null
+    "shot": 420,
+    "overlay": true
   },
   {
     "id": "Popover",
     "group": "overlays",
     "wide": true,
-    "shot": null
+    "shot": 420,
+    "overlay": true
   },
   {
     "id": "ToastHost",
     "group": "overlays",
     "wide": false,
-    "shot": null
+    "shot": 480,
+    "overlay": true
   },
   {
     "id": "AppAccordion",
     "group": "navigation",
     "wide": false,
-    "shot": null
+    "shot": 360,
+    "overlay": false
   },
   {
     "id": "AppMenu",
     "group": "navigation",
     "wide": true,
-    "shot": null
+    "shot": 540,
+    "overlay": true
   },
   {
     "id": "AppTabs",
     "group": "navigation",
     "wide": false,
-    "shot": null
+    "shot": 420,
+    "overlay": false
   },
   {
     "id": "Breadcrumb",
     "group": "navigation",
     "wide": false,
-    "shot": null
+    "shot": 420,
+    "overlay": false
   },
   {
     "id": "Carousel",
     "group": "navigation",
     "wide": true,
-    "shot": null
+    "shot": 540,
+    "overlay": false
   },
   {
     "id": "DeferredContent",
     "group": "navigation",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "Dock",
     "group": "navigation",
     "wide": true,
-    "shot": null
+    "shot": 480,
+    "overlay": false
   },
   {
     "id": "MegaMenu",
     "group": "navigation",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": true
   },
   {
     "id": "Menubar",
     "group": "navigation",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "ScrollTop",
     "group": "navigation",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "TieredMenu",
     "group": "navigation",
     "wide": true,
-    "shot": null
+    "shot": 600,
+    "overlay": true
   },
   {
     "id": "AppVirtualList",
     "group": "data",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "DataTable",
     "group": "data",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "DataView",
     "group": "data",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "MeterGroup",
     "group": "data",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "OrderList",
     "group": "data",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "OrgChart",
     "group": "data",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "Paginator",
     "group": "data",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "PickList",
     "group": "data",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "Terminal",
     "group": "data",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "TextEditor",
     "group": "data",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "Timeline",
     "group": "data",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "Tree",
     "group": "data",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "TreeSelect",
     "group": "data",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": true
   },
   {
     "id": "TreeTable",
     "group": "data",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "VirtualScroller",
     "group": "data",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "AppPanel",
     "group": "layout",
     "wide": false,
-    "shot": null
+    "shot": 480,
+    "overlay": false
   },
   {
     "id": "Card",
     "group": "layout",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "Fieldset",
     "group": "layout",
     "wide": false,
-    "shot": null
+    "shot": 360,
+    "overlay": false
   },
   {
     "id": "Fluid",
     "group": "layout",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "MediaGallery",
     "group": "layout",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": true
   },
   {
     "id": "PaneSection",
     "group": "layout",
     "wide": true,
-    "shot": null
+    "shot": 420,
+    "overlay": false
   },
   {
     "id": "ScrollArea",
     "group": "layout",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "Splitter",
     "group": "layout",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "Stepper",
     "group": "layout",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "Toolbar",
     "group": "layout",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "BarChart",
     "group": "charts",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "ChartLegend",
     "group": "charts",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "DonutChart",
     "group": "charts",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "LineChart",
     "group": "charts",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "RadarChart",
     "group": "charts",
     "wide": false,
-    "shot": null
+    "shot": 480,
+    "overlay": false
   },
   {
     "id": "CalendarToolbar",
     "group": "calendar",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "DayCalendar",
     "group": "calendar",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "EventChip",
     "group": "calendar",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "EventDialog",
     "group": "calendar",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": true
   },
   {
     "id": "EventTile",
     "group": "calendar",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "MonthCalendar",
     "group": "calendar",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "SchedulerView",
     "group": "calendar",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "WeekCalendar",
     "group": "calendar",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "BoardCard",
     "group": "board",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "BoardColumn",
     "group": "board",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "BoardToolbar",
     "group": "board",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "LaneBoard",
     "group": "board",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "TaskBoard",
     "group": "board",
     "wide": true,
-    "shot": null
+    "shot": null,
+    "overlay": false
   },
   {
     "id": "TaskDialog",
     "group": "board",
     "wide": false,
-    "shot": null
+    "shot": null,
+    "overlay": true
   }
 ]

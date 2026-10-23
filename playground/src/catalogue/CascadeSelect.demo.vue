@@ -62,6 +62,5 @@ onMounted(() => {
     <div ref="host" class="cat-row">
       <CascadeSelect v-model="blank" :options="options" placeholder="Pick a component" />
     </div>
-    <div style="height: 200px" aria-hidden="true" />
   </div>
 </template>

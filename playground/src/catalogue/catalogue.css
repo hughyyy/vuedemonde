@@ -18,20 +18,29 @@
   align-items: flex-start;
 }
 
-/* Horizontal cluster of sibling states (button variants, badge tints, …). */
+/* Horizontal cluster of sibling states (button variants, badge tints, …).
+ *
+ * Deliberately `width: max-content` + `max-width: 100%`: a row must hug its
+ * controls so the content crop is tight. A stretched row would report the full
+ * layout frame and reinstate the dead space the crop exists to remove.
+ * Long rows still wrap at the frame width. */
 .cat-row {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
+  width: max-content;
+  max-width: 100%;
 }
 
-/* Vertical stack — one state per line. */
+/* Vertical stack — one state per line. Rows inside it hug their own content. */
 .cat-col {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 10px;
-  width: 100%;
+  width: max-content;
+  max-width: 100%;
 }
 
 /* Let a child fill the demo width (tables, trees, panels). */

@@ -25,6 +25,5 @@ onMounted(() => {
         <AppButton size="sm" variant="ghost" @click="open = false">Close</AppButton>
       </div>
     </Drawer>
-    <div style="height: 240px" aria-hidden="true" />
   </div>
 </template>

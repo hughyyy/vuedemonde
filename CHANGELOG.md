@@ -7,6 +7,14 @@ entry, and an update to `docs/quality-audit.md`**.
 ## Unreleased — default theme expansion
 
 ### Changed
+- **Catalogue renders are content-sized.** Each composite is cropped to the
+  component's painted box instead of a fixed 520×640 panel: the demo's children
+  plus any body-level overlay panel are unioned, full-viewport scrims are
+  measured by their dialog rather than the screen, and static wrappers (the Vue
+  mount root) are ignored. Overlay demos render at a 460 px viewport and
+  narrow demos get `shot` widths from their own content; `.cat-row`/`.cat-col`
+  hug their controls. Median composite area dropped ~3× (total 10.4 MB → 7.1 MB)
+  and a badge demo is no longer a mostly-empty 640 px panel.
 - **Per-component catalogue** (replaces the tier-2 upgrade path): the release
   renderer now emits **one composite image per exported component (106)** —
   each a 2×3 grid of six themes (`dark`/`thermal`/`bubblegum` over

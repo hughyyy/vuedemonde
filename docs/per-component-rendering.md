@@ -268,14 +268,23 @@ Details that must be pinned:
   is ≈ 4 min plus build time — acceptable for a release-time task, and it stays
   parallelisable across components later (the harness already runs families
   sequentially; a `--only=<id>` flag keeps iteration cheap).
-- **Fixed crop contract:** each demo renders into a wrapper with a stable
-  `#component-shot` id and a **fixed width** (proposal: 520 CSS px). Fixed width
-  is what makes the six crops the same size and the composite aligned;
-  components that need more get a `wide` flag in the registry (two-column
-  composite or a wider cell).
-- **Equal-height cells:** height varies per theme only if a component's text
-  wraps differently; pad crops to the tallest with the theme's own `--bg` so the
-  composite has no ragged bottoms.
+- **Content-driven crop (implemented).** Each demo lays out at its own width
+  (`shot`, `wide` → 780 px, else 520 px) but the screenshot is cropped to the
+  **painted content**, not to that frame:
+  - the demo's painted children, plus any body-level overlay layer
+    (dialog scrim → its panel, drawer, toast stack, popover) are unioned;
+  - a full-viewport layer is treated as a scrim and measured by its visible
+    panels, so a centred modal crops to the dialog rather than the screen;
+  - static wrappers such as the Vue mount root are ignored — unioning them
+    would stretch every crop to the page width (this was a real bug: it made
+    every cell ~3× taller and wider than its content).
+  Overlay demos additionally render at a 460 px viewport so a viewport-centred
+  panel does not leave ~400 px of empty backdrop inside the crop.
+  Rows (`width: max-content`) and columns hug their controls so demos do not
+  inflate the measured box either.
+- **Per-row/column alignment:** cells keep their own size; each column is as
+  wide as its widest cell and each row as tall as its tallest, and narrower
+  content is centred in its cell. No demo is stretched to a global maximum.
 - **Compose in Node**, not in the browser: read the six PNGs with the existing
   `pngjs` dependency (already used by `visual-compare.mjs`) and blit into one
   canvas with a labelled gutter. No new dependency. **Verified:** a 3×2 blit of

@@ -31,6 +31,5 @@ onMounted(() => {
     </AppDialog>
     <!-- The modal is fixed and vertically centred in the viewport, so the
          shot needs the height to reach it; the scrim dims the rest. -->
-    <div style="height: 560px" aria-hidden="true" />
   </div>
 </template>

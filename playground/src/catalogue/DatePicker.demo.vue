@@ -35,6 +35,5 @@ onMounted(() => {
     <div ref="host" class="cat-row">
       <DatePicker v-model="blank" placeholder="Pick a delivery date" />
     </div>
-    <div style="height: 340px" aria-hidden="true" />
   </div>
 </template>

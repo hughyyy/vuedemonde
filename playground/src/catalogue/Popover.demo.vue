@@ -29,6 +29,5 @@ onMounted(() => {
       <AppButton size="sm" variant="ghost">Trigger only</AppButton>
     </div>
     <span class="cat-label">open in print — otherwise click the trigger</span>
-    <div style="height: 260px" aria-hidden="true" />
   </div>
 </template>

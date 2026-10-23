@@ -37,6 +37,5 @@ onMounted(() => {
       </AppMenu>
       <span class="cat-label">{{ picked ? `selected: ${picked}` : "open in print — otherwise click the trigger" }}</span>
     </div>
-    <div style="height: 230px" aria-hidden="true" />
   </div>
 </template>

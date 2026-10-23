@@ -24,6 +24,5 @@ function applyPatch(patch: Partial<CalendarEvent>): void {
       <AppButton size="sm" variant="secondary" @click="open = true">Open event</AppButton>
       <span class="cat-label">title, time, location and tint are editable</span>
     </div>
-    <div style="height: 300px" aria-hidden="true" />
   </div>
 </template>

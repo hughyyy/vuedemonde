@@ -26,6 +26,5 @@ onMounted(() => {
       <AppButton size="sm" variant="secondary">Cancel</AppButton>
     </div>
     <span class="cat-label">prompt() resolves to true or false; Escape cancels</span>
-    <div style="height: 210px" aria-hidden="true" />
   </div>
 </template>

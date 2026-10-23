@@ -49,6 +49,7 @@ const rows = entries
   .map((e) => {
     const bits = [`label: ${JSON.stringify(e.id)}`, `group: ${JSON.stringify(e.group)}`, `demo: ${e.id}`];
     if (e.wide) bits.push("wide: true");
+    if (e.overlay) bits.push("overlay: true");
     if (typeof e.shot === "number") bits.push(`shot: ${e.shot}`);
     return `  ${e.id}: { ${bits.join(", ")} },`;
   })
@@ -94,6 +95,9 @@ export type CatalogueEntry = {
   wide?: boolean;
   /** Explicit capture width override (CSS px). */
   shot?: number;
+  /** Opens a viewport-anchored overlay; rendered with a shorter viewport so the
+   *  content crop does not span the empty backdrop above a centred panel. */
+  overlay?: boolean;
 };
 
 export const COMPONENT_DEMOS: Record<string, CatalogueEntry> = {

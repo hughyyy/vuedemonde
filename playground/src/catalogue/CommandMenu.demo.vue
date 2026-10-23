@@ -34,6 +34,5 @@ onMounted(() => {
       <span class="cat-label">{{ picked ? `ran: ${picked}` : "⌘K toggles the palette" }}</span>
     </div>
     <CommandMenu v-model:open="open" :items="items" @select="onSelect" />
-    <div style="height: 460px" aria-hidden="true" />
   </div>
 </template>

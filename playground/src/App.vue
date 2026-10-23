@@ -56,7 +56,13 @@ const buildMode = params.has("build");
  * of truth (it cannot import .vue demos from Node). Playground-only global. */
 (window as unknown as { __CATALOGUE_MANIFEST__: unknown }).__CATALOGUE_MANIFEST__ = Object.entries(
   COMPONENT_DEMOS,
-).map(([id, e]) => ({ id, group: e.group, wide: e.wide ?? false, shot: e.shot ?? null }));
+).map(([id, e]) => ({
+  id,
+  group: e.group,
+  wide: e.wide ?? false,
+  shot: e.shot ?? null,
+  overlay: e.overlay ?? false,
+}));
 
 function scrollTo(id: string): void {
   document.getElementById(`sec-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });

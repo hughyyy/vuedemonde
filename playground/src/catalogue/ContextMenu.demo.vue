@@ -44,6 +44,5 @@ onMounted(() => {
       </span>
       <span class="cat-label">{{ picked ? `selected: ${picked}` : "pointer-anchored panel" }}</span>
     </div>
-    <div style="height: 250px" aria-hidden="true" />
   </div>
 </template>

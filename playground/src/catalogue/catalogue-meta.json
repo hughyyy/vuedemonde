@@ -1,25 +1,31 @@
 {
  "AppAccordion": {
-  "group": "navigation"
+  "group": "navigation",
+  "shot": 360
  },
  "AppAvatar": {
-  "group": "primitives"
+  "group": "primitives",
+  "shot": 360
  },
  "AppBadge": {
   "group": "primitives"
  },
  "AppButton": {
-  "group": "primitives"
+  "group": "primitives",
+  "shot": 480
  },
  "AppCheckbox": {
   "group": "inputs"
  },
  "AppChip": {
-  "group": "primitives"
+  "group": "primitives",
+  "shot": 480
  },
  "AppDialog": {
   "group": "overlays",
-  "wide": true
+  "wide": true,
+  "shot": 540,
+  "overlay": true
  },
  "AppEmptyState": {
   "group": "primitives"
@@ -33,7 +39,9 @@
  },
  "AppMenu": {
   "group": "navigation",
-  "wide": true
+  "wide": true,
+  "shot": 540,
+  "overlay": true
  },
  "AppMessage": {
   "group": "primitives"
@@ -43,13 +51,15 @@
   "wide": true
  },
  "AppPanel": {
-  "group": "layout"
+  "group": "layout",
+  "shot": 480
  },
  "AppProgress": {
   "group": "primitives"
  },
  "AppRadio": {
-  "group": "inputs"
+  "group": "inputs",
+  "shot": 360
  },
  "AppSearchInput": {
   "group": "inputs"
@@ -59,7 +69,8 @@
   "wide": true
  },
  "AppTabs": {
-  "group": "navigation"
+  "group": "navigation",
+  "shot": 420
  },
  "AppTextarea": {
   "group": "inputs"
@@ -78,7 +89,8 @@
   "wide": true
  },
  "AvatarStack": {
-  "group": "primitives"
+  "group": "primitives",
+  "shot": 480
  },
  "BarChart": {
   "group": "charts"
@@ -96,7 +108,8 @@
   "group": "board"
  },
  "Breadcrumb": {
-  "group": "navigation"
+  "group": "navigation",
+  "shot": 420
  },
  "CalendarToolbar": {
   "group": "calendar"
@@ -106,18 +119,23 @@
  },
  "Carousel": {
   "group": "navigation",
-  "wide": true
+  "wide": true,
+  "shot": 540
  },
  "CascadeSelect": {
   "group": "inputs",
-  "wide": true
+  "wide": true,
+  "shot": 600,
+  "overlay": true
  },
  "ChartLegend": {
   "group": "charts"
  },
  "CommandMenu": {
   "group": "overlays",
-  "wide": true
+  "wide": true,
+  "shot": 480,
+  "overlay": true
  },
  "Compare": {
   "group": "inputs",
@@ -125,15 +143,21 @@
  },
  "ConfirmDialog": {
   "group": "primitives",
-  "wide": true
+  "wide": true,
+  "shot": 300,
+  "overlay": true
  },
  "ConfirmPopup": {
   "group": "overlays",
-  "wide": true
+  "wide": true,
+  "shot": 480,
+  "overlay": true
  },
  "ContextMenu": {
   "group": "overlays",
-  "wide": true
+  "wide": true,
+  "shot": 420,
+  "overlay": true
  },
  "DataTable": {
   "group": "data",
@@ -145,7 +169,9 @@
  },
  "DatePicker": {
   "group": "inputs",
-  "wide": true
+  "wide": true,
+  "shot": 480,
+  "overlay": true
  },
  "DayCalendar": {
   "group": "calendar",
@@ -156,76 +182,93 @@
  },
  "DialogHost": {
   "group": "primitives",
-  "wide": true
+  "wide": true,
+  "shot": 300,
+  "overlay": true
  },
  "Divider": {
   "group": "primitives"
  },
  "Dock": {
   "group": "navigation",
-  "wide": true
+  "wide": true,
+  "shot": 480
  },
  "DonutChart": {
   "group": "charts"
  },
  "Drawer": {
   "group": "overlays",
-  "wide": true
+  "wide": true,
+  "shot": 420,
+  "overlay": true
  },
  "EventChip": {
   "group": "calendar"
  },
  "EventDialog": {
-  "group": "calendar"
+  "group": "calendar",
+  "overlay": true
  },
  "EventTile": {
   "group": "calendar"
  },
  "Fieldset": {
-  "group": "layout"
+  "group": "layout",
+  "shot": 360
  },
  "FileUpload": {
   "group": "inputs"
  },
  "FloatLabel": {
-  "group": "inputs"
+  "group": "inputs",
+  "shot": 360
  },
  "Fluid": {
   "group": "layout",
   "wide": true
  },
  "IconField": {
-  "group": "inputs"
+  "group": "inputs",
+  "shot": 360
  },
  "IftaLabel": {
-  "group": "inputs"
+  "group": "inputs",
+  "shot": 360
  },
  "Inplace": {
-  "group": "inputs"
+  "group": "inputs",
+  "shot": 480
  },
  "InputColor": {
   "group": "inputs",
-  "wide": true
+  "wide": true,
+  "shot": 420
  },
  "InputGroup": {
   "group": "inputs",
-  "wide": true
+  "wide": true,
+  "shot": 480
  },
  "InputNumber": {
-  "group": "inputs"
+  "group": "inputs",
+  "shot": 360
  },
  "InputOtp": {
-  "group": "inputs"
+  "group": "inputs",
+  "shot": 480
  },
  "InputPassword": {
-  "group": "inputs"
+  "group": "inputs",
+  "shot": 300
  },
  "InputTags": {
   "group": "inputs",
   "wide": true
  },
  "Knob": {
-  "group": "inputs"
+  "group": "inputs",
+  "shot": 360
  },
  "LaneBoard": {
   "group": "board",
@@ -240,11 +283,13 @@
  },
  "MediaGallery": {
   "group": "layout",
-  "wide": true
+  "wide": true,
+  "overlay": true
  },
  "MegaMenu": {
   "group": "navigation",
-  "wide": true
+  "wide": true,
+  "overlay": true
  },
  "Menubar": {
   "group": "navigation"
@@ -270,7 +315,8 @@
  },
  "PaneSection": {
   "group": "layout",
-  "wide": true
+  "wide": true,
+  "shot": 420
  },
  "PickList": {
   "group": "data",
@@ -278,10 +324,13 @@
  },
  "Popover": {
   "group": "overlays",
-  "wide": true
+  "wide": true,
+  "shot": 420,
+  "overlay": true
  },
  "RadarChart": {
-  "group": "charts"
+  "group": "charts",
+  "shot": 480
  },
  "Rating": {
   "group": "inputs"
@@ -318,7 +367,8 @@
   "wide": true
  },
  "TaskDialog": {
-  "group": "board"
+  "group": "board",
+  "overlay": true
  },
  "Terminal": {
   "group": "data",
@@ -330,17 +380,22 @@
  },
  "TieredMenu": {
   "group": "navigation",
-  "wide": true
+  "wide": true,
+  "shot": 600,
+  "overlay": true
  },
  "Timeline": {
   "group": "data",
   "wide": true
  },
  "ToastHost": {
-  "group": "overlays"
+  "group": "overlays",
+  "shot": 480,
+  "overlay": true
  },
  "ToggleButton": {
-  "group": "inputs"
+  "group": "inputs",
+  "shot": 360
  },
  "Toolbar": {
   "group": "layout",
@@ -352,7 +407,8 @@
  },
  "TreeSelect": {
   "group": "data",
-  "wide": true
+  "wide": true,
+  "overlay": true
  },
  "TreeTable": {
   "group": "data",

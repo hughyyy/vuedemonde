@@ -49,6 +49,5 @@ onMounted(() => {
       <Menubar :items="items" @select="(id: string) => (picked = id)" />
     </div>
     <span class="cat-label">{{ picked ? `selected: ${picked}` : "File menu open in print" }}</span>
-    <div style="height: 190px" aria-hidden="true" />
   </div>
 </template>

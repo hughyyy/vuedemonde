@@ -67,6 +67,5 @@ onMounted(() => {
       <MegaMenu :items="items" @select="(id: string) => (picked = id)" />
     </div>
     <span class="cat-label">{{ picked ? `selected: ${picked}` : "Product panel open in print" }}</span>
-    <div style="height: 200px" aria-hidden="true" />
   </div>
 </template>
