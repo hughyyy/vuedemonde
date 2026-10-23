@@ -157,6 +157,34 @@ default), and thermal. Regenerate whenever a component or theme changes:
 | Calendar | ![](docs/assets/catalogue-calendar-light.png) | ![](docs/assets/catalogue-calendar-dark.png) | ![](docs/assets/catalogue-calendar-thermal.png) |
 | Board | ![](docs/assets/catalogue-board-light.png) | ![](docs/assets/catalogue-board-dark.png) | ![](docs/assets/catalogue-board-thermal.png) |
 
+## Visual regression testing
+
+Beyond the release catalogue above, a two-stage regression harness renders
+the whole surface (every family × 3 themes × base/hover/focus states + the
+theme banner + the app shell — 77 frames) and compares it against the
+previous render:
+
+1. cheap 112-bit fingerprint per frame (gradient hash + color signature);
+2. full pixel diff + change bbox **only when the fingerprint disagrees**;
+3. only genuinely changed frames reach a vision model for classification.
+
+Frames are deterministic by construction: frozen page clock (calendar seeds
+and "today" markers can't drift), mouse reset between shots (no stale
+`:hover` inheritance), stubbed remote images, reduced motion, fixed
+viewport. Run it before/after any visual change:
+
+```bash
+npm run visual:capture   # regenerate the baseline (visual/baseline/)
+npm run visual:test      # compare current render vs baseline; exit 1 on changes
+npm run visual:update    # promote the last render to baseline (no re-render)
+npm run visual:report    # print the last results
+```
+
+Changed frames land in `visual/diff/` as magenta overlays (+ cropped
+vision-ready copies) with bbox/ratio facts in `visual/results.json`.
+Baselines are gitignored and machine-specific. Full design and triage
+protocol: `docs/visual-regression.md`.
+
 ## Notes
 
 - All components are scoped SFCs on `var(--…)` tokens — they ship with zero own

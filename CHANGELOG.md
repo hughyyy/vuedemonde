@@ -27,6 +27,22 @@ so it runs on demand rather than on every change.
 - Render-audit suite (`audit/`, `vitest.audit.config.ts`): mounts all nine
   family sections (print mode) under dark/light/thermal + the theme banner
   under all 16 themes; asserts zero console errors/warnings.
+- Vision-gated visual regression harness (`scripts/visual-regression.mjs`,
+  `visual-compare.mjs`): re-renders the catalogue surface (9 families × 3
+  themes × base/hover/focus states + 16-theme banner + app shell = 77
+  deterministic frames) and compares each frame to the previous render via
+  a two-stage gate — a 112-bit fingerprint (gradient dHash + color
+  signature) first, a full pixel diff with change bbox only on mismatch,
+  and only genuinely changed frames surface for vision-model analysis
+  (magenta overlays + cropped vision-ready artifacts + `results.json`).
+  Determinism is enforced: frozen page clock (calendar seeds/"today"/timers
+  cannot drift), mouse reset between shots (no stale `:hover` inheritance),
+  stubbed remote images, reduced motion, fixed viewport. Commands:
+  `npm run visual:capture|test|update|report`. Design + triage protocol:
+  `docs/visual-regression.md`.
+- `AGENTS.md` — repo conventions for agent work (commands, test style,
+  quality process, visual-harness invariants); `docs/handover.md` — phase
+  handover with the open register and flagged edge cases.
 - `docs/quality-audit.md` — the living issue register for the phase.
 - Theme builder (`/?build` in the playground): pick 13 anchor colours, derive
   the other 21 tokens, unlock any derived value, preview on the real kit, and
