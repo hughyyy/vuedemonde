@@ -71,6 +71,14 @@ same commit.** Anything not yet audited is implicitly `open` on first sight.
 | AppTooltip | info | hover/focus-only — no static representation possible in renders (documented) | none — documented limitation | open |
 | Terminal | med | light/dark ANSI polarity matched only the theme id `"light"` — every other light theme (mint, sunshine, pure-platinum, monotone, + the 7 new ones) rendered the dark ANSI palette | read polarity from resolved `--bg` luminance (≥ 0.35, the builder's boundary) + regression test | fixed |
 | Catalogue (release renderer) | info | Tier 2 was 27 family PNGs × 3 themes — cluttered, open dialogs buried siblings, no way to cite one component | per-component composites (106 × 6 themes, WebP) + registry parity test + per-demo audit; see docs/per-component-rendering.md | fixed |
+| AppAvatar | med | `--fs-10` was undefined, so sm (20px) avatars rendered 16px text and clipped initials; a broken `<img>` URL showed the broken-image glyph instead of the documented initials fallback | define --fs-10/--fs-11 in theme.css; @error → initials fallback; constrain the img inside the grid + test | fixed |
+| AvatarStack | med | fixed -7px overlap on 20px sm circles occluded each avatar's right-hand initial (visible in board-column/task-board card footers) | overlap scales with size: sm -4px, md/lg -7px | fixed |
+| FloatLabel / IftaLabel | high | floating label stayed centred over the value (both unreadable) when the wrapped control was a composite `<AppInput>` — the sibling selector `input ~ label` only matched a bare input | use `:has()` so the float trigger works at any nesting depth | fixed |
+| EventTile | med | short calendar slots (30 min ≈ 20 px) sliced the title line mid-glyph (15px text in an 8px box) | clip the body at the line boundary; hide the meta line in slots under 26px; shrink the title in sub-17px slots (container queries) | fixed |
+| Undefined tokens | med | `--fs-15`, `--space-7`, `--shadow-card` used by components but never defined — dialog titles fell back to inherited size, cards had no elevation | define the tokens + per-theme shadow-card values | fixed |
+| VirtualScroller / AppVirtualList | med | catalogue demo used `#item` but the component only exposed a default slot, so the list rendered empty; VirtualScroller uses `#item` | name AppVirtualList's slot `item` (default fallback kept) + fix the demo + tests | fixed |
+| DialogHost (demo) | med | template-string body component needs the runtime compiler the shipped build lacks, so the dialog body was blank | use a render function | fixed |
+| Carousel / MediaGallery (render) | info | remote picsum images 404ed in the renderer, showing broken-image glyphs | stub picsum with a fixed placeholder (same as the visual harness) | fixed |
 | _Populated by the audit run — see commits_ | | | | |
 
 Severity: `crit` breaks rendering, `high` broken state/behavior, `med`

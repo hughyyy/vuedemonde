@@ -87,7 +87,12 @@ onUnmounted(() => observer?.disconnect());
           ref="itemEls"
           class="app-vlist__item"
         >
-          <slot :item="item" :index="start + position" />
+          <!-- Named for consistency with VirtualScroller's `#item`; the default
+               slot stays available so existing `<AppVirtualList>` usages that
+               pass bare children keep working. -->
+          <slot name="item" :item="item" :index="start + position">
+            <slot :item="item" :index="start + position" />
+          </slot>
         </div>
       </div>
     </div>

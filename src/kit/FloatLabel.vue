@@ -45,10 +45,15 @@ onMounted(() => {
   pointer-events: none;
   transition: var(--dur-2) var(--ease-out);
 }
-.float-label :deep(input:not(:placeholder-shown)) ~ label,
-.float-label :deep(input:focus) ~ label,
-.float-label :deep(textarea:not(:placeholder-shown)) ~ label,
-.float-label :deep(textarea:focus) ~ label {
+/* The label floats when the wrapped control has a value or focus. The control
+ * may be a bare <input>/<textarea> or a composite like <AppInput> that renders
+ * its own label around the input — sibling selectors (`input ~ label`) only
+ * match a bare control, so they never fire for the composite form. `:has()` is
+ * nesting-agnostic and covers both. */
+.float-label:has(:deep(input:not(:placeholder-shown))) label,
+.float-label:has(:deep(input:focus)) label,
+.float-label:has(:deep(textarea:not(:placeholder-shown))) label,
+.float-label:has(:deep(textarea:focus)) label {
   top: var(--space-1);
   transform: none;
   font-size: var(--fs-10);

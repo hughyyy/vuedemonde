@@ -2,40 +2,43 @@
 /**
  * Catalogue demo: the DynamicDialog service host.
  *
- * Like ConfirmDialog, DialogHost's only visible state is an open dialog from
- * the live service, so in print mode we open one and leave it pending. The
- * inline body component is marked raw to avoid the "reactive Component" warning.
+ * DialogHost only renders whatever the dialogs registry holds, so in print mode
+ * we open one through the real service and leave it pending — exactly as a
+ * caller sees it.
+ *
+ * The body is a render function, not a `template:` string: the shipped build
+ * uses the runtime-only Vue compiler, where a string template silently renders
+ * nothing (an empty dialog body).
  */
-import { markRaw, onMounted } from "vue";
+import { h, markRaw, onMounted } from "vue";
 import { AppButton, DialogHost, openDialog } from "@vuedemonde";
 
 const props = defineProps<{ print?: boolean }>();
 
 const Body = markRaw({
   name: "DialogBody",
-  template: `<p>Reached from the <code>openDialog()</code> service — no <code>&lt;AppDialog&gt;</code> in the template.</p>`,
+  render: () =>
+    h("p", { style: "margin: 0" }, [
+      "Reached from the ",
+      h("code", "openDialog()"),
+      " service — no ",
+      h("code", "<AppDialog>"),
+      " in the template.",
+    ]),
 });
 
-onMounted(() => {
-  if (!props.print) return;
+function open(): void {
   openDialog({ title: "Connection settings", width: "sm", component: Body });
+}
+
+onMounted(() => {
+  if (props.print) open();
 });
 </script>
 
 <template>
   <div class="cat-demo">
-    <AppButton
-      @click="
-        () =>
-          void openDialog({
-            title: 'Connection settings',
-            width: 'sm',
-            component: Body,
-          })
-      "
-    >
-      Open dialog
-    </AppButton>
+    <AppButton @click="open">Open dialog</AppButton>
     <DialogHost />
   </div>
 </template>

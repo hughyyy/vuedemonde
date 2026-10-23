@@ -92,11 +92,29 @@ function kebab(name) {
  * listener. The app is a single-page demo with no router: every URL falls to
  * index.html, and static assets are read from `dist-demo/`.
  */
+/**
+ * Fixed 4x4 PNG for remote images.
+ *
+ * Demos reference picsum for avatars/galleries. Fetching them would make the
+ * catalogue depend on the network (and a machine without it renders broken-image
+ * glyphs — the exact artefact that showed up in AppAvatar). Same placeholder the
+ * visual-regression harness uses, so both surfaces agree.
+ */
+const PLACEHOLDER_IMAGE = Buffer.from(
+  "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAFElEQVR42mP8z8AARMAgYJyKAAAAAAElFTkSuQmCC",
+  "base64",
+);
+
 function serveFromDisk(context, root) {
   const TYPES = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css",
     ".json": "application/json", ".svg": "image/svg+xml", ".png": "image/png", ".webp": "image/webp" };
   return context.route("**/*", (route) => {
     const url = new URL(route.request().url());
+    // Remote imagery is stubbed so a render never depends on the network.
+    if (url.hostname.endsWith("picsum.photos")) {
+      route.fulfill({ status: 200, contentType: "image/png", body: PLACEHOLDER_IMAGE });
+      return;
+    }
     let file = join(root, normalize(url.pathname).replace(/^\//, "").replace(/^\.\.(\/|$)/, ""));
     try {
       if (statSync(file).isDirectory()) file = join(file, "index.html");

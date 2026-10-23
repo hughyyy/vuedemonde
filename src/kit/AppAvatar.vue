@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 
 const props = withDefaults(
   defineProps<{
@@ -11,6 +11,17 @@ const props = withDefaults(
     tint?: "neutral" | "accent" | "ok" | "warn" | "err" | "info";
   }>(),
   { size: "md", tint: "neutral" },
+);
+
+/** True once the image fails to load — the prop contract promises an initials
+ *  fallback, and without this a dead URL renders the browser's broken-image
+ *  glyph plus alt text inside the circle. */
+const failed = ref(false);
+watch(
+  () => props.src,
+  () => {
+    failed.value = false;
+  },
 );
 
 const initials = computed(() =>
@@ -26,7 +37,13 @@ const initials = computed(() =>
 
 <template>
   <span class="app-avatar" :class="[`is-${props.size}`, `is-${props.tint}`]" role="img" :aria-label="props.name" :title="props.name">
-    <img v-if="props.src" :src="props.src" :alt="props.name" class="app-avatar__img" />
+    <img
+      v-if="props.src && !failed"
+      :src="props.src"
+      :alt="props.name"
+      class="app-avatar__img"
+      @error="failed = true"
+    />
     <span v-else class="app-avatar__initials">{{ initials }}</span>
   </span>
 </template>
@@ -57,10 +74,22 @@ const initials = computed(() =>
   height: 36px;
   font-size: var(--fs-13);
 }
+/* `min-width/min-height: 0` + absolute-free sizing: an <img> inside an
+ * inline-grid otherwise contributes its intrinsic size to the track, so the
+ * picture overflowed the circle (measured 52x34 in a 28px avatar). */
 .app-avatar__img {
   width: 100%;
   height: 100%;
+  min-width: 0;
+  min-height: 0;
   object-fit: cover;
+  display: block;
+}
+.app-avatar__initials {
+  line-height: 1;
+  /* keep two initials inside small circles without horizontal clipping */
+  letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 .app-avatar.is-neutral {
   background: var(--surface-3);

@@ -38,18 +38,25 @@ const overflow = computed(() => Math.max(0, props.people.length - props.max));
   align-items: center;
   line-height: 0;
 }
+/* Overlap scales with circle size: a fixed -7px on a 20px sm circle eats 35% of
+ * the avatar and clips the right-hand initial (the initials sit centred, so the
+ * neighbouring circle covers them). md/lg have room; sm overlaps less. */
 .avatar-stack__av {
-  margin-left: -7px;
+  margin-left: -4px;
   border: 2px solid var(--surface-1);
 }
 .avatar-stack__av:first-child {
   margin-left: 0;
 }
+.avatar-stack__av.is-md,
+.avatar-stack__av.is-lg {
+  margin-left: -7px;
+}
 .avatar-stack__more {
   display: inline-grid;
   place-items: center;
-  margin-left: -7px;
   border: 2px solid var(--surface-1);
+  margin-left: -7px;
   border-radius: var(--radius-pill);
   background: var(--surface-3);
   color: var(--text-2);
@@ -59,6 +66,7 @@ const overflow = computed(() => Math.max(0, props.people.length - props.max));
   width: 20px;
   height: 20px;
   font-size: var(--fs-10);
+  margin-left: -4px;
 }
 .avatar-stack__more.is-md {
   width: 28px;

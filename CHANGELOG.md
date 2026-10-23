@@ -42,7 +42,21 @@ entry, and an update to `docs/quality-audit.md`**.
   harnesses widen to 2120 px so all 12 cards fit per row.
 
 ### Fixed
-- Terminal ANSI palette: the component decided light-mode by matching the theme
+- **Catalogue-driven component defects found by a vision sweep of the 106
+  renders** (per-theme crops reviewed, defects cross-checked against source):
+  - AppAvatar: `--fs-10` was undefined so sm avatars rendered 16px text and
+    clipped initials; broken URLs now fall back to initials (@error) instead of
+    the broken-image glyph; the img is constrained inside the grid.
+  - AvatarStack: the -7px overlap clipped sm (20px) initials; overlap now
+    scales (sm -4px, md/lg -7px).
+  - FloatLabel / IftaLabel: the floating label never moved off a composite
+    `<AppInput>` (sibling selector only matched bare inputs) — `:has()` makes it
+    nesting-agnostic.
+  - EventTile: short calendar slots sliced the title mid-glyph; container
+    queries clip at the line boundary and drop the meta line when it cannot fit.
+  - Undefined tokens `--fs-15`, `--space-7`, `--shadow-card` are now defined
+    (incl. per-theme shadow-card), fixing dialog/panel/card sizing.
+- **Terminal ANSI palette:** the component decided light-mode by matching the theme
   id `"light"`, so `mint`, `sunshine`, `pure-platinum`, `monotone` and every
   other light theme rendered with the dark ANSI palette. Polarity is now read
   from the resolved `--bg` luminance (same ≥ 0.35 boundary the theme builder

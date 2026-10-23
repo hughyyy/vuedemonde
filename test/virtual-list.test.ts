@@ -41,3 +41,27 @@ describe("AppVirtualList — dynamic-height virtualiser", () => {
     expect(rows.every((row) => row.startsWith("item-"))).toBe(true);
   });
 });
+
+describe("AppVirtualList — named #item slot", () => {
+  it("renders rows through the named #item slot like VirtualScroller", async () => {
+    const wrapper = mount(AppVirtualList, {
+      props: { items: Array.from({ length: 20 }, (_, i) => `item-${i}`) },
+      slots: {
+        item: '<template #item="{ item }"><span class="named-row">{{ item }}</span></template>',
+      },
+    });
+    await wrapper.vm.$nextTick();
+    const rows = wrapper.findAll(".named-row");
+    expect(rows.length).toBeGreaterThan(0);
+    expect(rows[0]!.text()).toBe("item-0");
+  });
+
+  it("keeps the unnamed default slot working (back-compat)", async () => {
+    const wrapper = mount(AppVirtualList, {
+      props: { items: Array.from({ length: 20 }, (_, i) => `item-${i}`) },
+      slots: { default: '<span class="def-row">{{ item }}</span>' },
+    });
+    await wrapper.vm.$nextTick();
+    expect(wrapper.findAll(".def-row").length).toBeGreaterThan(0);
+  });
+});

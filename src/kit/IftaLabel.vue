@@ -44,8 +44,17 @@ onMounted(() => {
   transition: var(--dur-2) var(--ease-out);
   white-space: nowrap;
 }
-.ifta-label :deep(input:not(:placeholder-shown)) ~ label,
-.ifta-label :deep(input:focus) ~ label {
+/* The label must move up for a value/focus, even when the control is a
+ * composite <AppInput> whose input is nested rather than a sibling. `:has()`
+ * covers both bare controls and composites (sibling selectors only matched the
+ * bare form, leaving the caption over the value for AppInput wraps). */
+.ifta-label:has(:deep(input:not(:placeholder-shown))) label,
+.ifta-label:has(:deep(input:focus)) label,
+.ifta-label:has(:deep(textarea:not(:placeholder-shown))) label,
+.ifta-label:has(:deep(textarea:focus)) label {
+  top: var(--space-1);
+  transform: none;
+  font-size: var(--fs-10);
   color: var(--accent);
 }
 </style>
