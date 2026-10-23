@@ -3,3 +3,8 @@ dist/
 dist-demo/
 *.local
 .DS_Store
+visual/baseline/
+visual/current/
+visual/diff/
+visual/results.json
+visual/manifest.json
