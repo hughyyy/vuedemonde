@@ -98,7 +98,17 @@ describe("Tree — disabled nodes", () => {
     expect(w.find(".tree-item__row").classes()).toContain("is-disabled");
   });
 
-  it("disabled items still open their children (documented: disabled ≠ closed)", async () => {
+  it("disabled items cannot be selected by click, Enter or Space", async () => {
+    const w = mount(Tree, {
+      props: { nodes: [{ id: "d", label: "Disabled", disabled: true }], selectable: true },
+    });
+    await w.find(".tree-item__row").trigger("click");
+    await w.find(".tree-item__row").trigger("keydown.enter");
+    await w.find(".tree-item__row").trigger("keydown.space");
+    expect(w.emitted("select")).toBeUndefined();
+  });
+
+  it("disabled items still open their children (disabled ≠ closed)", async () => {
     const w = mount(Tree, {
       props: { nodes: [{ id: "d", label: "Disabled", disabled: true, children: [{ id: "d1", label: "D1" }] }] },
     });
