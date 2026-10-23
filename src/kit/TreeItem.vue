@@ -8,7 +8,7 @@ const props = defineProps<{
   node: TreeNode;
   level: number;
   open: boolean;
-  folded: Set<string>;
+  overrides: Map<string, boolean>;
   expandAll: boolean;
   selectable: boolean;
   selectedId?: string;
@@ -22,7 +22,8 @@ function openByDefault(n: TreeNode): boolean {
 
 function childOpen(n: TreeNode): boolean {
   if (!n.children?.length) return false;
-  if (props.folded.has(n.id)) return false;
+  const o = props.overrides.get(n.id);
+  if (o !== undefined) return o;
   return openByDefault(n);
 }
 </script>
@@ -41,7 +42,7 @@ function childOpen(n: TreeNode): boolean {
       :class="{ 'is-selected': selectable && selectedId === node.id, 'is-disabled': node.disabled }"
       :style="{ paddingLeft: node.children?.length ? 10 + level * 12 + 'px' : 26 + level * 12 + 'px' }"
       :tabindex="selectable ? 0 : undefined"
-      @click="emit('select', node.id)"
+      @click="selectable && emit('select', node.id)"
       @keydown.enter.prevent="selectable && emit('select', node.id)"
       @keydown.space.prevent="selectable && emit('select', node.id)"
     >
@@ -64,7 +65,7 @@ function childOpen(n: TreeNode): boolean {
         :node="c"
         :level="level + 1"
         :open="childOpen(c)"
-        :folded="folded"
+        :overrides="overrides"
         :expand-all="expandAll"
         :selectable="selectable"
         :selected-id="selectedId"
