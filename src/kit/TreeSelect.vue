@@ -107,7 +107,7 @@ onBeforeUnmount(() => {
     <Teleport to="body">
       <Transition name="menu-pop">
         <div v-if="open" ref="panelEl" class="tree-select__panel" role="listbox" :style="{ ...pos, width: width + 'px' }" @keydown="onKeydown">
-          <Tree :nodes="nodes" expand-all :selected-id="modelValue" @select="onSelect" />
+          <Tree :nodes="nodes" expand-all selectable :selected-id="modelValue" @select="onSelect" />
         </div>
       </Transition>
     </Teleport>

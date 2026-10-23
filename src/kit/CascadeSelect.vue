@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { AppIcon } from "./index";
 
 export type CascadeOption = { value: string; label: string; children?: CascadeOption[] };
@@ -35,6 +35,17 @@ function findChain(opts: CascadeOption[], id: string): CascadeOption[] {
   }
   return [];
 }
+
+// Reflect a bound modelValue (v-model contract) instead of only tracking
+// picks made inside the panel — otherwise the trigger never shows a value
+// passed in from the parent.
+watch(
+  () => props.modelValue,
+  (v) => {
+    selectedPath.value = v ? findChain(props.options, v) : [];
+  },
+  { immediate: true },
+);
 
 function place(): void {
   const t = triggerEl.value;

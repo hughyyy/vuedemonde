@@ -113,5 +113,20 @@ so it runs on demand rather than on every change.
 - TreeItem: row clicks no longer emit `select` in non-selectable trees (the
   row was already unfocusable and keyboard-gated; the click path is gated to
   match).
+- MonthCalendar: a crowded day's "+N more" overflow could be expanded but
+  never collapsed; the toggle now becomes a "show less" button.
+- CascadeSelect: the trigger never reflected a bound `modelValue` — the
+  selection only appeared after picking inside the panel. An immediate watch
+  now syncs the selected path from the prop (unknown ids fall back to the
+  placeholder instead of crashing).
+- TreeSelect: the panel's Tree was rendered without `selectable`, so row
+  clicks never emitted select — picking a node was impossible.
+- TreeItem / TreeRow: nodes marked `disabled` (aria-disabled + style) were
+  still selectable via click/Enter/Space; all three paths are now gated.
+- TreeTable: same first-expand no-op as Tree — a fold-only set could never
+  open a default-closed parent. Expansion overrides are now an explicit
+  Map, mirroring Tree.
+- TreeRow: row clicks emitted select even with `selectable=false`; the click
+  is gated like TreeItem's, and disabled rows carry `is-disabled`.
 
 _Populated per component as the audit proceeds._

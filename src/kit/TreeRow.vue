@@ -8,7 +8,7 @@ const props = defineProps<{
   node: TreeNode;
   level: number;
   open: boolean;
-  folded: Set<string>;
+  overrides: Map<string, boolean>;
   expandAll: boolean;
   columns: ColumnDef[];
   selectable: boolean;
@@ -23,7 +23,8 @@ function openByDefault(n: TreeNode): boolean {
 
 function childOpen(n: TreeNode): boolean {
   if (!n.children?.length) return false;
-  if (props.folded.has(n.id)) return false;
+  const o = props.overrides.get(n.id);
+  if (o !== undefined) return o;
   return openByDefault(n);
 }
 
@@ -35,8 +36,8 @@ function cellValues(n: TreeNode, cols: ColumnDef[]): { [f: string]: unknown } {
 <template>
   <tr
     class="tree-row"
-    :class="{ 'is-selected': selectable && selectedId === node.id }"
-    @click="emit('select', node.id)"
+    :class="{ 'is-selected': selectable && selectedId === node.id, 'is-disabled': node.disabled }"
+    @click="selectable && !node.disabled && emit('select', node.id)"
   >
     <td :style="{ paddingLeft: (node.children?.length ? 8 : 22) + level * 14 + 'px' }">
       <span class="tree-row__cell">
@@ -63,7 +64,7 @@ function cellValues(n: TreeNode, cols: ColumnDef[]): { [f: string]: unknown } {
     :node="c"
     :level="level + 1"
     :open="childOpen(c)"
-    :folded="folded"
+    :overrides="overrides"
     :expand-all="expandAll"
     :columns="columns"
     :selectable="selectable"

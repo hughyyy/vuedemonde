@@ -42,9 +42,9 @@ function childOpen(n: TreeNode): boolean {
       :class="{ 'is-selected': selectable && selectedId === node.id, 'is-disabled': node.disabled }"
       :style="{ paddingLeft: node.children?.length ? 10 + level * 12 + 'px' : 26 + level * 12 + 'px' }"
       :tabindex="selectable ? 0 : undefined"
-      @click="selectable && emit('select', node.id)"
-      @keydown.enter.prevent="selectable && emit('select', node.id)"
-      @keydown.space.prevent="selectable && emit('select', node.id)"
+      @click="selectable && !node.disabled && emit('select', node.id)"
+      @keydown.enter.prevent="selectable && !node.disabled && emit('select', node.id)"
+      @keydown.space.prevent="selectable && !node.disabled && emit('select', node.id)"
     >
       <button
         v-if="node.children?.length"

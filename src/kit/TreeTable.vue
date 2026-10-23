@@ -21,23 +21,40 @@ const props = withDefaults(
 
 const emit = defineEmits<{ select: [id: string] }>();
 
-const folded = ref<Set<string>>(new Set());
+/** Explicit open/closed override per node id; absent = follow the default. */
+const overrides = ref<Map<string, boolean>>(new Map());
 
 function openByDefault(n: TreeNode): boolean {
   return props.expandAll || !!n.expanded;
 }
 
+function findNode(id: string, list: TreeNode[]): TreeNode | null {
+  for (const n of list) {
+    if (n.id === id) return n;
+    if (n.children?.length) {
+      const hit = findNode(id, n.children);
+      if (hit) return hit;
+    }
+  }
+  return null;
+}
+
 function isOpen(n: TreeNode): boolean {
   if (!n.children?.length) return false;
-  if (folded.value.has(n.id)) return false;
+  const o = overrides.value.get(n.id);
+  if (o !== undefined) return o;
   return openByDefault(n);
 }
 
 function toggle(id: string): void {
-  const s = new Set(folded.value);
-  if (s.has(id)) s.delete(id);
-  else s.add(id);
-  folded.value = s;
+  // Flip the CURRENT state into an explicit override — toggling a
+  // default-closed node must open it (a fold-only set made the first
+  // expand click a no-op).
+  const node = findNode(id, props.nodes);
+  if (!node) return;
+  const m = new Map(overrides.value);
+  m.set(id, !isOpen(node));
+  overrides.value = m;
 }
 </script>
 
@@ -58,7 +75,7 @@ function toggle(id: string): void {
           :node="n"
           :level="0"
           :open="isOpen(n)"
-          :folded="folded"
+          :overrides="overrides"
           :expand-all="expandAll"
           :columns="columns"
           :selectable="selectable"

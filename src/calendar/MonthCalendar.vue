@@ -69,8 +69,13 @@ function toggle(d: Date): void {
             layout="cell"
             @open="emit('open', e)"
           />
-          <button v-if="visible(d).more > 0" class="month-cal__more" type="button" @click="toggle(d)">
-            +{{ visible(d).more }} more
+          <button
+            v-if="expanded.has(keyOf(d)) || visible(d).more > 0"
+            class="month-cal__more"
+            type="button"
+            @click="toggle(d)"
+          >
+            {{ expanded.has(keyOf(d)) ? "show less" : `+${visible(d).more} more` }}
           </button>
         </div>
       </div>
